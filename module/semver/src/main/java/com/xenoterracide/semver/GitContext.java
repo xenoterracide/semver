@@ -5,6 +5,7 @@
 
 package com.xenoterracide.semver;
 
+import org.immutables.value.Value;
 import org.jspecify.annotations.Nullable;
 
 /**
@@ -22,6 +23,7 @@ import org.jspecify.annotations.Nullable;
  * @param isDirty true if working tree has uncommitted changes
  * @param isShallowClone true if repository is a shallow clone
  */
+@Value.Builder
 public record GitContext(
   @Nullable String nearestTag,
   long distanceFromTag,
@@ -40,8 +42,8 @@ public record GitContext(
    *
    * @return a new builder instance
    */
-  public static Builder builder() {
-    return new Builder();
+  public static GitContextBuilder builder() {
+    return new GitContextBuilder();
   }
 
   /**
@@ -63,94 +65,5 @@ public record GitContext(
       return null;
     }
     return this.nearestTag.startsWith("v") ? this.nearestTag.substring(1) : this.nearestTag;
-  }
-
-  /**
-   * Builder for GitContext.
-   */
-  public static class Builder {
-
-    private @Nullable String nearestTag;
-    private long distanceFromTag;
-    private boolean isOnTagExact;
-    private @Nullable String currentBranch;
-    private @Nullable String headBranch;
-    private boolean isHeadBranch;
-    private long distanceFromMergeBase;
-    private @Nullable String shortSha;
-    private @Nullable String fullSha;
-    private boolean isDirty;
-    private boolean isShallowClone;
-
-    public Builder nearestTag(@Nullable String nearestTag) {
-      this.nearestTag = nearestTag;
-      return this;
-    }
-
-    public Builder distanceFromTag(long distanceFromTag) {
-      this.distanceFromTag = distanceFromTag;
-      return this;
-    }
-
-    public Builder isOnTagExact(boolean isOnTagExact) {
-      this.isOnTagExact = isOnTagExact;
-      return this;
-    }
-
-    public Builder currentBranch(@Nullable String currentBranch) {
-      this.currentBranch = currentBranch;
-      return this;
-    }
-
-    public Builder headBranch(@Nullable String headBranch) {
-      this.headBranch = headBranch;
-      return this;
-    }
-
-    public Builder isHeadBranch(boolean isHeadBranch) {
-      this.isHeadBranch = isHeadBranch;
-      return this;
-    }
-
-    public Builder distanceFromMergeBase(long distanceFromMergeBase) {
-      this.distanceFromMergeBase = distanceFromMergeBase;
-      return this;
-    }
-
-    public Builder shortSha(@Nullable String shortSha) {
-      this.shortSha = shortSha;
-      return this;
-    }
-
-    public Builder fullSha(@Nullable String fullSha) {
-      this.fullSha = fullSha;
-      return this;
-    }
-
-    public Builder isDirty(boolean isDirty) {
-      this.isDirty = isDirty;
-      return this;
-    }
-
-    public Builder isShallowClone(boolean isShallowClone) {
-      this.isShallowClone = isShallowClone;
-      return this;
-    }
-
-    public GitContext build() {
-      return new GitContext(
-        nearestTag,
-        distanceFromTag,
-        isOnTagExact,
-        currentBranch,
-        headBranch,
-        isHeadBranch,
-        distanceFromMergeBase,
-        shortSha,
-        fullSha,
-        isDirty,
-        isShallowClone
-      );
-    }
   }
 }

@@ -3,7 +3,6 @@
 SPDX-FileCopyrightText: Copyright © 2024-2026 Caleb Cushing
 
 SPDX-License-Identifier: CC0-1.0
-SPDX-License-Identifier: MIT
 -->
 <project
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -20,10 +19,10 @@ SPDX-License-Identifier: MIT
   <name>Semantic Versioning Parent</name>
   <description>Parent POM for semantic versioning tools and libraries</description>
 
-  <modules>
-    <module>module/git</module>
-    <module>module/semver</module>
-  </modules>
+  <subprojects>
+    <subproject>module/git</subproject>
+    <subproject>module/semver</subproject>
+  </subprojects>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -33,13 +32,14 @@ SPDX-License-Identifier: MIT
     <maven.compiler.release>${java.version}</maven.compiler.release>
 
     <!-- Dependency versions -->
-    <jgit.version>7.2.0.202503040940-r</jgit.version>
+    <jgit.version>7.2.1.202505142326-r</jgit.version>
     <vavr.version>1.0.0-alpha-4</vavr.version>
-    <commons-lang3.version>3.17.0</commons-lang3.version>
+    <commons-lang3.version>3.18.0</commons-lang3.version>
     <guava.version>33.4.0-jre</guava.version>
     <jspecify.version>1.0.0</jspecify.version>
     <semver4j.version>6.0.0</semver4j.version>
     <errorprone.annotations.version>2.36.0</errorprone.annotations.version>
+    <immutables.version>2.12.1</immutables.version>
 
     <!-- Plugin versions -->
     <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
@@ -53,8 +53,8 @@ SPDX-License-Identifier: MIT
     <maven-javadoc-plugin.version>3.11.2</maven-javadoc-plugin.version>
 
     <!-- Test versions -->
-    <junit.version>5.12.1</junit.version>
-    <assertj.version>3.27.3</assertj.version>
+    <junit.version>6.0.1</junit.version>
+    <assertj.version>3.27.7</assertj.version>
   </properties>
 
   <dependencyManagement>
@@ -67,6 +67,13 @@ SPDX-License-Identifier: MIT
       </dependency>
 
       <!-- Main dependencies -->
+      <dependency>
+        <groupId>org.immutables</groupId>
+        <artifactId>value-annotations</artifactId>
+        <version>${immutables.version}</version>
+        <scope>provided</scope>
+        <!-- compile only -->
+      </dependency>
       <dependency>
         <groupId>org.eclipse.jgit</groupId>
         <artifactId>org.eclipse.jgit</artifactId>
@@ -140,8 +147,18 @@ SPDX-License-Identifier: MIT
           <artifactId>maven-compiler-plugin</artifactId>
           <version>${maven-compiler-plugin.version}</version>
           <configuration>
+            <annotationProcessorPaths>
+              <path>
+                <groupId>org.immutables</groupId>
+                <artifactId>value</artifactId>
+                <!-- contains the annotation processor -->
+                <version>${immutables.version}</version>
+              </path>
+            </annotationProcessorPaths>
             <compilerArgs>
               <arg>-parameters</arg>
+              <arg>-Aimmutables.annotations.pick=jakarta</arg>
+              <arg>-Aimmutables.guava.suppress</arg>
             </compilerArgs>
           </configuration>
         </plugin>
@@ -172,7 +189,7 @@ SPDX-License-Identifier: MIT
             <dependency>
               <groupId>com.puppycrawl.tools</groupId>
               <artifactId>checkstyle</artifactId>
-              <version>${checkstyle.version}</version>
+              <version>13.3.0</version>
             </dependency>
           </dependencies>
           <configuration>

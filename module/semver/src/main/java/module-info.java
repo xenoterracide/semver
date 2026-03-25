@@ -8,11 +8,11 @@
  */
 module com.xenoterracide.semver {
   requires com.xenoterracide.git;
+  requires org.immutables.value.annotations;
   requires org.semver4j;
   requires com.google.common;
   requires org.jspecify;
+  requires com.google.errorprone.annotations;
 
   exports com.xenoterracide.semver;
-
-  opens com.xenoterracide.semver to org.immutables.builder;
 }
