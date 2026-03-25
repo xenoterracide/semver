@@ -19,8 +19,9 @@
     "merge:junie": "yarn workspace merge run merge:junie",
     "merge:kimi": "yarn workspace merge run merge:kimi",
     "lint:prettier": "prettier --ignore-unknown --cache --check '**'",
-    "lint:reuse": "uv run --frozen --group dev reuse lint",
+    "lint:reuse": "yarn reuse lint",
     "lint": "yarn lint:prettier && yarn lint:reuse",
-    "test": "yarn workspaces foreach --all run test"
+    "test": "yarn workspaces foreach --all run test",
+    "reuse": "uv run --frozen --group dev reuse"
   }
 }
