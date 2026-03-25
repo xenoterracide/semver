@@ -1,0 +1,37 @@
+// SPDX-FileCopyrightText: Copyright © 2024-2026 Caleb Cushing
+//
+// SPDX-License-Identifier: GPL-3.0-or-later
+// SPDX-License-Identifier: GPL-3.0-or-later WITH Classpath-exception-2.0
+
+package com.xenoterracide.gradle.git;
+
+import org.gradle.api.Plugin;
+import org.gradle.api.Project;
+
+/**
+ * A plugin that provides Git-related functionality.
+ */
+public class GitPlugin implements Plugin<Project> {
+
+  private static final String GIT = "git";
+
+  @Override
+  public void apply(Project project) {
+    var gitDir = project
+      .getProviders()
+      .of(GitDirectoryValueSource.class, c ->
+        c.parameters(p -> {
+          p.getProjectDirectory().set(project.getLayout().getProjectDirectory());
+        })
+      );
+
+    var gitService = project
+      .getGradle()
+      .getSharedServices()
+      .registerIfAbsent(GitService.class.getCanonicalName(), GitService.class, spec -> {
+        spec.getParameters().getGitDirectory().set(gitDir);
+      });
+
+    project.getExtensions().add(GIT, new GitExtension(gitService, new ProvidedFactory(project)));
+  }
+}
