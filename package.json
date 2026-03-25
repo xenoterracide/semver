@@ -14,6 +14,7 @@
     "rimraf": "^6.1.2"
   },
   "scripts": {
+    "precontribute": "npm install -g corepack && corepack enable && yarn install --immutable",
     "contribute": "git submodule update --init --recursive && uv sync --frozen && git config core.hooksPath .share/git/hooks",
     "merge:copilot": "yarn workspace merge run merge:copilot",
     "merge:junie": "yarn workspace merge run merge:junie",
