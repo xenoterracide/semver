@@ -4,16 +4,26 @@
 
 version = 1
 
+# file is mostly used for vendored and generated files as they are hard to maintain the license for
+
+# yarn
+[[annotations]]
+path = ".pnp.cjs"
+SPDX-FileCopyrightText = "NONE"
+SPDX-License-Identifier = "CC0-1.0"
+
 [[annotations]]
 path = "yarn.lock"
 SPDX-FileCopyrightText = "NONE"
 SPDX-License-Identifier = "CC0-1.0"
 
+# asdf
 [[annotations]]
 path = ".tool-versions"
 SPDX-FileCopyrightText = "NONE"
 SPDX-License-Identifier = "CC0-1.0"
 
+# uv/python
 [[annotations]]
 path = "uv.lock"
 SPDX-FileCopyrightText = "NONE"
@@ -24,12 +34,19 @@ path = ".python-version"
 SPDX-FileCopyrightText = "NONE"
 SPDX-License-Identifier = "CC0-1.0"
 
-[[annotations]]
-path = ".pnp.cjs"
-SPDX-FileCopyrightText = "NONE"
-SPDX-License-Identifier = "CC0-1.0"
-
+# maven
 [[annotations]]
 path = "mvnw*"
 SPDX-FileCopyrightText = "NONE"
 SPDX-License-Identifier = "Apache-2.0"
+
+[[annotations]]
+path = ".mvn/wrapper/*"
+SPDX-FileCopyrightText = "NONE"
+SPDX-License-Identifier = "Apache-2.0"
+
+# gitmodules
+[[annotations]]
+path = ".gitmodules"
+SPDX-FileCopyrightText = "NONE"
+SPDX-License-Identifier = "CC0-1.0"
