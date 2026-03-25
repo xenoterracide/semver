@@ -3,4 +3,6 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.1.0 http://maven.apache.org/xsd/maven-4.1.0.xsd">
   <modelVersion>4.1.0</modelVersion>
   <artifactId>semver</artifactId>
+  <groupId>com.xenoterracide</groupId>
+  <version>0.0.0</version>
 </project>
