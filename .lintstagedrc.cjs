@@ -35,9 +35,11 @@ module.exports = {
   "package.json": run([`${reuse} ${copyright} ${symbol} ${licenseScripts}`, prettier]),
   "{.config/git/hooks/**,**/*.*sh}": run([`${reuse} ${copyright} ${symbol} ${licenseScripts} --style python`, shfmt]),
   "*.{md,adoc}": run([`${reuse} ${copyright} ${symbol} ${licenseDocumentation}`, prettier]),
-  // GitHub workflows contain significant logic; must come before general yaml
+  // GitHub workflows contain significant logic
   ".github/**/*.yml": run([`${reuse} ${copyright} ${symbol} ${licenseScripts}`, prettier]),
-  "*.{xml,yaml,yml,properties,toml,json5}": run([`${reuse} ${copyright} ${licenseConfiguration} ${symbol}`, prettier]),
+  // Configuration files (yaml always config; yml files are scripts except specific ones)
+  "*.{xml,yaml,properties,toml,json5}": run([`${reuse} ${copyright} ${licenseConfiguration} ${symbol}`, prettier]),
+  ".yarnrc.yml": run([`${reuse} ${copyright} ${licenseConfiguration} ${symbol}`, prettier]),
   "*.{js,cjs}": run([`${reuse} ${copyright} ${symbol} ${licenseScripts}`, prettier]),
   ".{*ignore,editorconfig,gitattributes,mailmap}": run([
     `${reuse} ${copyright} ${symbol} ${licenseConfiguration}`,
