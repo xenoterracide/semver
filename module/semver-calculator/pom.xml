@@ -3,6 +3,7 @@
 SPDX-FileCopyrightText: Copyright © 2024-2026 Caleb Cushing
 
 SPDX-License-Identifier: CC0-1.0
+SPDX-License-Identifier: MIT
 -->
 <project
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -18,22 +19,18 @@ SPDX-License-Identifier: CC0-1.0
     <relativePath>../../pom.xml</relativePath>
   </parent>
 
-  <artifactId>git</artifactId>
-  <name>Git Metadata</name>
-  <description>Git metadata extraction library</description>
+  <artifactId>semver</artifactId>
+  <name>Semantic Versioning</name>
+  <description>Semantic versioning calculation from git metadata</description>
 
   <dependencies>
     <dependency>
-      <groupId>org.eclipse.jgit</groupId>
-      <artifactId>org.eclipse.jgit</artifactId>
+      <groupId>com.xenoterracide</groupId>
+      <artifactId>git-metadata</artifactId>
     </dependency>
     <dependency>
-      <groupId>io.vavr</groupId>
-      <artifactId>vavr</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.commons</groupId>
-      <artifactId>commons-lang3</artifactId>
+      <groupId>org.semver4j</groupId>
+      <artifactId>semver4j</artifactId>
     </dependency>
     <dependency>
       <groupId>com.google.guava</groupId>
@@ -43,9 +40,20 @@ SPDX-License-Identifier: CC0-1.0
       <groupId>org.jspecify</groupId>
       <artifactId>jspecify</artifactId>
     </dependency>
+
+    <!-- compile only -->
+
     <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
+      <groupId>org.immutables</groupId>
+      <artifactId>value-annotations</artifactId>
+      <scope>provided</scope>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>com.google.errorprone</groupId>
+      <artifactId>error_prone_annotations</artifactId>
+      <scope>provided</scope>
+      <optional>true</optional>
     </dependency>
 
     <!-- Test dependencies -->
@@ -69,11 +77,6 @@ SPDX-License-Identifier: CC0-1.0
       <artifactId>assertj-core</artifactId>
       <scope>test</scope>
     </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-simple</artifactId>
-      <scope>test</scope>
-    </dependency>
   </dependencies>
 
   <build>
@@ -81,11 +84,6 @@ SPDX-License-Identifier: CC0-1.0
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <source>${java.version}</source>
-          <target>${java.version}</target>
-          <release>${java.version}</release>
-        </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -94,25 +92,6 @@ SPDX-License-Identifier: CC0-1.0
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-failsafe-plugin</artifactId>
-      </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>build-helper-maven-plugin</artifactId>
-        <version>3.6.0</version>
-        <executions>
-          <execution>
-            <id>add-test-fixtures</id>
-            <phase>generate-test-sources</phase>
-            <goals>
-              <goal>add-test-source</goal>
-            </goals>
-            <configuration>
-              <sources>
-                <source>src/testFixtures/java</source>
-              </sources>
-            </configuration>
-          </execution>
-        </executions>
       </plugin>
     </plugins>
   </build>

@@ -29,6 +29,13 @@ public class MergeBaseFinder {
     this.repo = repo;
   }
 
+  private static @Nullable String extractHeadBranchRef(@Nullable GitRemote gitRemote) {
+    if (gitRemote == null || gitRemote.headBranch() == null) {
+      return null;
+    }
+    return gitRemote.headBranchRefName();
+  }
+
   public Optional<ObjectId> find(@Nullable GitRemote gitRemote) {
     var headBranchRef = extractHeadBranchRef(gitRemote);
     if (headBranchRef == null) {
@@ -39,13 +46,6 @@ public class MergeBaseFinder {
     } catch (IOException e) {
       throw new UncheckedIOException(e);
     }
-  }
-
-  private static @Nullable String extractHeadBranchRef(@Nullable GitRemote gitRemote) {
-    if (gitRemote == null || gitRemote.headBranch() == null) {
-      return null;
-    }
-    return gitRemote.headBranchRefName();
   }
 
   private Optional<ObjectId> findMergeBase(String headBranchRef) throws IOException {

@@ -20,8 +20,8 @@ SPDX-License-Identifier: CC0-1.0
   <description>Parent POM for semantic versioning tools and libraries</description>
 
   <subprojects>
-    <subproject>module/git</subproject>
-    <subproject>module/semver</subproject>
+    <subproject>module/git-metadata</subproject>
+    <subproject>module/semver-calculator</subproject>
   </subprojects>
 
   <properties>
@@ -62,7 +62,7 @@ SPDX-License-Identifier: CC0-1.0
       <!-- Project modules -->
       <dependency>
         <groupId>com.xenoterracide</groupId>
-        <artifactId>git</artifactId>
+        <artifactId>git-metadata</artifactId>
         <version>${project.version}</version>
       </dependency>
 

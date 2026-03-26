@@ -7,10 +7,7 @@ package com.xenoterracide.semver;
 
 import com.xenoterracide.git.GitMetadata;
 import com.xenoterracide.semver.internal.VersionStrategyFactory;
-import java.io.File;
-import java.nio.file.Path;
 import java.util.Objects;
-import org.jspecify.annotations.Nullable;
 import org.semver4j.Semver;
 
 /**
