@@ -32,7 +32,7 @@ SPDX-License-Identifier: CC0-1.0
     <maven.compiler.release>${java.version}</maven.compiler.release>
 
     <!-- Dependency versions -->
-    <jgit.version>7.2.1.202505142326-r</jgit.version>
+    <jgit.version>7.6.0.202603022253-r</jgit.version>
     <vavr.version>1.0.0-alpha-4</vavr.version>
     <commons-lang3.version>3.20.0</commons-lang3.version>
     <guava.version>33.4.0-jre</guava.version>
