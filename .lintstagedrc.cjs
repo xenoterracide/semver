@@ -13,7 +13,8 @@ const licenseConfiguration = "--license 'CC0-1.0' --fallback-dot-license";
 const licenseDocumentation = "--license 'CC-BY-NC-SA-4.0";
 const licenseScripts = "--license 'MIT' --fallback-dot-license";
 
-const withoutYarn = (files) => files.filter((file) => !file.includes("/.yarn/") && !file.startsWith(".yarn/"));
+const withoutYarn = (files) =>
+  files.filter((file) => !file.includes("/.yarn/") && !file.startsWith(".yarn/") && !file.endsWith(".pnp.cjs"));
 
 const withFiles = (command, files) => `${command} ${files.map((file) => `"${file.replace(/"/g, '\\"')}"`).join(" ")}`;
 
