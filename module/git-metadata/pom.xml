@@ -98,7 +98,7 @@ SPDX-License-Identifier: CC0-1.0
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>build-helper-maven-plugin</artifactId>
-        <version>3.6.0</version>
+        <version>3.6.1</version>
         <executions>
           <execution>
             <id>add-test-fixtures</id>
