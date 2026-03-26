@@ -18,6 +18,7 @@
   packageRules: [
     {
       matchManagers: ["maven"],
+      matchUpdateTypes: ["major", "minor", "patch"],
       automerge: true,
     },
     {
