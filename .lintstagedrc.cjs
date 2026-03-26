@@ -10,7 +10,7 @@ const symbol = "--copyright-prefix spdx-string-symbol";
 
 const licenseCode = "--license 'GPL-3.0-or-later'";
 const licenseConfiguration = "--license 'CC0-1.0' --fallback-dot-license";
-const licenseDocumentation = "--license 'CC-BY-NC-SA-4.0";
+const licenseDocumentation = "--license 'CC-BY-NC-SA-4.0'";
 const licenseScripts = "--license 'MIT' --fallback-dot-license";
 
 const withoutYarn = (files) =>
