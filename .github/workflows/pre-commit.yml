@@ -1,0 +1,14 @@
+# SPDX-FileCopyrightText: Copyright © 2024-2026 Caleb Cushing
+#
+# SPDX-License-Identifier: CC0-1.0
+# SPDX-License-Identifier: MIT
+
+name: precommit
+on: push
+jobs:
+  license:
+    uses: xenoterracide/github/.github/workflows/license.yml@develop
+  prettier:
+    uses: xenoterracide/github/.github/workflows/prettier.yml@develop
+  kotlin:
+    uses: xenoterracide/github/.github/workflows/ktlint.yml@develop
