@@ -32,8 +32,8 @@ const run = (commands) => (files) => {
   return cmds.map((command) => withFiles(command, filtered));
 };
 
-// For config files that should exclude .github yml files (they get MIT license separately)
-const runConfig = (commands) => (files) => {
+// For patterns that should exclude .github/**/*.yml (it has its own MIT pattern)
+const runWithoutGithubYml = (commands) => (files) => {
   const filtered = withoutGithubYml(withoutYarn(files));
 
   if (!filtered.length) {
@@ -51,7 +51,7 @@ module.exports = {
   "{.config/git/hooks/**,**/*.*sh}": run([`${reuse} ${copyright} ${symbol} ${licenseScripts} --style python`, shfmt]),
   "*.{md,adoc}": run([`${reuse} ${copyright} ${symbol} ${licenseDocumentation}`, prettier]),
   // Config files - excludes .github/**/*.yml which is handled separately as scripts
-  "*.{xml,yaml,yml,properties,toml,json5}": runConfig([
+  "*.{xml,yaml,yml,properties,toml,json5}": runWithoutGithubYml([
     `${reuse} ${copyright} ${licenseConfiguration} ${symbol}`,
     prettier,
   ]),
