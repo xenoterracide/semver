@@ -2,6 +2,8 @@
 #
 # SPDX-License-Identifier: CC0-1.0
 
+.agents/
+.share/
 .pnp.cjs
 uv.lock
 .venv/
