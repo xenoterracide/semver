@@ -28,6 +28,10 @@
       automerge: true,
     },
     {
+      matchManagers: ["pyenv"],
+      automerge: true,
+    },
+    {
       matchManagers: ["github-actions"],
       automerge: true,
     },
