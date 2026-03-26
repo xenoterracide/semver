@@ -11,5 +11,3 @@ jobs:
     uses: xenoterracide/github/.github/workflows/license.yml@develop
   prettier:
     uses: xenoterracide/github/.github/workflows/prettier.yml@develop
-  kotlin:
-    uses: xenoterracide/github/.github/workflows/ktlint.yml@develop
