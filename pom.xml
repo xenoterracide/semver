@@ -180,6 +180,8 @@ SPDX-License-Identifier: CC0-1.0
               <arg>-J--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED</arg>
               <arg>-J--add-opens=jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED</arg>
               <arg>-parameters</arg>
+              <arg>-Aimmutables.annotations.pick=jakarta</arg>
+              <arg>-Aimmutables.guava.suppress</arg>
               <arg>--should-stop=ifError=FLOW</arg>
               <arg>-XDcompilePolicy=simple</arg>
               <arg>
@@ -207,6 +209,8 @@ SPDX-License-Identifier: CC0-1.0
                   <arg>-J--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED</arg>
                   <arg>-J--add-opens=jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED</arg>
                   <arg>-parameters</arg>
+                  <arg>-Aimmutables.annotations.pick=jakarta</arg>
+                  <arg>-Aimmutables.guava.suppress</arg>
                   <arg>--should-stop=ifError=FLOW</arg>
                   <arg>-XDcompilePolicy=simple</arg>
                   <arg>

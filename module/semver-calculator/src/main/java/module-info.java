@@ -12,7 +12,6 @@ module com.xenoterracide.semver {
   requires org.jspecify;
 
   // Compile-time only annotations
-  requires static java.compiler;
   requires static org.immutables.value.annotations;
   requires static com.google.errorprone.annotations;
 
