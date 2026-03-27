@@ -1,11 +1,10 @@
 // SPDX-FileCopyrightText: Copyright © 2024-2026 Caleb Cushing
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
-// SPDX-License-Identifier: GPL-3.0-or-later WITH Classpath-exception-2.0
 
 package com.xenoterracide.git;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.eclipse.jgit.lib.Constants;
 import org.jspecify.annotations.Nullable;
 
@@ -22,7 +21,7 @@ public interface GitRemote {
   default String headBranch() {
     var prefix = Constants.R_REMOTES + this.name() + "/";
     var refName = this.headBranchRefName();
-    return refName != null ? StringUtils.removeStart(refName, prefix) : null;
+    return refName != null ? Strings.CI.removeStart(refName, prefix) : null;
   }
 
   /**

@@ -1,11 +1,9 @@
 // SPDX-FileCopyrightText: Copyright © 2024-2026 Caleb Cushing
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
-// SPDX-License-Identifier: GPL-3.0-or-later WITH Classpath-exception-2.0
 
-package com.xenoterracide.git.internal;
+package com.xenoterracide.git;
 
-import com.xenoterracide.git.GitRemote;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.util.List;
@@ -21,7 +19,7 @@ import org.jspecify.annotations.Nullable;
 /**
  * Finds the merge base between two commits.
  */
-public class MergeBaseFinder {
+class MergeBaseFinder {
 
   private final Repository repo;
 

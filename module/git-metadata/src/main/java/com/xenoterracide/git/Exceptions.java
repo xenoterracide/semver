@@ -1,9 +1,8 @@
 // SPDX-FileCopyrightText: Copyright © 2024-2026 Caleb Cushing
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
-// SPDX-License-Identifier: GPL-3.0-or-later WITH Classpath-exception-2.0
 
-package com.xenoterracide.git.internal;
+package com.xenoterracide.git;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
@@ -11,7 +10,7 @@ import java.io.UncheckedIOException;
 /**
  * Internal utility class for exception handling.
  */
-public final class Exceptions {
+final class Exceptions {
 
   private Exceptions() {}
 
@@ -22,7 +21,7 @@ public final class Exceptions {
    * @param throwable the exception to convert
    * @return a runtime exception
    */
-  public static RuntimeException toRuntime(Throwable throwable) {
+  static RuntimeException toRuntime(Throwable throwable) {
     if (throwable instanceof RuntimeException re) {
       return re;
     }

@@ -1,9 +1,8 @@
 // SPDX-FileCopyrightText: Copyright © 2024-2026 Caleb Cushing
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
-// SPDX-License-Identifier: GPL-3.0-or-later WITH Classpath-exception-2.0
 
-package com.xenoterracide.git.internal;
+package com.xenoterracide.git;
 
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
@@ -11,7 +10,7 @@ import java.util.stream.StreamSupport;
 /**
  * Internal utility for working with iterables.
  */
-public final class IterableTools {
+final class IterableTools {
 
   private IterableTools() {}
 
@@ -22,7 +21,7 @@ public final class IterableTools {
    * @param <T> the element type
    * @return a stream
    */
-  public static <T> Stream<T> of(Iterable<T> iterable) {
+  static <T> Stream<T> of(Iterable<T> iterable) {
     return StreamSupport.stream(iterable.spliterator(), false);
   }
 }

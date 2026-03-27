@@ -9,7 +9,6 @@ import static com.xenoterracide.git.fixtures.CommitTools.commit;
 import static com.xenoterracide.git.fixtures.CommitTools.supplies;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.xenoterracide.git.internal.GitMetadataImpl;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;

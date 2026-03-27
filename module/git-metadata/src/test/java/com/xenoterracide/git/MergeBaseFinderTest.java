@@ -10,9 +10,6 @@ import static java.util.function.Predicate.isEqual;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.google.common.base.Joiner;
-import com.xenoterracide.git.internal.GitMetadataImpl;
-import com.xenoterracide.git.internal.MergeBaseFinder;
-import com.xenoterracide.git.internal.TryGit;
 import io.vavr.CheckedFunction0;
 import io.vavr.control.Try;
 import java.io.File;
