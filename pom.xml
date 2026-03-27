@@ -48,6 +48,9 @@ SPDX-License-Identifier: CC0-1.0
       -Xplugin:ErrorProne
       -XepDisableWarningsInGeneratedCode
       -XepExcludedPaths:.*/target/generated-sources/annotations/.*
+      -XepOpt:NullAway:AnnotatedPackages=com.xenoterracide
+      -XepOpt:NullAway:JSpecifyMode=true
+      -XepOpt:NullAway:UnannotatedSubPackages=io.vavr,org.apache.commons.lang3,org.assertj,org.eclipse.jgit
       -Xep:InvalidInlineTag:OFF
       -Xep:MultipleNullnessAnnotations:OFF
       -Xep:AddNullMarkedToPackageInfo:ERROR
@@ -153,6 +156,7 @@ SPDX-License-Identifier: CC0-1.0
       -Xep:NonAtomicVolatileUpdate:ERROR
       -Xep:NonCanonicalStaticMemberImport:ERROR
       -Xep:NonOverridingEquals:ERROR
+      -Xep:NullAway:ERROR
       -Xep:NullOptional:ERROR
       -Xep:NullableConstructor:ERROR
       -Xep:NullablePrimitive:ERROR
@@ -212,6 +216,7 @@ SPDX-License-Identifier: CC0-1.0
     <errorprone.checks.test>
       -Xplugin:ErrorProne
       -XepDisableWarningsInGeneratedCode
+      -Xep:NullAway:OFF
       -Xep:JavaTimeDefaultTimeZone:OFF
     </errorprone.checks.test>
 
@@ -331,6 +336,11 @@ SPDX-License-Identifier: CC0-1.0
                 <groupId>com.google.errorprone</groupId>
                 <artifactId>error_prone_core</artifactId>
                 <version>${errorprone.core.version}</version>
+              </path>
+              <path>
+                <groupId>com.uber.nullaway</groupId>
+                <artifactId>nullaway</artifactId>
+                <version>${nullaway.version}</version>
               </path>
             </annotationProcessorPaths>
             <compilerArgs>
