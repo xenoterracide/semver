@@ -187,6 +187,8 @@ SPDX-License-Identifier: CC0-1.0
               <arg>-parameters</arg>
               <arg>-Aimmutables.annotations.pick=jakarta</arg>
               <arg>-Aimmutables.guava.suppress</arg>
+              <arg>--should-stop=ifError=FLOW</arg>
+              <arg>-XDcompilePolicy=simple</arg>
               <arg>${errorprone.checks}</arg>
             </compilerArgs>
           </configuration>
@@ -200,6 +202,8 @@ SPDX-License-Identifier: CC0-1.0
                 <release>25</release>
                 <compilerArgs>
                   <arg>-parameters</arg>
+                  <arg>--should-stop=ifError=FLOW</arg>
+                  <arg>-XDcompilePolicy=simple</arg>
                   <arg>${errorprone.test.checks}</arg>
                 </compilerArgs>
               </configuration>
@@ -297,6 +301,11 @@ SPDX-License-Identifier: CC0-1.0
     </pluginManagement>
 
     <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>properties-maven-plugin</artifactId>
+      </plugin>
+
       <plugin>
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
