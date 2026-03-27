@@ -163,6 +163,8 @@ SPDX-License-Identifier: CC0-1.0
                 <version>${nullaway.version}</version>
               </path>
             </annotationProcessorPaths>
+            <source>17</source>
+            <target>17</target>
             <release>17</release>
             <compilerArgs>
               <arg>-parameters</arg>
