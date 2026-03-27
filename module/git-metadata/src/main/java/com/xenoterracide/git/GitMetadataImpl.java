@@ -206,7 +206,7 @@ class GitMetadataImpl implements GitMetadata {
 
     @Override
     public String toString() {
-      return "RemoteImpl{name=" + name + ", headBranchRefName=" + headBranchRefName + "}";
+      return ("RemoteImpl{" + "name=" + this.name + ", headBranchRefName=" + this.headBranchRefName + "}");
     }
   }
 }
