@@ -39,8 +39,8 @@ SPDX-License-Identifier: CC0-1.0
     <jspecify.version>1.0.0</jspecify.version>
     <semver4j.version>6.0.0</semver4j.version>
     <errorprone.annotations.version>2.48.0</errorprone.annotations.version>
-    <errorprone.core.version>2.38.0</errorprone.core.version>
-    <nullaway.version>0.12.6</nullaway.version>
+    <errorprone.core.version>2.48.0</errorprone.core.version>
+    <nullaway.version>0.13.1</nullaway.version>
     <immutables.version>2.12.1</immutables.version>
 
     <!-- Error Prone checks configuration -->
