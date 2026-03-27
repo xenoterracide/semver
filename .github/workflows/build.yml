@@ -1,5 +1,6 @@
 # SPDX-FileCopyrightText: Copyright © 2024-2026 Caleb Cushing
 #
+# SPDX-License-Identifier: CC0-1.0
 # SPDX-License-Identifier: MIT
 
 name: build
@@ -11,7 +12,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-24.04
-    timeout-minutes: 10
+    timeout-minutes: 5
     permissions:
       actions: write
       contents: read
@@ -22,7 +23,7 @@ jobs:
         uses: actions/setup-java@v5.2.0
         with:
           distribution: temurin
-          java-version: 21
+          java-version: 25
           cache: maven
       - run: ./mvnw verify --batch-mode --fail-at-end
         env:
@@ -31,7 +32,7 @@ jobs:
 
   full:
     runs-on: ubuntu-24.04
-    timeout-minutes: 10
+    timeout-minutes: 5
     permissions:
       actions: read
       contents: read
