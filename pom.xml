@@ -189,7 +189,7 @@ SPDX-License-Identifier: CC0-1.0
                   <arg>--should-stop=ifError=FLOW</arg>
                   <arg>-XDcompilePolicy=simple</arg>
                   <arg>
-                    -Xplugin:ErrorProne -XepDisableWarningsInGeneratedCode -XepExcludedPaths:.*/target/generated-sources/annotations/.* -Xep:NullAway:OFF -Xep:JavaTimeDefaultTimeZone:OFF
+                    -Xplugin:ErrorProne -XepDisableWarningsInGeneratedCode -Xep:NullAway:OFF -Xep:JavaTimeDefaultTimeZone:OFF
                   </arg>
                 </compilerArgs>
               </configuration>
