@@ -180,6 +180,7 @@ SPDX-License-Identifier: CC0-1.0
                 <goal>testCompile</goal>
               </goals>
               <configuration>
+                <release>25</release>
                 <compilerArgs>
                   <arg>-parameters</arg>
                   <arg>--should-stop=ifError=FLOW</arg>

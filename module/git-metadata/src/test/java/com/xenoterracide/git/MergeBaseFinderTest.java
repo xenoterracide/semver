@@ -114,14 +114,14 @@ class MergeBaseFinderTest {
       var mergeBase = new MergeBaseFinder(git.getRepository());
 
       assertThat(gitMetadata.remotes()).isNotEmpty();
-      assertThat(mergeBase.find(gitMetadata.remotes().get(0))).isNotPresent();
+      assertThat(mergeBase.find(gitMetadata.remotes().getFirst())).isNotPresent();
     }
   }
 
   @Test
   void originHeadBranchAllPushed() throws Throwable {
     var gitMetadata = new GitMetadataImpl(this.git);
-    var origin = gitMetadata.remotes().get(0);
+    var origin = gitMetadata.remotes().getFirst();
     var mergeBase = new MergeBaseFinder(git.get().getRepository());
 
     assertThat(mergeBase.find(origin)).as("initial").isPresent().hasValue(initialCommit);
