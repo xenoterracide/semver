@@ -1,7 +1,6 @@
 // SPDX-FileCopyrightText: Copyright © 2024-2026 Caleb Cushing
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
-// SPDX-License-Identifier: MIT
 
 /**
  * Semantic versioning calculation module.

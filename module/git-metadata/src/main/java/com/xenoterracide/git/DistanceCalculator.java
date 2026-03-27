@@ -1,9 +1,8 @@
 // SPDX-FileCopyrightText: Copyright © 2024-2026 Caleb Cushing
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
-// SPDX-License-Identifier: GPL-3.0-or-later WITH Classpath-exception-2.0
 
-package com.xenoterracide.git.internal;
+package com.xenoterracide.git;
 
 import java.util.NoSuchElementException;
 import java.util.function.Function;
@@ -16,7 +15,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Calculates the distance (number of commits) between references.
  */
-public class DistanceCalculator implements Function<String, Long> {
+class DistanceCalculator implements Function<String, Long> {
 
   private final TryGit git;
   private final Logger log = LoggerFactory.getLogger(this.getClass());

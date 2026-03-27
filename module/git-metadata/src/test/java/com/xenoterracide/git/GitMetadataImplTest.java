@@ -1,7 +1,6 @@
 // SPDX-FileCopyrightText: Copyright © 2024-2026 Caleb Cushing
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
-// SPDX-License-Identifier: GPL-3.0-or-later WITH Classpath-exception-2.0
 
 package com.xenoterracide.git;
 
@@ -9,7 +8,6 @@ import static com.xenoterracide.git.fixtures.CommitTools.commit;
 import static com.xenoterracide.git.fixtures.CommitTools.supplies;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.xenoterracide.git.internal.GitMetadataImpl;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;

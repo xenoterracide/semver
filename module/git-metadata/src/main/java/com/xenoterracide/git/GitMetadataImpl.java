@@ -1,18 +1,14 @@
 // SPDX-FileCopyrightText: Copyright © 2024-2026 Caleb Cushing
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
-// SPDX-License-Identifier: GPL-3.0-or-later WITH Classpath-exception-2.0
 
-package com.xenoterracide.git.internal;
+package com.xenoterracide.git;
 
 import static io.vavr.API.$;
 import static io.vavr.API.Case;
 import static io.vavr.API.Match;
 import static io.vavr.Predicates.instanceOf;
 
-import com.xenoterracide.git.GitMetadata;
-import com.xenoterracide.git.GitRemote;
-import com.xenoterracide.git.GitStatus;
 import io.vavr.control.Try;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -40,7 +36,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Implementation of GitMetadata.
  */
-public class GitMetadataImpl implements GitMetadata {
+class GitMetadataImpl implements GitMetadata {
 
   // this is not a regex but a glob (`man glob`)
   private static final String VERSION_GLOB = "v[0-9]*.[0-9]*.[0-9]*";
@@ -204,7 +200,7 @@ public class GitMetadataImpl implements GitMetadata {
     }
 
     @Override
-    public @NonNull String name() {
+    public String name() {
       return this.name;
     }
 
