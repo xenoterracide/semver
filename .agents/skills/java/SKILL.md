@@ -1,13 +1,19 @@
 ---
 name: java
 license: CC-BY-NC-SA-4.0
-description: Write code in the Java programming language.
+description: |
+  Write code in the Java programming language.
+  
+  ALWAYS apply this skill when:
+  - Creating or modifying `.java` source files
+  - Working with Java classes, interfaces, records, or enums
+  - Writing or refactoring Java code of any kind
 # SPDX-FileCopyrightText: Copyright © 2026 Caleb Cushing
 #
 # SPDX-License-Identifier: CC-BY-NC-SA-4.0
 ---
 
-Use for writing Java code.
+Use for writing Java code in `.java` files.
 
 ## Design Principles
 
@@ -70,7 +76,18 @@ static Supplier<Foo> fooSupplier() {
 Avoid `private` except with fields. prefer the default "package protected" unless must be `public` or is useful for subclasses.
 
 - this allows methods to be exposed for testing but not outside the package. This aligns with the Vertical Slice architecture, Test Driven Principles, conventions where tests live in the same package and can access package protected methods, as well as original Java Language design that made this the default visibility. `private` is only necessary to prevent access from other classes in the same package, which is uncommon and should be avoided.
-- prefer builder pattern over complex constructors with immutables library `@Builder` and a static factory. e.g.
+
+### Internal Packages
+
+Avoid `internal` packages. Package-private visibility should be preferred to hide implementation details. Only use `internal` packages when something must be `public` (e.g., for framework integration or cross-module access) but should not be part of the stable public API.
+
+- prefer package-private classes and methods over placing them in `internal` packages
+- use `internal` only as a last resort when `public` is unavoidable
+- if you must use `internal`, clearly document what is internal and why
+
+### Builders
+
+prefer builder pattern over complex constructors with immutables library `@Builder` and a static factory. e.g.
 
 ```java
 import org.immutables.builder.Builder;
