@@ -5,4 +5,7 @@
 /**
  * Test fixtures for git module.
  */
+@NullMarked
 package com.xenoterracide.git.fixtures;
+
+import org.jspecify.annotations.NullMarked;
