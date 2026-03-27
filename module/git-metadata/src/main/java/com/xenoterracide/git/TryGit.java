@@ -27,7 +27,7 @@ public interface TryGit extends Supplier<@Nullable Git> {
    *   return type
    * @return the result of the function
    */
-  default <R> Try<R> tryCommand(CheckedFunction1<Git, GitCommand<@Nullable R>> command) {
+  default <R> Try<R> tryCommand(CheckedFunction1<Git, GitCommand<R>> command) {
     return this.tryGit(git -> command.apply(git).call());
   }
 
@@ -40,7 +40,7 @@ public interface TryGit extends Supplier<@Nullable Git> {
    *   result of the function
    * @return result of the function with filtered nulls
    */
-  default <R> Try<R> tryGit(CheckedFunction1<Git, @Nullable R> command) {
+  default <R> Try<R> tryGit(CheckedFunction1<Git, R> command) {
     return Try.of(this::get)
       .filter(Objects::nonNull)
       .mapTry(command)
