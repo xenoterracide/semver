@@ -1,10 +1,24 @@
 ---
 name: pull-request
-description: ALWAYS use this skill when ANY files are modified, created, or deleted - including fixing bugs, adding features, refactoring, debugging, updating configs/workflows, or investigating issues that result in code changes. Handles committing, pushing, and creating/updating pull requests through GitHub.
+description: |
+  ALWAYS use this skill when ANY files are modified, created, or deleted - including fixing bugs, adding features, refactoring, debugging, updating configs/workflows, or investigating issues that result in code changes. Handles committing, pushing, and creating/updating pull requests through GitHub.
+  
+  ALWAYS apply this skill when:
+  - Making changes to files (create, modify, delete)
+  - Adding new features or functionality
+  - Fixing bugs or issues
+  - Refactoring or restructuring code
+  - Updating documentation (README.md, AGENTS.md, skill files)
+  - Changing configuration files or workflows
+  - Any work that results in file modifications
+  
+  This skill MUST be used alongside any domain-specific skills (java, gradle, etc.) when file changes are involved.
 # SPDX-FileCopyrightText: Copyright © 2026 Caleb Cushing
 #
 # SPDX-License-Identifier: CC-BY-NC-SA-4.0
 ---
+
+**CRITICAL: This skill must ALWAYS be used whenever files are created, modified, or deleted, regardless of what other skills are also being applied.**
 
 - use commit-message
 - keep the pull request message up to date
