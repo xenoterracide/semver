@@ -38,7 +38,7 @@ SPDX-License-Identifier: CC0-1.0
     <guava.version>33.5.0-jre</guava.version>
     <jspecify.version>1.0.0</jspecify.version>
     <semver4j.version>6.0.0</semver4j.version>
-    <errorprone.annotations.version>2.36.0</errorprone.annotations.version>
+    <errorprone.annotations.version>2.48.0</errorprone.annotations.version>
     <immutables.version>2.12.1</immutables.version>
 
     <!-- Plugin versions -->
