@@ -27,6 +27,23 @@ skill-name/
 **CRITICAL:** Skills are fussy with frontmatter. The `---` must be the very
 first line in the file.
 
+### Frontmatter Fields
+
+Only two fields allowed in frontmatter:
+
+- **`name`**: Skill identifier
+  - Max 64 characters
+  - Lowercase letters, numbers, and hyphens only
+  - Must not start or end with a hyphen
+  - Examples: `java`, `pull-request`, `gradle-shadow`
+
+- **`description`**: When to use this skill (this triggers the skill)
+  - Max 1024 characters, non-empty
+  - Be specific about triggers and usage scenarios
+  - Include "when to use" guidance here, not in the body
+
+Do not include other fields like `license` in frontmatter.
+
 ### Correct Structure
 
 ```markdown
