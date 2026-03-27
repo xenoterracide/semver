@@ -1,22 +1,19 @@
 ---
 name: pull-request
 description: |
-  ALWAYS use this skill when ANY files are modified, created, or deleted - including fixing bugs, adding features, refactoring, debugging, updating configs/workflows, or investigating issues that result in code changes. Handles committing, pushing, and creating/updating pull requests through GitHub.
-  
-  ALWAYS apply this skill when:
-  - Making changes to files (create, modify, delete)
-  - Adding new features or functionality
-  - Fixing bugs or issues
-  - Refactoring or restructuring code
-  - Updating documentation (README.md, AGENTS.md, skill files)
-  - Changing configuration files or workflows
-  - Any work that results in file modifications
-  
-  This skill MUST be used alongside any domain-specific skills (java, gradle, etc.) when file changes are involved.
-# SPDX-FileCopyrightText: Copyright © 2026 Caleb Cushing
-#
-# SPDX-License-Identifier: CC-BY-NC-SA-4.0
+  ALWAYS use when files are modified, created, or deleted - including bugs,
+  features, refactoring, or config changes. Handles committing, pushing, and
+  PR management through GitHub.
+
+  Use when: making file changes, adding features, fixing bugs, refactoring,
+  updating docs or configs. Must be used with domain-specific skills.
 ---
+
+<!--
+SPDX-FileCopyrightText: Copyright © 2026 Caleb Cushing
+
+SPDX-License-Identifier: CC-BY-NC-SA-4.0
+-->
 
 **CRITICAL: This skill must ALWAYS be used whenever files are created, modified, or deleted, regardless of what other skills are also being applied.**
 
@@ -189,3 +186,9 @@ Use your AI identity:
 | Claude  | `Claude`         | `claude@anthropic.localhost` |
 
 Place the Co-authored-by trailer at the end of the commit message body, after the description.
+
+---
+
+SPDX-FileCopyrightText: Copyright © 2026 Caleb Cushing
+
+SPDX-License-Identifier: CC-BY-NC-SA-4.0

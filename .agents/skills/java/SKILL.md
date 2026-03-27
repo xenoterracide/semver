@@ -1,17 +1,19 @@
 ---
 name: java
-license: CC-BY-NC-SA-4.0
 description: |
   Write code in the Java programming language.
-  
+
   ALWAYS apply this skill when:
   - Creating or modifying `.java` source files
   - Working with Java classes, interfaces, records, or enums
   - Writing or refactoring Java code of any kind
-# SPDX-FileCopyrightText: Copyright © 2026 Caleb Cushing
-#
-# SPDX-License-Identifier: CC-BY-NC-SA-4.0
 ---
+
+<!--
+SPDX-FileCopyrightText: Copyright © 2026 Caleb Cushing
+
+SPDX-License-Identifier: CC-BY-NC-SA-4.0
+-->
 
 Use for writing Java code in `.java` files.
 
