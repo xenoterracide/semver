@@ -163,6 +163,7 @@ SPDX-License-Identifier: CC0-1.0
                 <version>${nullaway.version}</version>
               </path>
             </annotationProcessorPaths>
+            <release>17</release>
             <compilerArgs>
               <arg>-parameters</arg>
               <arg>-Aimmutables.annotations.pick=jakarta</arg>
