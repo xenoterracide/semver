@@ -146,6 +146,7 @@ SPDX-License-Identifier: CC0-1.0
           <artifactId>maven-compiler-plugin</artifactId>
           <version>${maven-compiler-plugin.version}</version>
           <configuration>
+            <incrementalCompilation>sources</incrementalCompilation>
             <annotationProcessorPaths>
               <path>
                 <groupId>org.immutables</groupId>
