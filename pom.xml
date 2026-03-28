@@ -232,13 +232,14 @@ SPDX-License-Identifier: CC0-1.0
             <dependency>
               <groupId>com.puppycrawl.tools</groupId>
               <artifactId>checkstyle</artifactId>
-              <version>${checkstye.version}</version>
+              <version>${checkstyle.version}</version>
             </dependency>
           </dependencies>
           <configuration>
-            <configLocation>config/checkstyle/checkstyle.xml</configLocation>
-            <suppressionsLocation>config/checkstyle/suppressions.xml</suppressionsLocation>
+            <configLocation>.config/checkstyle/main.xml</configLocation>
+            <suppressionsLocation>.config/checkstyle/suppressions.xml</suppressionsLocation>
             <includeTestSourceDirectory>true</includeTestSourceDirectory>
+            <excludes>**/generated-sources/**/*</excludes>
             <consoleOutput>true</consoleOutput>
             <failsOnError>true</failsOnError>
             <linkXRef>false</linkXRef>
@@ -314,6 +315,19 @@ SPDX-License-Identifier: CC0-1.0
           </execution>
           <execution>
             <id>check</id>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>checkstyle</id>
+            <phase>verify</phase>
             <goals>
               <goal>check</goal>
             </goals>
