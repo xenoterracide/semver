@@ -236,10 +236,6 @@ SPDX-License-Identifier: CC0-1.0
             </dependency>
           </dependencies>
           <configuration>
-            <configLocation>.config/checkstyle/main.xml</configLocation>
-            <suppressionsLocation>.config/checkstyle/suppressions.xml</suppressionsLocation>
-            <includeTestSourceDirectory>true</includeTestSourceDirectory>
-            <excludes>**/generated-sources/**/*</excludes>
             <consoleOutput>true</consoleOutput>
             <failsOnError>true</failsOnError>
             <linkXRef>false</linkXRef>
@@ -326,11 +322,34 @@ SPDX-License-Identifier: CC0-1.0
         <artifactId>maven-checkstyle-plugin</artifactId>
         <executions>
           <execution>
-            <id>checkstyle</id>
+            <id>checkstyle-main</id>
             <phase>verify</phase>
             <goals>
               <goal>check</goal>
             </goals>
+            <configuration>
+              <configLocation>.config/checkstyle/main.xml</configLocation>
+              <suppressionsLocation>.config/checkstyle/suppressions-main.xml</suppressionsLocation>
+              <sourceDirectories>
+                <sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
+              </sourceDirectories>
+            </configuration>
+          </execution>
+          <execution>
+            <id>checkstyle-test</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>check</goal>
+            </goals>
+            <configuration>
+              <configLocation>.config/checkstyle/test.xml</configLocation>
+              <suppressionsLocation>.config/checkstyle/suppressions-test.xml</suppressionsLocation>
+              <sourceDirectories>
+                <sourceDirectory>${project.basedir}/src/test/java</sourceDirectory>
+                <sourceDirectory>${project.basedir}/src/testFixtures/java</sourceDirectory>
+                <sourceDirectory>${project.basedir}/src/testIntegration/java</sourceDirectory>
+              </sourceDirectories>
+            </configuration>
           </execution>
         </executions>
       </plugin>
