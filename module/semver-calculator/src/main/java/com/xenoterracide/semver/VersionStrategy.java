@@ -4,12 +4,6 @@
 
 package com.xenoterracide.semver;
 
-import com.xenoterracide.semver.internal.AfterTagHeadStrategy;
-import com.xenoterracide.semver.internal.AfterTagTopicStrategy;
-import com.xenoterracide.semver.internal.NoTagHeadStrategy;
-import com.xenoterracide.semver.internal.NoTagTopicStrategy;
-import com.xenoterracide.semver.internal.OnExactTagHeadStrategy;
-import com.xenoterracide.semver.internal.OnExactTagTopicStrategy;
 import org.semver4j.Semver;
 
 /**

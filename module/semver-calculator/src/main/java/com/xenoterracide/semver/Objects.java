@@ -2,14 +2,14 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-package com.xenoterracide.semver.internal;
+package com.xenoterracide.semver;
 
 import org.jspecify.annotations.Nullable;
 
 /**
  * Internal utility class for object operations.
  */
-public final class Objects {
+final class Objects {
 
   private Objects() {}
 
@@ -22,7 +22,7 @@ public final class Objects {
    * @param <T> the type of the value
    * @throws IllegalStateException if value is null
    */
-  public static <T> T requireNonNullElseThrow(@Nullable T value, String message) {
+  static <T> T requireNonNullElseThrow(@Nullable T value, String message) {
     if (value == null) {
       throw new IllegalStateException(message);
     }

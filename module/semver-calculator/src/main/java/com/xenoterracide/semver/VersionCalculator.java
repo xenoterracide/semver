@@ -5,7 +5,6 @@
 package com.xenoterracide.semver;
 
 import com.xenoterracide.git.GitMetadata;
-import com.xenoterracide.semver.internal.VersionStrategyFactory;
 import java.util.Objects;
 import org.semver4j.Semver;
 
@@ -22,7 +21,7 @@ import org.semver4j.Semver;
  * System.out.println(version); // e.g., "1.0.1-alpha.0.5+git.5.abc123"
  * }</pre>
  */
-public final class VersionCalculator {
+final class VersionCalculator {
 
   private VersionCalculator() {
     // utility class
