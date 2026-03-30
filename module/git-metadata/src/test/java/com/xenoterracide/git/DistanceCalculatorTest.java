@@ -89,4 +89,19 @@ class DistanceCalculatorTest {
       assertThat(ourDistance).isEqualTo(describeDistance).isEqualTo(5);
     }
   }
+
+  @Test
+  void distanceOnExactTagReturnsZero() throws Exception {
+    try (var git = Git.init().setDirectory(projectDir).call()) {
+      // Create initial commit and tag it
+      commit(git);
+      git.tag().setName("v1.0.0").call();
+
+      // We're exactly on the tag - distance should be 0
+      var calculator = new DistanceCalculator(() -> git);
+      var ourDistance = calculator.apply("HEAD");
+
+      assertThat(ourDistance).isEqualTo(0);
+    }
+  }
 }
