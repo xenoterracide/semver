@@ -2,11 +2,9 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-package com.xenoterracide.semver.internal;
+package com.xenoterracide.semver;
 
 import com.google.common.base.MoreObjects;
-import com.xenoterracide.semver.GitContext;
-import com.xenoterracide.semver.VersionStrategy;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.semver4j.Semver;
@@ -24,13 +22,13 @@ import org.semver4j.Semver;
  *
  * <p>Build metadata includes git distance and short SHA for traceability.</p>
  */
-public final class AfterTagHeadStrategy implements VersionStrategy {
+final class AfterTagHeadStrategy implements VersionStrategy {
 
   private static final String UNKNOWN = "unknown";
 
   private final GitContext ctx;
 
-  public AfterTagHeadStrategy(GitContext ctx) {
+  AfterTagHeadStrategy(GitContext ctx) {
     this.ctx = ctx;
   }
 

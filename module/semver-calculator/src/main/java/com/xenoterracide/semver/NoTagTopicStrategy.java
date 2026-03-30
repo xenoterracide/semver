@@ -2,11 +2,9 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-package com.xenoterracide.semver.internal;
+package com.xenoterracide.semver;
 
 import com.google.common.base.MoreObjects;
-import com.xenoterracide.semver.GitContext;
-import com.xenoterracide.semver.VersionStrategy;
 import org.semver4j.Semver;
 
 /**
@@ -21,12 +19,12 @@ import org.semver4j.Semver;
  *       metadata: 2 commits since <a href="https://git-scm.com/docs/git-merge-base">merge base</a>)</li>
  * </ul>
  */
-public final class NoTagTopicStrategy implements VersionStrategy {
+final class NoTagTopicStrategy implements VersionStrategy {
 
   private static final String UNKNOWN = "unknown";
   private final GitContext ctx;
 
-  public NoTagTopicStrategy(GitContext ctx) {
+  NoTagTopicStrategy(GitContext ctx) {
     this.ctx = ctx;
   }
 

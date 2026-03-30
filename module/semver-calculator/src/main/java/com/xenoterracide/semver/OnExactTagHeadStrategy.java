@@ -2,10 +2,8 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-package com.xenoterracide.semver.internal;
+package com.xenoterracide.semver;
 
-import com.xenoterracide.semver.GitContext;
-import com.xenoterracide.semver.VersionStrategy;
 import org.semver4j.Semver;
 
 /**
@@ -20,11 +18,11 @@ import org.semver4j.Semver;
  *
  * <p>This is the cleanest strategy - no prerelease or build metadata needed.</p>
  */
-public final class OnExactTagHeadStrategy implements VersionStrategy {
+final class OnExactTagHeadStrategy implements VersionStrategy {
 
   private final GitContext ctx;
 
-  public OnExactTagHeadStrategy(GitContext ctx) {
+  OnExactTagHeadStrategy(GitContext ctx) {
     this.ctx = ctx;
   }
 
