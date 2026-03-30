@@ -2,11 +2,9 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-package com.xenoterracide.semver.internal;
+package com.xenoterracide.semver;
 
 import com.google.common.base.MoreObjects;
-import com.xenoterracide.semver.GitContext;
-import com.xenoterracide.semver.VersionStrategy;
 import org.semver4j.Semver;
 
 /**
@@ -20,13 +18,13 @@ import org.semver4j.Semver;
  *
  * <p>Starts from 0.0.0 and adds prerelease with total commits and metadata.</p>
  */
-public final class NoTagHeadStrategy implements VersionStrategy {
+final class NoTagHeadStrategy implements VersionStrategy {
 
   private static final String UNKNOWN = "unknown";
 
   private final GitContext ctx;
 
-  public NoTagHeadStrategy(GitContext ctx) {
+  NoTagHeadStrategy(GitContext ctx) {
     this.ctx = ctx;
   }
 

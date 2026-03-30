@@ -2,11 +2,9 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-package com.xenoterracide.semver.internal;
+package com.xenoterracide.semver;
 
 import com.google.common.base.MoreObjects;
-import com.xenoterracide.semver.GitContext;
-import com.xenoterracide.semver.VersionStrategy;
 import org.semver4j.Semver;
 
 /**
@@ -22,12 +20,12 @@ import org.semver4j.Semver;
  *   <li>v1.0.0 on feature-x (0 new commits) → {@code 1.0.0+branch.feature-x.git.0.abc123}</li>
  * </ul>
  */
-public final class OnExactTagTopicStrategy implements VersionStrategy {
+final class OnExactTagTopicStrategy implements VersionStrategy {
 
   private static final String UNKNOWN = "unknown";
   private final GitContext ctx;
 
-  public OnExactTagTopicStrategy(GitContext ctx) {
+  OnExactTagTopicStrategy(GitContext ctx) {
     this.ctx = ctx;
   }
 

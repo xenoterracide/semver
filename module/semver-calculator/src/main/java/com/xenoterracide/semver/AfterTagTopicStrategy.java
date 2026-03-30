@@ -2,11 +2,9 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-package com.xenoterracide.semver.internal;
+package com.xenoterracide.semver;
 
 import com.google.common.base.MoreObjects;
-import com.xenoterracide.semver.GitContext;
-import com.xenoterracide.semver.VersionStrategy;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.semver4j.Semver;
@@ -28,7 +26,7 @@ import org.semver4j.Semver;
  * <p>The prerelease uses distance from tag (same as HEAD branch would),
  * while metadata uses distance from merge base (commits on topic branch only).</p>
  */
-public final class AfterTagTopicStrategy implements VersionStrategy {
+final class AfterTagTopicStrategy implements VersionStrategy {
 
   private static final String UNKNOWN = "unknown";
 

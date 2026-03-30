@@ -2,10 +2,7 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-package com.xenoterracide.semver.internal;
-
-import com.xenoterracide.semver.GitContext;
-import com.xenoterracide.semver.VersionStrategy;
+package com.xenoterracide.semver;
 
 /**
  * Factory for creating version calculation strategies based on git context.
@@ -16,7 +13,7 @@ import com.xenoterracide.semver.VersionStrategy;
  *   <li>Branch type: HEAD_BRANCH or TOPIC_BRANCH</li>
  * </ul>
  */
-public final class VersionStrategyFactory {
+final class VersionStrategyFactory {
 
   private VersionStrategyFactory() {
     // utility class
@@ -28,7 +25,7 @@ public final class VersionStrategyFactory {
    * @param ctx the git context
    * @return the version strategy for this context
    */
-  public static VersionStrategy determineStrategy(GitContext ctx) {
+  static VersionStrategy determineStrategy(GitContext ctx) {
     var hasTag = ctx.hasTagInHistory();
     var onExactTag = ctx.isOnTagExact();
     var isHeadBranch = ctx.isHeadBranch();
