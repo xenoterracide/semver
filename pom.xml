@@ -236,6 +236,8 @@ SPDX-License-Identifier: CC0-1.0
             </dependency>
           </dependencies>
           <configuration>
+            <configLocation>.config/checkstyle/main.xml</configLocation>
+            <suppressionsLocation>.config/checkstyle/suppressions-main.xml</suppressionsLocation>
             <consoleOutput>true</consoleOutput>
             <failsOnError>true</failsOnError>
             <linkXRef>false</linkXRef>
