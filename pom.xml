@@ -260,6 +260,7 @@ SPDX-License-Identifier: CC0-1.0
             <threshold>Low</threshold>
             <xmlOutput>true</xmlOutput>
             <failOnError>true</failOnError>
+            <excludeFilterFile>${project.basedir}/.config/spotbugs/exclude.xml</excludeFilterFile>
           </configuration>
         </plugin>
 
@@ -320,38 +321,23 @@ SPDX-License-Identifier: CC0-1.0
         </executions>
       </plugin>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-checkstyle-plugin</artifactId>
+        <groupId>com.github.spotbugs</groupId>
+        <artifactId>spotbugs-maven-plugin</artifactId>
+        <version>${spotbugs-maven-plugin.version}</version>
+        <dependencies>
+          <dependency>
+            <groupId>com.github.spotbugs</groupId>
+            <artifactId>spotbugs</artifactId>
+            <version>${spotbugs.version}</version>
+          </dependency>
+        </dependencies>
         <executions>
           <execution>
-            <id>checkstyle-main</id>
+            <id>spotbugs-check</id>
             <phase>verify</phase>
             <goals>
               <goal>check</goal>
             </goals>
-            <configuration>
-              <configLocation>.config/checkstyle/main.xml</configLocation>
-              <suppressionsLocation>.config/checkstyle/suppressions-main.xml</suppressionsLocation>
-              <sourceDirectories>
-                <sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
-              </sourceDirectories>
-            </configuration>
-          </execution>
-          <execution>
-            <id>checkstyle-test</id>
-            <phase>verify</phase>
-            <goals>
-              <goal>check</goal>
-            </goals>
-            <configuration>
-              <configLocation>.config/checkstyle/test.xml</configLocation>
-              <suppressionsLocation>.config/checkstyle/suppressions-test.xml</suppressionsLocation>
-              <sourceDirectories>
-                <sourceDirectory>${project.basedir}/src/test/java</sourceDirectory>
-                <sourceDirectory>${project.basedir}/src/testFixtures/java</sourceDirectory>
-                <sourceDirectory>${project.basedir}/src/testIntegration/java</sourceDirectory>
-              </sourceDirectories>
-            </configuration>
           </execution>
         </executions>
       </plugin>
