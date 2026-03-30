@@ -114,6 +114,12 @@ SPDX-License-Identifier: CC0-1.0
         <artifactId>error_prone_annotations</artifactId>
         <version>${errorprone.annotations.version}</version>
       </dependency>
+      <dependency>
+        <groupId>com.github.spotbugs</groupId>
+        <artifactId>spotbugs-annotations</artifactId>
+        <version>${spotbugs.version}</version>
+        <scope>provided</scope>
+      </dependency>
 
       <!-- Test dependencies -->
       <dependency>
