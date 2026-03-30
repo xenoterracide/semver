@@ -22,14 +22,12 @@ final class Exceptions {
    * @return a runtime exception
    */
   static RuntimeException toRuntime(Throwable throwable) {
-    RuntimeException result;
     if (throwable instanceof RuntimeException re) {
-      result = re;
-    } else if (throwable instanceof IOException ioe) {
-      result = new UncheckedIOException(ioe);
-    } else {
-      result = new RuntimeException(throwable);
+      return re;
     }
-    return result;
+    if (throwable instanceof IOException ioe) {
+      return new UncheckedIOException(ioe);
+    }
+    return new RuntimeException(throwable);
   }
 }

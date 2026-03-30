@@ -163,7 +163,9 @@ SPDX-License-Identifier: CC0-1.0
     <module name="StaticVariableName" />
     <module name="TypeName" />
     <module name="ParameterAssignment" />
-    <module name="ReturnCount" />
+    <module name="ReturnCount">
+      <property name="max" value="3" />
+    </module>
     <module name="StringLiteralEquality" />
     <module name="CatchParameterName" />
     <module name="ClassTypeParameterName">
