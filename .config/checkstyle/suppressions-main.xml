@@ -7,17 +7,6 @@ SPDX-License-Identifier: CC0-1.0
 <!DOCTYPE suppressions PUBLIC "-//Checkstyle//DTD Suppressions 1.2//EN"
   "https://checkstyle.org/dtds/suppressions_1_2.dtd">
 <suppressions>
-  <!-- Allow redundant public in interface methods (common pattern) -->
-  <suppress files="[/\\]src[/\\]main[/\\]java[/\\]" checks="RedundantModifier" />
-  <!-- Existing code issues - should be fixed eventually -->
-  <suppress files="[/\\]src[/\\]main[/\\]java[/\\]" checks="ReturnCount" />
-  <suppress files="[/\\]src[/\\]main[/\\]java[/\\]" checks="RequireThis" />
-  <suppress files="[/\\]src[/\\]main[/\\]java[/\\]" checks="MethodLength" />
-  <!-- Internal package classes have relaxed Javadoc requirements -->
-  <suppress files="[/\\]internal[/\\]" checks="MissingJavadocMethod" />
-  <suppress files="[/\\]internal[/\\]" checks="JavadocPackage" />
-  <!-- Generated sources -->
+  <!-- Generated sources are not checked -->
   <suppress files="[/\\]target[/\\]generated-sources[/\\]" checks=".*" />
-  <!-- AtclauseOrder issue in Objects.java -->
-  <suppress files="Objects\.java" checks="AtclauseOrder" />
 </suppressions>

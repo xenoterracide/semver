@@ -16,10 +16,10 @@ final class Objects {
   /**
    * Returns the value if non-null, otherwise throws IllegalStateException with the given message.
    *
+   * @param <T> the type of the value
    * @param value the value to check
    * @param message the exception message
    * @return the value if non-null
-   * @param <T> the type of the value
    * @throws IllegalStateException if value is null
    */
   static <T> T requireNonNullElseThrow(@Nullable T value, String message) {

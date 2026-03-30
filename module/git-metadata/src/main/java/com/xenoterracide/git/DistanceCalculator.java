@@ -20,7 +20,7 @@ class DistanceCalculator implements Function<String, Long> {
   private final TryGit git;
   private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-  public DistanceCalculator(TryGit git) {
+  DistanceCalculator(TryGit git) {
     this.git = git;
   }
 

@@ -23,7 +23,7 @@ class MergeBaseFinder {
 
   private final Repository repo;
 
-  public MergeBaseFinder(Repository repo) {
+  MergeBaseFinder(Repository repo) {
     this.repo = repo;
   }
 

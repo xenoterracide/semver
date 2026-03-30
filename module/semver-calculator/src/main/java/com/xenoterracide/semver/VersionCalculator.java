@@ -6,6 +6,7 @@ package com.xenoterracide.semver;
 
 import com.xenoterracide.git.GitMetadata;
 import java.util.Objects;
+import org.jspecify.annotations.Nullable;
 import org.semver4j.Semver;
 
 /**
@@ -51,20 +52,7 @@ final class VersionCalculator {
     var tag = metadata.tag();
     var distance = metadata.distance();
     var branch = metadata.branch();
-    var shortSha = metadata.uniqueShort();
-    var fullSha = metadata.commit();
-    var isDirty = metadata.status().name().equals("DIRTY");
-
-    // Determine head branch from remotes
-    var headBranch = metadata
-      .remotes()
-      .stream()
-      .filter(r -> r.name().equals("origin"))
-      .findFirst()
-      .map(r -> r.headBranch())
-      .orElse(null);
-
-    // Determine if current branch is the head branch
+    var headBranch = extractHeadBranch(metadata);
     var isHeadBranch = branch != null && branch.equals(headBranch);
 
     return GitContext.builder()
@@ -74,11 +62,21 @@ final class VersionCalculator {
       .currentBranch(branch)
       .headBranch(headBranch)
       .isHeadBranch(isHeadBranch)
-      .distanceFromMergeBase(distance) // Default to same as distance for now
-      .shortSha(shortSha)
-      .fullSha(fullSha)
-      .isDirty(isDirty)
+      .distanceFromMergeBase(distance)
+      .shortSha(metadata.uniqueShort())
+      .fullSha(metadata.commit())
+      .isDirty(metadata.status().name().equals("DIRTY"))
       .isShallowClone(false)
       .build();
+  }
+
+  private static @Nullable String extractHeadBranch(GitMetadata metadata) {
+    return metadata
+      .remotes()
+      .stream()
+      .filter(r -> r.name().equals("origin"))
+      .findFirst()
+      .map(r -> r.headBranch())
+      .orElse(null);
   }
 }
