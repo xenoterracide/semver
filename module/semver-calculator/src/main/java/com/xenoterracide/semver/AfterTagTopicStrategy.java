@@ -32,7 +32,7 @@ final class AfterTagTopicStrategy implements VersionStrategy {
 
   private final GitContext ctx;
 
-  public AfterTagTopicStrategy(GitContext ctx) {
+  AfterTagTopicStrategy(GitContext ctx) {
     this.ctx = ctx;
   }
 

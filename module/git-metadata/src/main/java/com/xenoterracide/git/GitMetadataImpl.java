@@ -45,7 +45,7 @@ class GitMetadataImpl implements GitMetadata {
   private final Logger log = LoggerFactory.getLogger(this.getClass());
   private final TryGit git;
 
-  public GitMetadataImpl(TryGit git) {
+  GitMetadataImpl(TryGit git) {
     this.git = git;
   }
 
@@ -206,7 +206,7 @@ class GitMetadataImpl implements GitMetadata {
 
     @Override
     public String toString() {
-      return "RemoteImpl{name=" + name + ", headBranchRefName=" + headBranchRefName + "}";
+      return "RemoteImpl{name=" + this.name + ", headBranchRefName=" + this.headBranchRefName + "}";
     }
   }
 }
