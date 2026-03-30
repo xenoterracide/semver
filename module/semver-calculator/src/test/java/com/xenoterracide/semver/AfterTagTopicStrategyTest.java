@@ -34,7 +34,7 @@ class AfterTagTopicStrategyTest {
     var version = strategy.calculate();
 
     // Prerelease uses distance from tag (5), metadata uses distance from merge base (3)
-    assertThat(version.toString()).isEqualTo("1.0.1-alpha.0.5+branch.feature-x.git.3.abc123");
+    assertThat(version).hasToString("1.0.1-alpha.0.5+branch.feature-x.git.3.abc123");
   }
 
   @Test
@@ -56,7 +56,7 @@ class AfterTagTopicStrategyTest {
 
     var version = strategy.calculate();
 
-    assertThat(version.toString()).isEqualTo("1.0.0-rc.1.3+branch.feature-x.git.2.abc123");
+    assertThat(version).hasToString("1.0.0-rc.1.3+branch.feature-x.git.2.abc123");
   }
 
   @Test
@@ -82,7 +82,7 @@ class AfterTagTopicStrategyTest {
 
     // Prerelease: alpha.0.10 (uses distanceFromTag)
     // Metadata: branch.feature-y.git.4.def456 (uses distanceFromMergeBase)
-    assertThat(version.toString()).isEqualTo("2.0.1-alpha.0.10+branch.feature-y.git.4.def456");
+    assertThat(version).hasToString("2.0.1-alpha.0.10+branch.feature-y.git.4.def456");
   }
 
   @Test
@@ -104,7 +104,7 @@ class AfterTagTopicStrategyTest {
 
     var version = strategy.calculate();
 
-    assertThat(version.toString()).isEqualTo("1.0.1-alpha.0.5+branch.feature-x.git.3.abc123.dirty");
+    assertThat(version).hasToString("1.0.1-alpha.0.5+branch.feature-x.git.3.abc123.dirty");
   }
 
   @Test
@@ -126,7 +126,7 @@ class AfterTagTopicStrategyTest {
 
     var version = strategy.calculate();
 
-    assertThat(version.toString()).isEqualTo("1.0.1-alpha.0.5+branch.feature-x-y-z.git.3.abc123");
+    assertThat(version).hasToString("1.0.1-alpha.0.5+branch.feature-x-y-z.git.3.abc123");
   }
 
   @Test
@@ -148,7 +148,7 @@ class AfterTagTopicStrategyTest {
 
     var version = strategy.calculate();
 
-    assertThat(version.toString()).isEqualTo("1.0.1-alpha.0.5+branch.unknown.git.3.abc123");
+    assertThat(version).hasToString("1.0.1-alpha.0.5+branch.unknown.git.3.abc123");
   }
 
   @Test
@@ -170,7 +170,7 @@ class AfterTagTopicStrategyTest {
 
     var version = strategy.calculate();
 
-    assertThat(version.toString()).isEqualTo("1.0.1-alpha.0.5+branch.feature-x.git.3.unknown");
+    assertThat(version).hasToString("1.0.1-alpha.0.5+branch.feature-x.git.3.unknown");
   }
 
   @Test

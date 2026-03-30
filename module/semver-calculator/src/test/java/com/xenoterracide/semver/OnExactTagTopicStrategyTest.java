@@ -33,7 +33,7 @@ class OnExactTagTopicStrategyTest {
 
     var version = strategy.calculate();
 
-    assertThat(version.toString()).isEqualTo("1.0.0+branch.feature-x.git.0.abc123");
+    assertThat(version).hasToString("1.0.0+branch.feature-x.git.0.abc123");
   }
 
   @Test
@@ -55,7 +55,7 @@ class OnExactTagTopicStrategyTest {
 
     var version = strategy.calculate();
 
-    assertThat(version.toString()).isEqualTo("1.0.0+branch.feature-x.git.0.abc123.dirty");
+    assertThat(version).hasToString("1.0.0+branch.feature-x.git.0.abc123.dirty");
   }
 
   @Test
@@ -77,7 +77,7 @@ class OnExactTagTopicStrategyTest {
 
     var version = strategy.calculate();
 
-    assertThat(version.toString()).isEqualTo("1.0.0+branch.feature-x-y-z.git.0.abc123");
+    assertThat(version).hasToString("1.0.0+branch.feature-x-y-z.git.0.abc123");
   }
 
   @Test
@@ -99,7 +99,7 @@ class OnExactTagTopicStrategyTest {
 
     var version = strategy.calculate();
 
-    assertThat(version.toString()).isEqualTo("1.0.0+branch.unknown.git.0.abc123");
+    assertThat(version).hasToString("1.0.0+branch.unknown.git.0.abc123");
   }
 
   @Test
@@ -121,7 +121,7 @@ class OnExactTagTopicStrategyTest {
 
     var version = strategy.calculate();
 
-    assertThat(version.toString()).isEqualTo("1.0.0+branch.feature-x.git.0.unknown");
+    assertThat(version).hasToString("1.0.0+branch.feature-x.git.0.unknown");
   }
 
   @Test

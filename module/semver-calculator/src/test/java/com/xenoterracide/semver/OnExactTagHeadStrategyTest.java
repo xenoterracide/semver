@@ -33,7 +33,7 @@ class OnExactTagHeadStrategyTest {
 
     var version = strategy.calculate();
 
-    assertThat(version.toString()).isEqualTo("1.2.3");
+    assertThat(version).hasToString("1.2.3");
   }
 
   @Test
@@ -55,7 +55,7 @@ class OnExactTagHeadStrategyTest {
 
     var version = strategy.calculate();
 
-    assertThat(version.toString()).isEqualTo("1.0.0-rc.1");
+    assertThat(version).hasToString("1.0.0-rc.1");
   }
 
   @Test
@@ -77,7 +77,7 @@ class OnExactTagHeadStrategyTest {
 
     var version = strategy.calculate();
 
-    assertThat(version.toString()).isEqualTo("2.0.0");
+    assertThat(version).hasToString("2.0.0");
   }
 
   @Test

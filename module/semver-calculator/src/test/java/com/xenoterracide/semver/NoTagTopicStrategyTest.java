@@ -35,7 +35,7 @@ class NoTagTopicStrategyTest {
 
     // Prerelease uses distanceFromTag (total commits = 5)
     // Metadata uses distanceFromMergeBase (commits on topic branch = 2)
-    assertThat(version.toString()).isEqualTo("0.0.1-alpha.0.5+branch.feature-x.git.2.abc123");
+    assertThat(version).hasToString("0.0.1-alpha.0.5+branch.feature-x.git.2.abc123");
   }
 
   @Test
@@ -57,7 +57,7 @@ class NoTagTopicStrategyTest {
 
     var version = strategy.calculate();
 
-    assertThat(version.toString()).isEqualTo("0.0.1-alpha.0.10+branch.feature-y.git.4.def456");
+    assertThat(version).hasToString("0.0.1-alpha.0.10+branch.feature-y.git.4.def456");
   }
 
   @Test
@@ -79,7 +79,7 @@ class NoTagTopicStrategyTest {
 
     var version = strategy.calculate();
 
-    assertThat(version.toString()).isEqualTo("0.0.1-alpha.0.5+branch.feature-x.git.2.abc123.dirty");
+    assertThat(version).hasToString("0.0.1-alpha.0.5+branch.feature-x.git.2.abc123.dirty");
   }
 
   @Test
@@ -101,7 +101,7 @@ class NoTagTopicStrategyTest {
 
     var version = strategy.calculate();
 
-    assertThat(version.toString()).isEqualTo("0.0.1-alpha.0.5+branch.feature-x-y-z.git.2.abc123");
+    assertThat(version).hasToString("0.0.1-alpha.0.5+branch.feature-x-y-z.git.2.abc123");
   }
 
   @Test
@@ -123,7 +123,7 @@ class NoTagTopicStrategyTest {
 
     var version = strategy.calculate();
 
-    assertThat(version.toString()).isEqualTo("0.0.1-alpha.0.5+branch.unknown.git.2.abc123");
+    assertThat(version).hasToString("0.0.1-alpha.0.5+branch.unknown.git.2.abc123");
   }
 
   @Test
@@ -145,6 +145,6 @@ class NoTagTopicStrategyTest {
 
     var version = strategy.calculate();
 
-    assertThat(version.toString()).isEqualTo("0.0.1-alpha.0.5+branch.feature-x.git.2.unknown");
+    assertThat(version).hasToString("0.0.1-alpha.0.5+branch.feature-x.git.2.unknown");
   }
 }

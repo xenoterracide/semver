@@ -34,7 +34,7 @@ class AfterTagHeadStrategyTest {
     var version = strategy.calculate();
 
     // Stable tag: increment patch, add alpha prerelease
-    assertThat(version.toString()).isEqualTo("1.0.1-alpha.0.5+git.5.abc123");
+    assertThat(version).hasToString("1.0.1-alpha.0.5+git.5.abc123");
   }
 
   @Test
@@ -56,7 +56,7 @@ class AfterTagHeadStrategyTest {
 
     var version = strategy.calculate();
 
-    assertThat(version.toString()).isEqualTo("1.0.1-alpha.0.1+git.1.abc123");
+    assertThat(version).hasToString("1.0.1-alpha.0.1+git.1.abc123");
   }
 
   @Test
@@ -79,7 +79,7 @@ class AfterTagHeadStrategyTest {
     var version = strategy.calculate();
 
     // Prerelease tag: keep base, append distance to prerelease
-    assertThat(version.toString()).isEqualTo("1.0.0-rc.1.3+git.3.abc123");
+    assertThat(version).hasToString("1.0.0-rc.1.3+git.3.abc123");
   }
 
   @Test
@@ -101,7 +101,7 @@ class AfterTagHeadStrategyTest {
 
     var version = strategy.calculate();
 
-    assertThat(version.toString()).isEqualTo("1.0.0-alpha.1.beta.2.4+git.4.abc123");
+    assertThat(version).hasToString("1.0.0-alpha.1.beta.2.4+git.4.abc123");
   }
 
   @Test
@@ -123,7 +123,7 @@ class AfterTagHeadStrategyTest {
 
     var version = strategy.calculate();
 
-    assertThat(version.toString()).isEqualTo("1.0.1-alpha.0.5+git.5.abc123.dirty");
+    assertThat(version).hasToString("1.0.1-alpha.0.5+git.5.abc123.dirty");
   }
 
   @Test
@@ -145,7 +145,7 @@ class AfterTagHeadStrategyTest {
 
     var version = strategy.calculate();
 
-    assertThat(version.toString()).isEqualTo("1.0.1-alpha.0.5+git.5.unknown");
+    assertThat(version).hasToString("1.0.1-alpha.0.5+git.5.unknown");
   }
 
   @Test

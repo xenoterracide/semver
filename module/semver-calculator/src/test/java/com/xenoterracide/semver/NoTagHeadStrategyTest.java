@@ -32,7 +32,7 @@ class NoTagHeadStrategyTest {
 
     var version = strategy.calculate();
 
-    assertThat(version.toString()).isEqualTo("0.0.1-alpha.0.5+git.5.abc123");
+    assertThat(version).hasToString("0.0.1-alpha.0.5+git.5.abc123");
   }
 
   @Test
@@ -54,7 +54,7 @@ class NoTagHeadStrategyTest {
 
     var version = strategy.calculate();
 
-    assertThat(version.toString()).isEqualTo("0.0.1-alpha.0.1+git.1.abc123");
+    assertThat(version).hasToString("0.0.1-alpha.0.1+git.1.abc123");
   }
 
   @Test
@@ -76,7 +76,7 @@ class NoTagHeadStrategyTest {
 
     var version = strategy.calculate();
 
-    assertThat(version.toString()).isEqualTo("0.0.1-alpha.0.100+git.100.abc123");
+    assertThat(version).hasToString("0.0.1-alpha.0.100+git.100.abc123");
   }
 
   @Test
@@ -98,7 +98,7 @@ class NoTagHeadStrategyTest {
 
     var version = strategy.calculate();
 
-    assertThat(version.toString()).isEqualTo("0.0.1-alpha.0.5+git.5.abc123.dirty");
+    assertThat(version).hasToString("0.0.1-alpha.0.5+git.5.abc123.dirty");
   }
 
   @Test
@@ -120,6 +120,6 @@ class NoTagHeadStrategyTest {
 
     var version = strategy.calculate();
 
-    assertThat(version.toString()).isEqualTo("0.0.1-alpha.0.5+git.5.unknown");
+    assertThat(version).hasToString("0.0.1-alpha.0.5+git.5.unknown");
   }
 }
