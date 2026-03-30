@@ -286,9 +286,9 @@ SPDX-License-Identifier: CC0-1.0
                 <element>BUNDLE</element>
                 <limits>
                   <limit>
-                    <counter>LINE</counter>
+                    <counter>INSTRUCTION</counter>
                     <value>COVEREDRATIO</value>
-                    <minimum>0.30</minimum>
+                    <minimum>0.90</minimum>
                   </limit>
                 </limits>
               </rule>
