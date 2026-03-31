@@ -22,7 +22,7 @@ import org.semver4j.Semver;
  * System.out.println(version); // e.g., "1.0.1-alpha.0.5+git.5.abc123"
  * }</pre>
  */
-final class VersionCalculator {
+public final class VersionCalculator {
 
   private VersionCalculator() {
     // utility class
