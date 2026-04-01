@@ -41,8 +41,9 @@ import picocli.CommandLine.Option;
   versionProvider = SemverCommand.VersionProvider.class,
   description = "Calculate semantic versions from Git repository metadata."
 )
-public class SemverCommand implements Callable<Integer> {
+public final class SemverCommand implements Callable<Integer> {
 
+  /** Path to the Git repository. */
   @Option(
     names = { "--path", "-p" },
     description = "Path to the Git repository (default: current directory)",
@@ -50,28 +51,21 @@ public class SemverCommand implements Callable<Integer> {
   )
   private @Nullable File path;
 
+  /** Enable debug logging flag. */
   @Option(names = { "--debug", "-d" }, description = "Enable debug logging")
   private boolean debug;
 
   @Override
   public Integer call() {
-    if (this.debug) {
-      System.setProperty("org.slf4j.simpleLogger.defaultLogLevel", "debug");
-    } else {
-      System.setProperty("org.slf4j.simpleLogger.defaultLogLevel", "warn");
-    }
+    this.configureLogging();
 
     if (this.path == null) {
       System.err.println("Error: Path must not be null");
       return 1;
     }
-    var metadata = createMetadata(this.path);
-    if (metadata == null) {
-      System.err.println("Error: Not a valid Git repository: " + this.path);
-      return 1;
-    }
 
-    if (metadata.status() == GitStatus.NO_REPO) {
+    var metadata = createMetadata(this.path);
+    if (metadata == null || metadata.status() == GitStatus.NO_REPO) {
       System.err.println("Error: Not a valid Git repository: " + this.path);
       return 1;
     }
@@ -82,19 +76,13 @@ public class SemverCommand implements Callable<Integer> {
     return 0;
   }
 
-  private static @Nullable GitMetadata createMetadata(File path) {
-    return GitMetadataFactory.create(path);
+  private void configureLogging() {
+    String level = this.debug ? "debug" : "warn";
+    System.setProperty("org.slf4j.simpleLogger.defaultLogLevel", level);
   }
 
-  /**
-   * Provides version information for the CLI.
-   */
-  public static class VersionProvider implements IVersionProvider {
-
-    @Override
-    public String[] getVersion() {
-      return new String[] { "semver 0.0.0" };
-    }
+  private static @Nullable GitMetadata createMetadata(File path) {
+    return GitMetadataFactory.create(path);
   }
 
   /**
@@ -106,5 +94,16 @@ public class SemverCommand implements Callable<Integer> {
     var cmd = new CommandLine(new SemverCommand());
     var exitCode = cmd.execute(args);
     System.exit(exitCode);
+  }
+
+  /**
+   * Provides version information for the CLI.
+   */
+  public static final class VersionProvider implements IVersionProvider {
+
+    @Override
+    public String[] getVersion() {
+      return new String[] { "semver 0.0.0" };
+    }
   }
 }
