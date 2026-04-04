@@ -7,7 +7,7 @@
   extends: ["config:recommended"],
   dependencyDashboard: true,
   timezone: "UTC",
-  platformAutomerge: false,
+  platformAutomerge: true,
   automergeStrategy: "rebase",
   // Rebase whenever PR falls behind base branch to keep them mergeable
   rebaseWhen: "behind-base-branch",
