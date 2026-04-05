@@ -28,8 +28,9 @@ class GitMetadataFactoryTest {
 
     var metadata = GitMetadataFactory.create(this.tempDir);
 
-    assertThat(metadata).isNotNull();
-    assertThat(metadata.status()).isEqualTo(GitStatus.CLEAN);
+    assertThat(metadata)
+      .isNotNull()
+      .satisfies(m -> assertThat(m.status()).isEqualTo(GitStatus.CLEAN));
   }
 
   @Test
@@ -39,8 +40,9 @@ class GitMetadataFactoryTest {
 
     var metadata = GitMetadataFactory.create(this.tempDir.getAbsolutePath());
 
-    assertThat(metadata).isNotNull();
-    assertThat(metadata.status()).isEqualTo(GitStatus.CLEAN);
+    assertThat(metadata)
+      .isNotNull()
+      .satisfies(m -> assertThat(m.status()).isEqualTo(GitStatus.CLEAN));
   }
 
   @Test
