@@ -9,7 +9,6 @@
   timezone: "UTC",
   platformAutomerge: true,
   automergeStrategy: "rebase",
-  autoApprove: true,
   // Rebase whenever PR falls behind base branch to keep them mergeable
   rebaseWhen: "behind-base-branch",
   // Subtrees are excluded - updates should be pulled via git subtree pull, not Renovate
