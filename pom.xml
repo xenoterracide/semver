@@ -300,6 +300,9 @@ SPDX-License-Identifier: CC0-1.0
           <artifactId>jacoco-maven-plugin</artifactId>
           <version>${jacoco-maven-plugin.version}</version>
           <configuration>
+            <excludes>
+              <exclude>**/Datatypes_*.class</exclude>
+            </excludes>
             <rules>
               <rule>
                 <element>BUNDLE</element>
