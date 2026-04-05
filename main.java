@@ -7,7 +7,7 @@
 
 // Dependencies will be resolved from Maven Central once published
 // For now, requires 'mvn install' to be run first
-// DEPS com.xenoterracide:semver-cli:0.0.0
+//DEPS com.xenoterracide:semver-cli:0.0.0
 
 import com.xenoterracide.semver.cli.SemverCommand;
 
