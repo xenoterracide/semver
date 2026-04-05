@@ -85,6 +85,7 @@ public final class SemverCommand implements Callable<Integer> {
     return GitMetadataFactory.create(path);
   }
 
+  // CHECKSTYLE:OFF: UncommentedMain - Main method is the entry point for CLI
   /**
    * Main entry point for the CLI.
    *
@@ -95,6 +96,8 @@ public final class SemverCommand implements Callable<Integer> {
     var exitCode = cmd.execute(args);
     System.exit(exitCode);
   }
+
+  // CHECKSTYLE:ON: UncommentedMain
 
   /**
    * Provides version information for the CLI.

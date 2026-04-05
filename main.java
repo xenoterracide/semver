@@ -22,7 +22,7 @@ import com.xenoterracide.semver.cli.SemverCommand;
  * jbang semver.java [options]
  * </pre>
  */
-class semver {
+class main {
 
   public static void main(String[] args) {
     SemverCommand.main(args);

@@ -36,7 +36,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Implementation of GitMetadata.
  */
-public final class GitMetadataImpl implements GitMetadata {
+final class GitMetadataImpl implements GitMetadata {
 
   /** Glob pattern for matching version tags (not a regex). */
   private static final String VERSION_GLOB = "v[0-9]*.[0-9]*.[0-9]*";
