@@ -1,45 +1,14 @@
 # SPDX-FileCopyrightText: Copyright © 2024-2026 Caleb Cushing
 #
+# SPDX-License-Identifier: CC0-1.0
 # SPDX-License-Identifier: MIT
 
 name: build
-on:
-  push:
-    branches: ["**"]
-    tags: ["v*"]
-  workflow_call:
+on: [push]
 jobs:
   build:
-    runs-on: ubuntu-24.04
-    timeout-minutes: 5
+    uses: xenoterracide/github/.github/workflows/maven.yml@29a3d18797fea084c08dd6551099c1726baef8b4 # develop
     permissions:
       actions: write
       contents: read
       packages: read
-    steps:
-      - uses: actions/checkout@v6.0.2
-      - &java
-        uses: actions/setup-java@v5.2.0
-        with:
-          distribution: temurin
-          java-version: 25
-          cache: maven
-      - run: ./mvnw verify --batch-mode --fail-at-end
-        env:
-          GH_USERNAME: ${{ github.actor }}
-          GH_TOKEN: ${{ github.token }}
-
-  full:
-    runs-on: ubuntu-24.04
-    timeout-minutes: 5
-    permissions:
-      actions: read
-      contents: read
-      packages: read
-    steps:
-      - uses: actions/checkout@v6.0.2
-      - *java
-      - run: ./mvnw clean verify --batch-mode --fail-at-end
-        env:
-          GH_USERNAME: ${{ github.actor }}
-          GH_TOKEN: ${{ github.token }}
