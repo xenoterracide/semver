@@ -8,6 +8,7 @@
 // Dependencies will be resolved from Maven Central once published
 // For now, requires 'mvn install' to be run first
 //DEPS com.xenoterracide:semver-cli:0.0.0
+//DEPS org.slf4j:slf4j-simple:2.0.17
 
 import com.xenoterracide.semver.cli.SemverCommand;
 
