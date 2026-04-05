@@ -4,7 +4,7 @@
 
 {
   $schema: "https://docs.renovatebot.com/renovate-schema.json",
-  extends: ["config:recommended"],
+  extends: ["config:recommended", "helpers:pinGitHubActionDigestsToSemver"],
   dependencyDashboard: true,
   timezone: "UTC",
   platformAutomerge: true,
