@@ -16,25 +16,10 @@ const licenseScripts = "--license 'MIT' --fallback-dot-license";
 const withoutYarn = (files) =>
   files.filter((file) => !file.includes("/.yarn/") && !file.startsWith(".yarn/") && !file.endsWith(".pnp.cjs"));
 
-// Exclude .github/**/*.yml from general config pattern (it has its own MIT pattern)
-const withoutGithubYml = (files) => files.filter((file) => !(file.startsWith(".github/") && file.endsWith(".yml")));
-
 const withFiles = (command, files) => `${command} ${files.map((file) => `"${file.replace(/"/g, '\\"')}"`).join(" ")}`;
 
 const run = (commands) => (files) => {
   const filtered = withoutYarn(files);
-
-  if (!filtered.length) {
-    return [];
-  }
-
-  const cmds = Array.isArray(commands) ? commands : [commands];
-  return cmds.map((command) => withFiles(command, filtered));
-};
-
-// For patterns that should exclude .github/**/*.yml (it has its own MIT pattern)
-const runWithoutGithubYml = (commands) => (files) => {
-  const filtered = withoutGithubYml(withoutYarn(files));
 
   if (!filtered.length) {
     return [];
@@ -51,12 +36,9 @@ module.exports = {
   "{.config/git/hooks/**,**/*.*sh}": run([`${reuse} ${copyright} ${symbol} ${licenseScripts} --style python`, shfmt]),
   "*.{md,adoc}": run([`${reuse} ${copyright} ${symbol} ${licenseDocumentation}`, prettier]),
   // Config files - excludes .github/**/*.yml which is handled separately as scripts
-  "*.{xml,yaml,yml,properties,toml,json5}": runWithoutGithubYml([
-    `${reuse} ${copyright} ${licenseConfiguration} ${symbol}`,
-    prettier,
-  ]),
+  "*.{xml,yaml,properties,toml,json5}": run([`${reuse} ${copyright} ${licenseConfiguration} ${symbol}`, prettier]),
   // GitHub workflows contain significant logic
-  ".github/**/*.yml": run([`${reuse} ${copyright} ${symbol} ${licenseScripts}`, prettier]),
+  "*.yml": run([`${reuse} ${copyright} ${symbol} ${licenseScripts}`, prettier]),
   "*.{js,cjs}": run([`${reuse} ${copyright} ${symbol} ${licenseScripts}`, prettier]),
   ".{*ignore,editorconfig,gitattributes,mailmap}": run([
     `${reuse} ${copyright} ${symbol} ${licenseConfiguration}`,
