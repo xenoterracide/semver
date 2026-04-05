@@ -47,6 +47,7 @@
       // Only these get digest pins; other actions get normal version tag updates
       matchManagers: ["github-actions"],
       matchDepNames: ["xenoterracide/**"],
+      branchName: "{{{packageFile}}}-{{{depNameSanitized}}}-{{{newDigestShort}}}",
       automerge: true,
       pinDigests: true,
     },
