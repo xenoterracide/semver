@@ -45,19 +45,19 @@ SPDX-License-Identifier: CC0-1.0
     <dependency>
       <groupId>org.immutables</groupId>
       <artifactId>value-annotations</artifactId>
-      <scope>provided</scope>
+      <scope>compile</scope>
       <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>org.immutables</groupId>
       <artifactId>datatype</artifactId>
-      <scope>provided</scope>
+      <scope>compile</scope>
       <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>com.google.errorprone</groupId>
       <artifactId>error_prone_annotations</artifactId>
-      <scope>provided</scope>
+      <scope>compile</scope>
       <optional>true</optional>
     </dependency>
 
