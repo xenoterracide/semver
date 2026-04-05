@@ -21,6 +21,6 @@ jobs:
           java-version: "21"
           distribution: "temurin"
       - run: ./mvnw install -DskipTests -q --batch-mode
-      - uses: jbangdev/setup-jbang@main
+      - uses: jbangdev/setup-jbang@v0.1.1
       - run: jbang main.java --help
       - run: jbang main.java
