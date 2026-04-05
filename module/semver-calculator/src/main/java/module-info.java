@@ -13,6 +13,7 @@ module com.xenoterracide.semver {
 
   // Compile-time only annotations
   requires static org.immutables.value.annotations;
+  requires static org.immutables.datatype;
   requires static com.google.errorprone.annotations;
 
   exports com.xenoterracide.semver;

@@ -62,6 +62,15 @@ SPDX-License-Identifier: CC0-1.0
 
   <dependencyManagement>
     <dependencies>
+      <!-- BOM imports must come first -->
+      <dependency>
+        <groupId>org.immutables</groupId>
+        <artifactId>bom</artifactId>
+        <version>${immutables.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
       <!-- Project modules -->
       <dependency>
         <groupId>com.xenoterracide</groupId>
@@ -80,13 +89,6 @@ SPDX-License-Identifier: CC0-1.0
       </dependency>
 
       <!-- Main dependencies -->
-      <dependency>
-        <groupId>org.immutables</groupId>
-        <artifactId>value-annotations</artifactId>
-        <version>${immutables.version}</version>
-        <scope>provided</scope>
-        <!-- compile only -->
-      </dependency>
       <dependency>
         <groupId>org.eclipse.jgit</groupId>
         <artifactId>org.eclipse.jgit</artifactId>

@@ -4,6 +4,7 @@
 
 package com.xenoterracide.semver;
 
+import org.immutables.datatype.Data;
 import org.immutables.value.Value;
 import org.jspecify.annotations.Nullable;
 
@@ -23,6 +24,7 @@ import org.jspecify.annotations.Nullable;
  * @param isShallowClone true if repository is a shallow clone
  */
 @Value.Builder
+@Data
 public record GitContext(
   @Nullable String nearestTag,
   long distanceFromTag,
