@@ -6,6 +6,7 @@ package com.xenoterracide.semver;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.xenoterracide.semver.Datatypes_GitContext.GitContext_;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -32,17 +33,18 @@ class GitContextTest {
       .isShallowClone(false)
       .build();
 
-    assertThat(ctx.nearestTag()).isEqualTo("v1.0.0");
-    assertThat(ctx.distanceFromTag()).isEqualTo(5);
-    assertThat(ctx.isOnTagExact()).isFalse();
-    assertThat(ctx.currentBranch()).isEqualTo("main");
-    assertThat(ctx.headBranch()).isEqualTo("main");
-    assertThat(ctx.isHeadBranch()).isTrue();
-    assertThat(ctx.distanceFromMergeBase()).isEqualTo(5);
-    assertThat(ctx.shortSha()).isEqualTo("abc123");
-    assertThat(ctx.fullSha()).isEqualTo("fullsha123");
-    assertThat(ctx.isDirty()).isFalse();
-    assertThat(ctx.isShallowClone()).isFalse();
+    assertThat(ctx)
+      .hasFieldOrPropertyWithValue(GitContext_.NEAREST_TAG_, "v1.0.0")
+      .hasFieldOrPropertyWithValue(GitContext_.DISTANCE_FROM_TAG_, 5L)
+      .hasFieldOrPropertyWithValue(GitContext_.IS_ON_TAG_EXACT_, false)
+      .hasFieldOrPropertyWithValue(GitContext_.CURRENT_BRANCH_, "main")
+      .hasFieldOrPropertyWithValue(GitContext_.HEAD_BRANCH_, "main")
+      .hasFieldOrPropertyWithValue(GitContext_.IS_HEAD_BRANCH_, true)
+      .hasFieldOrPropertyWithValue(GitContext_.DISTANCE_FROM_MERGE_BASE_, 5L)
+      .hasFieldOrPropertyWithValue(GitContext_.SHORT_SHA_, "abc123")
+      .hasFieldOrPropertyWithValue(GitContext_.FULL_SHA_, "fullsha123")
+      .hasFieldOrPropertyWithValue(GitContext_.IS_DIRTY_, false)
+      .hasFieldOrPropertyWithValue(GitContext_.IS_SHALLOW_CLONE_, false);
   }
 
   @Test
@@ -61,11 +63,12 @@ class GitContextTest {
       .isShallowClone(false)
       .build();
 
-    assertThat(ctx.nearestTag()).isNull();
-    assertThat(ctx.currentBranch()).isNull();
-    assertThat(ctx.headBranch()).isNull();
-    assertThat(ctx.shortSha()).isNull();
-    assertThat(ctx.fullSha()).isNull();
+    assertThat(ctx)
+      .hasFieldOrPropertyWithValue(GitContext_.NEAREST_TAG_, null)
+      .hasFieldOrPropertyWithValue(GitContext_.CURRENT_BRANCH_, null)
+      .hasFieldOrPropertyWithValue(GitContext_.HEAD_BRANCH_, null)
+      .hasFieldOrPropertyWithValue(GitContext_.SHORT_SHA_, null)
+      .hasFieldOrPropertyWithValue(GitContext_.FULL_SHA_, null);
   }
 
   @ParameterizedTest

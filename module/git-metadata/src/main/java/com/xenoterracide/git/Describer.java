@@ -20,17 +20,33 @@ import org.jspecify.annotations.Nullable;
 class Describer implements CheckedFunction1<Git, Describer.Described> {
 
   private static final long serialVersionUID = 1L;
+
+  /** Splitter for parsing git describe output. */
   private static final Splitter DESCRIBE_SPLITTER = Splitter.on('-');
+
+  /** Glob pattern for matching version tags. */
   private static final String VERSION_GLOB = "v[0-9]*.[0-9]*.[0-9]*";
 
+  /** The object ID to describe. */
   private final ObjectId oid;
 
-  Describer(ObjectId oid) {
-    this.oid = oid;
+  /**
+   * Creates a new Describer for the given object ID.
+   *
+   * @param objectId the object ID to describe
+   */
+  Describer(ObjectId objectId) {
+    this.oid = objectId;
   }
 
-  static CheckedFunction1<Git, Describer.Described> describe(ObjectId oid) {
-    return new Describer(oid);
+  /**
+   * Creates a describe function for the given object ID.
+   *
+   * @param objectId the object ID to describe
+   * @return a function that describes the object
+   */
+  static CheckedFunction1<Git, Describer.Described> describe(ObjectId objectId) {
+    return new Describer(objectId);
   }
 
   @Override
@@ -40,14 +56,26 @@ class Describer implements CheckedFunction1<Git, Describer.Described> {
     return desc != null ? new Described(DESCRIBE_SPLITTER.splitToList(desc)) : null;
   }
 
+  /** Value object representing parsed git describe output. */
   static class Described {
 
+    /** The parsed parts of the describe output. */
     private final List<String> parts;
 
-    Described(List<String> parts) {
-      this.parts = parts;
+    /**
+     * Creates a new Described instance.
+     *
+     * @param partsList the parsed parts of the describe output
+     */
+    Described(List<String> partsList) {
+      this.parts = partsList;
     }
 
+    /**
+     * Gets the distance from the nearest tag.
+     *
+     * @return the distance in commits
+     */
     long distance() {
       return this.parts.size() > 2 ? Long.parseLong(this.parts.get(this.parts.size() - 2)) : 0;
     }

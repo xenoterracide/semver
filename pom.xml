@@ -22,6 +22,7 @@ SPDX-License-Identifier: CC0-1.0
   <modules>
     <module>module/git-metadata</module>
     <module>module/semver-calculator</module>
+    <module>module/semver-cli</module>
   </modules>
 
   <properties>
@@ -39,6 +40,7 @@ SPDX-License-Identifier: CC0-1.0
     <errorprone.core.version>2.48.0</errorprone.core.version>
     <nullaway.version>0.13.1</nullaway.version>
     <immutables.version>2.12.1</immutables.version>
+    <picocli.version>4.7.7</picocli.version>
 
     <!-- Plugin versions -->
     <maven-jar-plugin.version>3.5.0</maven-jar-plugin.version>
@@ -60,21 +62,33 @@ SPDX-License-Identifier: CC0-1.0
 
   <dependencyManagement>
     <dependencies>
+      <!-- BOM imports must come first -->
+      <dependency>
+        <groupId>org.immutables</groupId>
+        <artifactId>bom</artifactId>
+        <version>${immutables.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
       <!-- Project modules -->
       <dependency>
         <groupId>com.xenoterracide</groupId>
         <artifactId>git-metadata</artifactId>
         <version>${project.version}</version>
       </dependency>
+      <dependency>
+        <groupId>com.xenoterracide</groupId>
+        <artifactId>semver-calculator</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.xenoterracide</groupId>
+        <artifactId>semver-cli</artifactId>
+        <version>${project.version}</version>
+      </dependency>
 
       <!-- Main dependencies -->
-      <dependency>
-        <groupId>org.immutables</groupId>
-        <artifactId>value-annotations</artifactId>
-        <version>${immutables.version}</version>
-        <scope>provided</scope>
-        <!-- compile only -->
-      </dependency>
       <dependency>
         <groupId>org.eclipse.jgit</groupId>
         <artifactId>org.eclipse.jgit</artifactId>
@@ -109,6 +123,11 @@ SPDX-License-Identifier: CC0-1.0
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-api</artifactId>
         <version>2.0.17</version>
+      </dependency>
+      <dependency>
+        <groupId>info.picocli</groupId>
+        <artifactId>picocli</artifactId>
+        <version>${picocli.version}</version>
       </dependency>
 
       <dependency>
@@ -281,6 +300,9 @@ SPDX-License-Identifier: CC0-1.0
           <artifactId>jacoco-maven-plugin</artifactId>
           <version>${jacoco-maven-plugin.version}</version>
           <configuration>
+            <excludes>
+              <exclude>**/Datatypes_*.class</exclude>
+            </excludes>
             <rules>
               <rule>
                 <element>BUNDLE</element>

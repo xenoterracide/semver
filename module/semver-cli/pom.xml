@@ -18,9 +18,9 @@ SPDX-License-Identifier: CC0-1.0
     <relativePath>../../pom.xml</relativePath>
   </parent>
 
-  <artifactId>semver-calculator</artifactId>
-  <name>Semantic Versioning</name>
-  <description>Semantic versioning calculation from git metadata</description>
+  <artifactId>semver-cli</artifactId>
+  <name>Semantic Versioning CLI</name>
+  <description>Command-line interface for semantic version calculation</description>
 
   <dependencies>
     <dependency>
@@ -28,37 +28,20 @@ SPDX-License-Identifier: CC0-1.0
       <artifactId>git-metadata</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.semver4j</groupId>
-      <artifactId>semver4j</artifactId>
+      <groupId>com.xenoterracide</groupId>
+      <artifactId>semver-calculator</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.google.guava</groupId>
-      <artifactId>guava</artifactId>
+      <groupId>info.picocli</groupId>
+      <artifactId>picocli</artifactId>
     </dependency>
     <dependency>
       <groupId>org.jspecify</groupId>
       <artifactId>jspecify</artifactId>
     </dependency>
-
-    <!-- compile only -->
-
     <dependency>
-      <groupId>org.immutables</groupId>
-      <artifactId>value-annotations</artifactId>
-      <scope>compile</scope>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>org.immutables</groupId>
-      <artifactId>datatype</artifactId>
-      <scope>compile</scope>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>com.google.errorprone</groupId>
-      <artifactId>error_prone_annotations</artifactId>
-      <scope>compile</scope>
-      <optional>true</optional>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
     </dependency>
 
     <!-- Test dependencies -->
@@ -80,6 +63,11 @@ SPDX-License-Identifier: CC0-1.0
     <dependency>
       <groupId>org.assertj</groupId>
       <artifactId>assertj-core</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>

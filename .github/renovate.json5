@@ -41,6 +41,8 @@
     {
       matchManagers: ["github-actions"],
       automerge: true,
+      // Expand short tags like @v6 to full version @v6.0.2 without pinning to digests
+      rangeStrategy: "pin",
     },
     {
       // Pin xenoterracide org actions to commit SHAs for build reproducibility

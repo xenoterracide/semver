@@ -36,17 +36,25 @@ import org.slf4j.LoggerFactory;
 /**
  * Implementation of GitMetadata.
  */
-class GitMetadataImpl implements GitMetadata {
+final class GitMetadataImpl implements GitMetadata {
 
-  // this is not a regex but a glob (`man glob`)
+  /** Glob pattern for matching version tags (not a regex). */
   private static final String VERSION_GLOB = "v[0-9]*.[0-9]*.[0-9]*";
+
+  /** Separator used in Git ref paths. */
   private static final String GIT_SEPARATOR = "/";
+
+  /** Warning message for shallow clone detection. */
   private static final String SHALLOW_CLONE_DETECTED = "shallow clone detected";
+
+  /** Logger instance for this class. */
   private final Logger log = LoggerFactory.getLogger(this.getClass());
+
+  /** The TryGit instance for Git operations. */
   private final TryGit git;
 
-  GitMetadataImpl(TryGit git) {
-    this.git = git;
+  GitMetadataImpl(TryGit tryGit) {
+    this.git = tryGit;
   }
 
   static <T> Function<? super Throwable, ? extends T> allWith(@Nullable T value) {
@@ -90,6 +98,12 @@ class GitMetadataImpl implements GitMetadata {
     return this.gitRepository().mapTry(r -> r.resolve(Objects.requireNonNull(shalike)));
   }
 
+  /**
+   * Gets the full revision SHA for the given SHA-like string.
+   *
+   * @param shalike the SHA-like string to resolve
+   * @return the full 40-character SHA, or null if not found
+   */
   public @Nullable String getRev(@NonNull String shalike) {
     return this.getObjectIdFor(shalike).map(AnyObjectId::getName).getOrNull();
   }
