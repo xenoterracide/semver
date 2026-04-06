@@ -6,23 +6,26 @@ SPDX-License-Identifier: CC-BY-NC-SA-4.0
 
 # Project Overview
 
-This is **semver**, a Java library for semantic versioning calculation based on Git metadata. It provides tools to extract Git repository information and calculate semantic versions according to the SemVer specification.
+This is **semver**, a Java library and CLI tool for semantic versioning calculation based on Git metadata. It provides tools to extract Git repository information and calculate semantic versions according to the SemVer specification.
 
-The project consists of two main modules:
+The project consists of three main modules:
 
 1. **git-metadata**: Extracts Git repository metadata (tags, commits, branches, remotes, status)
 2. **semver-calculator**: Calculates semantic versions from Git metadata using various strategies
+3. **semver-cli**: Command-line interface for the semver calculator (usable via JBang)
 
 ## Technology Stack
 
-- **Java**: 21+ (Temurin distribution)
+- **Java**: 17+ for production code, 25 for tests (Temurin distribution)
 - **Build Tool**: Maven 3.x (with wrapper `./mvnw`)
 - **Module System**: JPMS (Java Platform Module System)
 - **Git Library**: Eclipse JGit 7.6.0
 - **Version Parsing**: Semver4j 6.0.0
 - **Functional Programming**: Vavr 1.0.1
-- **Null Safety**: JSpecify 1.0.0 annotations
+- **Null Safety**: JSpecify 1.0.0 annotations with NullAway
 - **Immutables**: Immutables 2.12.1 for value objects
+- **CLI Framework**: Picocli 4.7.7
+- **Static Analysis**: Error Prone 2.48.0, Checkstyle 13.4.0, SpotBugs 4.9.8
 
 ### Tooling Stack
 
@@ -44,21 +47,25 @@ The project consists of two main modules:
 │   │   │   ├── test/java/          # Unit tests
 │   │   │   └── testFixtures/java/  # Test fixtures (CommitTools)
 │   │   └── pom.xml
-│   └── semver-calculator/          # Semantic version calculation
-│       ├── src/
-│       │   ├── main/java/          # Production code
-│       │   │   ├── com/xenoterracide/semver/
-│       │   │   └── com/xenoterracide/semver/internal/  # Strategy implementations
-│       │   └── test/java/          # Unit tests
+│   ├── semver-calculator/          # Semantic version calculation
+│   │   ├── src/
+│   │   │   ├── main/java/          # Production code
+│   │   │   │   └── com/xenoterracide/semver/
+│   │   │   └── test/java/          # Unit tests
+│   │   └── pom.xml
+│   └── semver-cli/                 # Command-line interface
+│       ├── src/main/java/          # CLI implementation
+│       │   └── com/xenoterracide/semver/cli/
 │       └── pom.xml
 ├── pom.xml                          # Parent POM
+├── main.java                        # JBang entry point script
 ├── package.json                     # Node.js tooling configuration
 ├── pyproject.toml                   # Python tooling configuration
 ├── .share/                          # Shared git hooks and tooling (git submodule)
 ├── .github/workflows/               # GitHub Actions
 │   ├── build.yml                   # Build and test workflow
 │   └── pre-commit.yml              # License and formatting checks
-└── config/                         # Checkstyle configuration (created on build)
+└── .config/checkstyle/             # Checkstyle configurations
 ```
 
 ## Module Architecture
@@ -67,13 +74,14 @@ The project consists of two main modules:
 
 Exports `com.xenoterracide.git` package:
 
-- `GitMetadata` - Interface for Git metadata access
+- `GitMetadata` - Interface for Git metadata access (tag, branch, commit, distance, status, remotes)
 - `GitMetadataImpl` - Implementation using JGit
+- `GitMetadataFactory` - Factory for creating GitMetadata instances from files/paths
 - `GitStatus` - Enum for repository status (CLEAN, DIRTY, NO_REPO)
 - `GitRemote` - Interface for remote repository info
 - `DistanceCalculator` - Calculates commit distance from tags
 - `MergeBaseFinder` - Finds merge base between branches
-- `TryGit` - Functional wrapper for JGit operations
+- `TryGit` - Functional wrapper for JGit operations using Vavr's Try
 
 **Test Fixtures** (`src/testFixtures/java`):
 
@@ -86,8 +94,9 @@ Exports `com.xenoterracide.semver` package:
 - `VersionCalculator` - Main entry point for version calculation
 - `GitContext` - Immutable context object built via Immutables
 - `VersionStrategy` - Interface for version calculation strategies
+- `VersionStrategyFactory` - Factory to determine appropriate strategy
 
-**Internal Strategies** (`internal` package):
+**Version Strategies** (selected based on tag relationship and branch type):
 
 Strategies are selected based on two dimensions:
 
@@ -100,7 +109,22 @@ Strategies are selected based on two dimensions:
 - `AfterTagTopicStrategy` - After a tag on a topic branch
 - `NoTagHeadStrategy` - No tags exist, on main branch
 - `NoTagTopicStrategy` - No tags exist, on topic branch
-- `VersionStrategyFactory` - Factory to determine appropriate strategy
+
+### semver-cli Module
+
+Exports `com.xenoterracide.semver.cli` package:
+
+- `SemverCommand` - Picocli-based CLI command implementation
+- Supports `--path`, `--debug`, `--help`, and `--version` options
+
+**JBang Integration**:
+
+The `main.java` file at the project root is a JBang script that allows running the CLI without installation:
+
+```bash
+jbang main.java --help
+jbang main.java --path /path/to/repo
+```
 
 ## Build and Test Commands
 
@@ -169,11 +193,31 @@ uv run --frozen --group dev reuse lint
 
 ### Java Code Style
 
-- **Source/Target**: Java 21
+- **Source/Target**: Java 17 (production), Java 25 (tests)
 - **Print width**: 120 characters (Prettier)
 - **Null annotations**: Use JSpecify `@Nullable` and `@NonNull`
 - **Immutables**: Use `@Value.Immutable` for value objects with Jakarta annotations
 - **Package-private**: Prefer package-private visibility for internal classes
+
+### Static Analysis Configuration
+
+**Error Prone** (enabled in compiler plugin):
+
+- NullAway for null safety (JSpecify mode, OnlyNullMarked)
+- Extensive checks enabled (see pom.xml for full list)
+- Generated code excluded from analysis
+
+**Checkstyle**:
+
+- Main code: `.config/checkstyle/main.xml`
+- Test code: `.config/checkstyle/test.xml`
+- Test fixtures: `.config/checkstyle/testFixtures.xml`
+- Integration tests: `.config/checkstyle/testIntegration.xml`
+
+**SpotBugs**:
+
+- Max effort, low threshold
+- Exclusions in `.config/spotbugs/exclude.xml`
 
 ### File Type Conventions
 
@@ -234,7 +278,7 @@ Integration tests are in `src/testIntegration/java` and run via Maven Failsafe p
 
 ### Code Coverage
 
-JaCoCo is configured with a minimum 30% line coverage threshold:
+JaCoCo is configured with a minimum 90% instruction coverage threshold:
 
 ```bash
 ./mvnw jacoco:report  # Generate HTML report in target/site/jacoco/
@@ -275,7 +319,8 @@ yarn merge:copilot   # Uses GitHub Copilot CLI
 1. **CI Detection**: Git hooks check `[ -n "$CI" ]` and exit early in CI environments
 2. **Shallow Clone Detection**: Code warns when repository has fewer than 4 commits
 3. **Error Handling**: Uses Vavr's `Try` for functional error handling
-4. **Null Safety**: JSpecify annotations for compile-time null checking
+4. **Null Safety**: JSpecify annotations for compile-time null checking with NullAway
+5. **Dependency Management**: Locked versions via Maven, yarn, and uv lockfiles
 
 ## Development Setup
 
@@ -313,14 +358,17 @@ yarn merge:copilot   # Uses GitHub Copilot CLI
 | Apache Commons Lang | 3.20.0  | String utilities                |
 | Immutables          | 2.12.1  | Code generation for value types |
 | JSpecify            | 1.0.0   | Nullability annotations         |
+| Picocli             | 4.7.7   | CLI framework                   |
 
 ### Quality Plugins
 
-| Plugin     | Version | Purpose               |
-| ---------- | ------- | --------------------- |
-| Checkstyle | 13.3.0  | Code style checking   |
-| SpotBugs   | 4.9.8   | Bug pattern detection |
-| JaCoCo     | 0.8.14  | Code coverage         |
+| Plugin      | Version | Purpose               |
+| ----------- | ------- | --------------------- |
+| Checkstyle  | 13.4.0  | Code style checking   |
+| SpotBugs    | 4.9.8   | Bug pattern detection |
+| JaCoCo      | 0.8.14  | Code coverage         |
+| Error Prone | 2.48.0  | Static analysis       |
+| NullAway    | 0.13.1  | Null safety checking  |
 
 ### Lock Files
 
@@ -335,8 +383,9 @@ yarn merge:copilot   # Uses GitHub Copilot CLI
 **build.yml**:
 
 - Runs on every push to any branch and version tags
-- Uses Java 21 (Temurin)
+- Uses Java 25 (Temurin) for Maven build
 - Executes `./mvnw verify --batch-mode --fail-at-end`
+- Includes JBang job for CLI validation
 
 **pre-commit.yml**:
 
