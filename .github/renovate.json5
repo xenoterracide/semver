@@ -41,7 +41,6 @@
     {
       matchManagers: ["github-actions"],
       extends: ["helpers:pinGitHubActionDigests"],
-      branchTopic: "{{{packageFile}}}-{{{depNameSanitized}}}-{{{newDigestShort}}}",
       automerge: true,
     },
     {
