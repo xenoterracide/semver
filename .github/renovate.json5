@@ -40,21 +40,9 @@
     },
     {
       matchManagers: ["github-actions"],
-      automerge: true,
-      // Expand short tags like @v6 to full version @v6.0.2 without pinning to digests
-
       extends: ["helpers:pinGitHubActionDigests"],
-      extractVersion: "^(?<version>v?\\d+\\.\\d+\\.\\d+)$",
-      versioning: "regex:^v?(?<major>\\d+)(\\.(?<minor>\\d+)\\.(?<patch>\\d+))?$",
-    },
-    {
-      // Pin xenoterracide org actions to commit SHAs for build reproducibility
-      // Only these get digest pins; other actions get normal version tag updates
-      matchManagers: ["github-actions"],
-      matchDepNames: ["xenoterracide/**"],
       branchTopic: "{{{packageFile}}}-{{{depNameSanitized}}}-{{{newDigestShort}}}",
       automerge: true,
-      pinDigests: true,
     },
     {
       // Run every Wednesday
