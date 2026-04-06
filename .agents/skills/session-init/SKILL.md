@@ -170,6 +170,35 @@ modify files outside your session.
 
 **When uncertain, verify** rather than assuming state is as you left it.
 
+## GitHub Workflow Limitations
+
+AI agents **cannot edit GitHub workflow files** (`.github/workflows/*.yml`). This is a hard limitation — workflow file modifications will fail. Other YAML files (`.yaml`) are not affected.
+
+### Planning Implications
+
+When creating plans that involve workflow changes:
+
+- Identify workflow edits as **human-required tasks**
+- Provide clear instructions for the human to make the changes
+- Structure the plan so AI-managed work can proceed independently
+
+### Example Compensation Strategy
+
+````markdown
+## Plan
+
+1. [AI] Update build configuration
+2. [AI] Add new test cases for the feature
+3. [HUMAN] Update .github/workflows/ci.yml:
+   - Add new job step after "Run Tests":
+     ```yaml
+     - run: <build-tool> integration-test
+     ```
+4. [AI] Update documentation to reflect new CI step
+````
+
+Flag workflow-related changes early so the human can prepare or execute them in parallel.
+
 ---
 
 SPDX-FileCopyrightText: Copyright © 2026 Caleb Cushing
