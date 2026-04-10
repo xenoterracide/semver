@@ -23,14 +23,27 @@ jobs:
       group: publish
     steps:
       - uses: actions/checkout@v6.0.2
+        with:
+          ref: ${{ github.ref_name }}
+          filter: "blob:none"
+          fetch-depth: 0
+          fetch-tags: true
+      - run: git remote set-head --auto origin
       - uses: actions/setup-java@v5.2.0
         with:
           java-version: "25"
           distribution: "temurin"
-      - run: ./mvnw install -DskipTests -q --batch-mode
+          cache: maven
+      - run: ./mvnw clean install -DskipTests -q --batch-mode
+      - name: compute version
+        id: version
+        run: |
+          VERSION=$(./mvnw exec:java -pl module/semver-cli -Dexec.mainClass=com.xenoterracide.semver.cli.SemverCommand -Dexec.classpathScope=runtime -q | sed 's/^\[INFO\] \[stdout\] //')
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
       - uses: jbangdev/setup-jbang@v0.1.1
       - run: jbang --verbose main.java --help
       - run: jbang --verbose main.java
+      - run: ./mvnw clean install -Drevision="${{ steps.version.outputs.version }}" -DskipTests -q --batch-mode
       - name: deploy to github packages
         run: ./mvnw -Drevision="${{ steps.version.outputs.version }}" jreleaser:deploy --batch-mode
         env:
