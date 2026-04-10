@@ -265,8 +265,16 @@ assertThat(user)
     .returns(30, User::getAge);
 
 // BEST - hasFieldOrPropertyWithValue with Immutables datatype for fields
-// Immutables generates type-safe string constants: User_.NAME_
-// (accessed via Datatypes_User.User_.NAME_ or just User_.NAME_ if imported)
+// The @Data annotation generates a class named Datatypes_<Type> containing
+// type-safe field name constants. For a User record, this generates Datatypes_User
+// with constants like User_.NAME_ and User_.AGE_.
+//
+// Import the constants for clean usage:
+//   import static com.example.Datatypes_User.User_;
+//
+// This method is preferred because when assertions fail, the error message
+// includes the field name (e.g., "expected field/property 'name' value"),
+// unlike approaches that result in unhelpful messages like "expected:<true> but was:<false>"
 assertThat(user)
     .hasFieldOrPropertyWithValue(User_.NAME_, "Alice")
     .hasFieldOrPropertyWithValue(User_.AGE_, 30);

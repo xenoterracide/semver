@@ -41,17 +41,14 @@
     {
       matchManagers: ["github-actions"],
       automerge: true,
-      // Expand short tags like @v6 to full version @v6.0.2 without pinning to digests
-      rangeStrategy: "pin",
     },
     {
       // Pin xenoterracide org actions to commit SHAs for build reproducibility
       // Only these get digest pins; other actions get normal version tag updates
       matchManagers: ["github-actions"],
       matchDepNames: ["xenoterracide/**"],
-      branchTopic: "{{{packageFile}}}-{{{depNameSanitized}}}-{{{newDigestShort}}}",
+      extends: ["helpers:pinGitHubActionDigests"],
       automerge: true,
-      pinDigests: true,
     },
     {
       // Run every Wednesday
