@@ -174,3 +174,7 @@ dist
 .yarn/install-state.gz
 .pnp.*
 .yarn/cache
+
+# Generated Maven files
+.flattened-pom.xml
+dependency-reduced-pom.xml
