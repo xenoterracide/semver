@@ -41,8 +41,7 @@ jobs:
           ./mvnw -Drevision="${{ steps.version.outputs.version }}" deploy -DaltDeploymentRepository=local::file:./target/staging-deploy --batch-mode
       - name: create github release and deploy to maven central
         if: startsWith(github.ref, 'refs/tags/')
-        run: |
-          ./mvnw -Drevision="${{ steps.version.outputs.version }}" jreleaser:full-release --batch-mode
+        run: ./mvnw -Drevision="${{ steps.version.outputs.version }}" jreleaser:full-release --batch-mode
         env:
           JRELEASER_GITHUB_TOKEN: ${{ github.token }}
           JRELEASER_MAVENCENTRAL_USERNAME: ${{ secrets.CENTRAL_USERNAME }}
