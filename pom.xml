@@ -408,6 +408,8 @@ SPDX-License-Identifier: CC0-1.0
                   <github>
                     <github-packages>
                       <active>ALWAYS</active>
+                      <url>https://maven.pkg.github.com/xenoterracide/semver</url>
+                      <stagingRepositories>target/staging-deploy</stagingRepositories>
                     </github-packages>
                   </github>
                 </maven>
