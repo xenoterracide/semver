@@ -28,6 +28,7 @@ jobs:
           filter: "blob:none"
           fetch-depth: 0
           fetch-tags: true
+      - run: git remote set-head --auto origin
       - uses: actions/setup-java@v5.2.0
         with:
           java-version: "25"
@@ -37,7 +38,7 @@ jobs:
       - name: compute version
         id: version
         run: |
-          VERSION=$(./mvnw exec:java -pl module/semver-cli -Dexec.mainClass=com.xenoterracide.semver.cli.SemverCommand -Dexec.classpathScope=runtime -q)
+          VERSION=$(./mvnw exec:java -pl module/semver-cli -Dexec.mainClass=com.xenoterracide.semver.cli.SemverCommand -Dexec.classpathScope=runtime -q | sed 's/^\[INFO\] \[stdout\] //')
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
       - uses: jbangdev/setup-jbang@v0.1.1
       - run: jbang --verbose main.java --help
