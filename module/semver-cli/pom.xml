@@ -14,11 +14,12 @@ SPDX-License-Identifier: CC0-1.0
   <parent>
     <groupId>com.xenoterracide</groupId>
     <artifactId>semver-parent</artifactId>
-    <version>0.0.0</version>
+    <version>${revision}</version>
     <relativePath>../../pom.xml</relativePath>
   </parent>
 
   <artifactId>semver-cli</artifactId>
+  <version>${revision}</version>
   <name>Semantic Versioning CLI</name>
   <description>Command-line interface for semantic version calculation</description>
 

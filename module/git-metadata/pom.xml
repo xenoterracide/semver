@@ -14,11 +14,12 @@ SPDX-License-Identifier: CC0-1.0
   <parent>
     <groupId>com.xenoterracide</groupId>
     <artifactId>semver-parent</artifactId>
-    <version>0.0.0</version>
+    <version>${revision}</version>
     <relativePath>../../pom.xml</relativePath>
   </parent>
 
   <artifactId>git-metadata</artifactId>
+  <version>${revision}</version>
   <name>Git Metadata</name>
   <description>Git metadata extraction library</description>
 

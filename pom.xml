@@ -13,8 +13,26 @@ SPDX-License-Identifier: CC0-1.0
 
   <groupId>com.xenoterracide</groupId>
   <artifactId>semver-parent</artifactId>
-  <version>0.0.0</version>
+  <version>${revision}</version>
   <packaging>pom</packaging>
+
+  <url>https://github.com/xenoterracide/semver</url>
+
+  <scm>
+    <connection>scm:git:https://github.com/xenoterracide/semver.git</connection>
+    <developerConnection>scm:git:git@github.com:xenoterracide/semver.git</developerConnection>
+    <url>https://github.com/xenoterracide/semver</url>
+  </scm>
+
+  <issueManagement>
+    <system>GitHub Issues</system>
+    <url>https://github.com/xenoterracide/semver/issues</url>
+  </issueManagement>
+
+  <ciManagement>
+    <system>GitHub Actions</system>
+    <url>https://github.com/xenoterracide/semver/actions</url>
+  </ciManagement>
 
   <name>Semantic Versioning Parent</name>
   <description>Parent POM for semantic versioning tools and libraries</description>
@@ -58,6 +76,15 @@ SPDX-License-Identifier: CC0-1.0
     <!-- Test versions -->
     <junit.version>6.0.3</junit.version>
     <assertj.version>3.27.7</assertj.version>
+
+    <!-- CI-friendly version -->
+    <revision>0.0.0</revision>
+
+    <!-- Publishing -->
+    <maven-source-plugin.version>3.3.1</maven-source-plugin.version>
+    <jreleaser-maven-plugin.version>1.17.0</jreleaser-maven-plugin.version>
+    <jreleaser.signing.active>ALWAYS</jreleaser.signing.active>
+    <flatten-maven-plugin.version>1.7.0</flatten-maven-plugin.version>
   </properties>
 
   <dependencyManagement>
@@ -162,6 +189,12 @@ SPDX-License-Identifier: CC0-1.0
   <build>
     <pluginManagement>
       <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>3.4.0</version>
+        </plugin>
+
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-jar-plugin</artifactId>
@@ -326,6 +359,78 @@ SPDX-License-Identifier: CC0-1.0
             <doclint>all,-missing</doclint>
           </configuration>
         </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-source-plugin</artifactId>
+          <version>${maven-source-plugin.version}</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.jreleaser</groupId>
+          <artifactId>jreleaser-maven-plugin</artifactId>
+          <version>${jreleaser-maven-plugin.version}</version>
+          <configuration>
+            <jreleaser>
+              <project>
+                <name>semver</name>
+                <description>Semantic versioning tools and libraries</description>
+                <license>MIT</license>
+                <links>
+                  <homepage>https://github.com/xenoterracide/semver</homepage>
+                </links>
+                <authors>
+                  <author>Caleb Cushing</author>
+                </authors>
+              </project>
+              <release>
+                <github>
+                  <owner>xenoterracide</owner>
+                  <name>semver</name>
+                  <overwrite>false</overwrite>
+                  <changelog>
+                    <enabled>true</enabled>
+                    <sort>ASC</sort>
+                    <format>- {{commitShortHash}} {{commitTitle}}</format>
+                  </changelog>
+                </github>
+              </release>
+              <deploy>
+                <maven>
+                  <mavenCentral>
+                    <maven-central>
+                      <active>RELEASE</active>
+                      <url>https://central.sonatype.com/api/v1/publisher</url>
+                      <stagingRepositories>target/staging-deploy</stagingRepositories>
+                      <verifyPom>false</verifyPom>
+                    </maven-central>
+                  </mavenCentral>
+                  <github>
+                    <github-packages>
+                      <active>ALWAYS</active>
+                      <url>https://maven.pkg.github.com/xenoterracide/semver</url>
+                      <stagingRepositories>target/staging-deploy</stagingRepositories>
+                    </github-packages>
+                  </github>
+                </maven>
+              </deploy>
+              <signing>
+                <active>${jreleaser.signing.active}</active>
+                <armored>true</armored>
+                <mode>MEMORY</mode>
+              </signing>
+            </jreleaser>
+          </configuration>
+        </plugin>
+
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>flatten-maven-plugin</artifactId>
+          <version>${flatten-maven-plugin.version}</version>
+          <configuration>
+            <flattenMode>resolveCiFriendliesOnly</flattenMode>
+          </configuration>
+        </plugin>
       </plugins>
     </pluginManagement>
 
@@ -408,6 +513,53 @@ SPDX-License-Identifier: CC0-1.0
                 <sourceDirectory>${project.basedir}/src/testIntegration/java</sourceDirectory>
               </sourceDirectories>
             </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>attach-javadocs</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>flatten-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>flatten</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>flatten</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>flatten.clean</id>
+            <phase>clean</phase>
+            <goals>
+              <goal>clean</goal>
+            </goals>
           </execution>
         </executions>
       </plugin>
