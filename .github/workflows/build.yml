@@ -23,14 +23,26 @@ jobs:
       group: publish
     steps:
       - uses: actions/checkout@v6.0.2
+        with:
+          ref: ${{ github.ref_name }}
+          filter: "blob:none"
+          fetch-depth: 0
+          fetch-tags: true
       - uses: actions/setup-java@v5.2.0
         with:
           java-version: "25"
           distribution: "temurin"
-      - run: ./mvnw install -DskipTests -q --batch-mode
+          cache: maven
+      - run: ./mvnw clean install -DskipTests -q --batch-mode
+      - name: compute version
+        id: version
+        run: |
+          VERSION=$(./mvnw exec:java -pl module/semver-cli -Dexec.mainClass=com.xenoterracide.semver.cli.SemverCommand -Dexec.classpathScope=runtime -q)
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
       - uses: jbangdev/setup-jbang@v0.1.1
       - run: jbang --verbose main.java --help
       - run: jbang --verbose main.java
+      - run: ./mvnw clean install -Drevision="${{ steps.version.outputs.version }}" -DskipTests -q --batch-mode
       - name: deploy to github packages
         run: ./mvnw -Drevision="${{ steps.version.outputs.version }}" jreleaser:deploy --batch-mode
         env:
@@ -41,7 +53,8 @@ jobs:
           ./mvnw -Drevision="${{ steps.version.outputs.version }}" deploy -DaltDeploymentRepository=local::file:./target/staging-deploy --batch-mode
       - name: create github release and deploy to maven central
         if: startsWith(github.ref, 'refs/tags/')
-        run: ./mvnw -Drevision="${{ steps.version.outputs.version }}" jreleaser:full-release --batch-mode
+        run: |
+          ./mvnw -Drevision="${{ steps.version.outputs.version }}" jreleaser:full-release --batch-mode
         env:
           JRELEASER_GITHUB_TOKEN: ${{ github.token }}
           JRELEASER_MAVENCENTRAL_USERNAME: ${{ secrets.CENTRAL_USERNAME }}
