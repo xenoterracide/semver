@@ -38,7 +38,7 @@ SPDX-License-Identifier: CC0-1.0
     <semver4j.version>6.0.0</semver4j.version>
     <errorprone.annotations.version>2.48.0</errorprone.annotations.version>
     <errorprone.core.version>2.48.0</errorprone.core.version>
-    <nullaway.version>0.13.1</nullaway.version>
+    <nullaway.version>0.13.4</nullaway.version>
     <immutables.version>2.12.1</immutables.version>
     <picocli.version>4.7.7</picocli.version>
 
