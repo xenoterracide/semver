@@ -33,12 +33,12 @@ SPDX-License-Identifier: CC0-1.0
     <jgit.version>7.6.0.202603022253-r</jgit.version>
     <vavr.version>1.0.1</vavr.version>
     <commons-lang3.version>3.20.0</commons-lang3.version>
-    <guava.version>33.5.0-jre</guava.version>
+    <guava.version>33.6.0-jre</guava.version>
     <jspecify.version>1.0.0</jspecify.version>
     <semver4j.version>6.0.0</semver4j.version>
     <errorprone.annotations.version>2.48.0</errorprone.annotations.version>
     <errorprone.core.version>2.48.0</errorprone.core.version>
-    <nullaway.version>0.13.1</nullaway.version>
+    <nullaway.version>0.13.4</nullaway.version>
     <immutables.version>2.12.1</immutables.version>
     <picocli.version>4.7.7</picocli.version>
 
@@ -49,7 +49,7 @@ SPDX-License-Identifier: CC0-1.0
     <maven-surefire-plugin.version>3.5.5</maven-surefire-plugin.version>
     <maven-failsafe-plugin.version>3.5.5</maven-failsafe-plugin.version>
     <maven-checkstyle-plugin.version>3.6.0</maven-checkstyle-plugin.version>
-    <checkstyle.version>13.4.0</checkstyle.version>
+    <checkstyle.version>13.4.2</checkstyle.version>
     <spotbugs-maven-plugin.version>4.9.8.3</spotbugs-maven-plugin.version>
     <spotbugs.version>4.9.8</spotbugs.version>
     <jacoco-maven-plugin.version>0.8.14</jacoco-maven-plugin.version>
