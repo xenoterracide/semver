@@ -29,9 +29,9 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./",\
         "packageDependencies": [\
           ["@prettier/plugin-xml", "virtual:b2f69d821ef07d6b0bd9eb6956daf482223e1bcdba1164b4395f7a0769d3283fe79762b3d0b719f8e1c9d7c7bfc0891a222bd14604b3cbabfe6c6fe7c6ea57dd#npm:3.4.2"],\
-          ["git-conventional-commits", "npm:2.8.0"],\
+          ["git-conventional-commits", "npm:2.9.0"],\
           ["lint-staged", "npm:16.4.0"],\
-          ["prettier", "npm:3.8.1"],\
+          ["prettier", "npm:3.8.3"],\
           ["prettier-plugin-java", "virtual:b2f69d821ef07d6b0bd9eb6956daf482223e1bcdba1164b4395f7a0769d3283fe79762b3d0b719f8e1c9d7c7bfc0891a222bd14604b3cbabfe6c6fe7c6ea57dd#npm:2.8.1"],\
           ["prettier-plugin-properties", "virtual:b2f69d821ef07d6b0bd9eb6956daf482223e1bcdba1164b4395f7a0769d3283fe79762b3d0b719f8e1c9d7c7bfc0891a222bd14604b3cbabfe6c6fe7c6ea57dd#npm:0.3.1"],\
           ["prettier-plugin-toml", "virtual:b2f69d821ef07d6b0bd9eb6956daf482223e1bcdba1164b4395f7a0769d3283fe79762b3d0b719f8e1c9d7c7bfc0891a222bd14604b3cbabfe6c6fe7c6ea57dd#npm:2.0.6"],\
@@ -105,7 +105,7 @@ const RAW_RUNTIME_STATE =
           ["@prettier/plugin-xml", "virtual:b2f69d821ef07d6b0bd9eb6956daf482223e1bcdba1164b4395f7a0769d3283fe79762b3d0b719f8e1c9d7c7bfc0891a222bd14604b3cbabfe6c6fe7c6ea57dd#npm:3.4.2"],\
           ["@types/prettier", null],\
           ["@xml-tools/parser", "npm:1.0.11"],\
-          ["prettier", "npm:3.8.1"]\
+          ["prettier", "npm:3.8.3"]\
         ],\
         "packagePeers": [\
           "@types/prettier",\
@@ -392,10 +392,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["git-conventional-commits", [\
-      ["npm:2.8.0", {\
-        "packageLocation": "./.yarn/cache/git-conventional-commits-npm-2.8.0-884fc23e00-15e2bd7e6a.zip/node_modules/git-conventional-commits/",\
+      ["npm:2.9.0", {\
+        "packageLocation": "./.yarn/cache/git-conventional-commits-npm-2.9.0-0014349708-103ce82e28.zip/node_modules/git-conventional-commits/",\
         "packageDependencies": [\
-          ["git-conventional-commits", "npm:2.8.0"],\
+          ["git-conventional-commits", "npm:2.9.0"],\
           ["yaml", "npm:2.8.3"],\
           ["yargs", "npm:17.7.2"]\
         ],\
@@ -589,10 +589,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["prettier", [\
-      ["npm:3.8.1", {\
-        "packageLocation": "./.yarn/unplugged/prettier-npm-3.8.1-04022a855f/node_modules/prettier/",\
+      ["npm:3.8.3", {\
+        "packageLocation": "./.yarn/unplugged/prettier-npm-3.8.3-ecd857a540/node_modules/prettier/",\
         "packageDependencies": [\
-          ["prettier", "npm:3.8.1"]\
+          ["prettier", "npm:3.8.3"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -610,7 +610,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@types/prettier", null],\
           ["java-parser", "npm:3.0.1"],\
-          ["prettier", "npm:3.8.1"],\
+          ["prettier", "npm:3.8.3"],\
           ["prettier-plugin-java", "virtual:b2f69d821ef07d6b0bd9eb6956daf482223e1bcdba1164b4395f7a0769d3283fe79762b3d0b719f8e1c9d7c7bfc0891a222bd14604b3cbabfe6c6fe7c6ea57dd#npm:2.8.1"]\
         ],\
         "packagePeers": [\
@@ -633,7 +633,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@types/prettier", null],\
           ["dot-properties", "npm:1.1.1"],\
-          ["prettier", "npm:3.8.1"],\
+          ["prettier", "npm:3.8.3"],\
           ["prettier-plugin-properties", "virtual:b2f69d821ef07d6b0bd9eb6956daf482223e1bcdba1164b4395f7a0769d3283fe79762b3d0b719f8e1c9d7c7bfc0891a222bd14604b3cbabfe6c6fe7c6ea57dd#npm:0.3.1"]\
         ],\
         "packagePeers": [\
@@ -656,7 +656,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@taplo/lib", "npm:0.5.0"],\
           ["@types/prettier", null],\
-          ["prettier", "npm:3.8.1"],\
+          ["prettier", "npm:3.8.3"],\
           ["prettier-plugin-toml", "virtual:b2f69d821ef07d6b0bd9eb6956daf482223e1bcdba1164b4395f7a0769d3283fe79762b3d0b719f8e1c9d7c7bfc0891a222bd14604b3cbabfe6c6fe7c6ea57dd#npm:2.0.6"]\
         ],\
         "packagePeers": [\
@@ -720,9 +720,9 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./",\
         "packageDependencies": [\
           ["@prettier/plugin-xml", "virtual:b2f69d821ef07d6b0bd9eb6956daf482223e1bcdba1164b4395f7a0769d3283fe79762b3d0b719f8e1c9d7c7bfc0891a222bd14604b3cbabfe6c6fe7c6ea57dd#npm:3.4.2"],\
-          ["git-conventional-commits", "npm:2.8.0"],\
+          ["git-conventional-commits", "npm:2.9.0"],\
           ["lint-staged", "npm:16.4.0"],\
-          ["prettier", "npm:3.8.1"],\
+          ["prettier", "npm:3.8.3"],\
           ["prettier-plugin-java", "virtual:b2f69d821ef07d6b0bd9eb6956daf482223e1bcdba1164b4395f7a0769d3283fe79762b3d0b719f8e1c9d7c7bfc0891a222bd14604b3cbabfe6c6fe7c6ea57dd#npm:2.8.1"],\
           ["prettier-plugin-properties", "virtual:b2f69d821ef07d6b0bd9eb6956daf482223e1bcdba1164b4395f7a0769d3283fe79762b3d0b719f8e1c9d7c7bfc0891a222bd14604b3cbabfe6c6fe7c6ea57dd#npm:0.3.1"],\
           ["prettier-plugin-toml", "virtual:b2f69d821ef07d6b0bd9eb6956daf482223e1bcdba1164b4395f7a0769d3283fe79762b3d0b719f8e1c9d7c7bfc0891a222bd14604b3cbabfe6c6fe7c6ea57dd#npm:2.0.6"],\
@@ -6633,9 +6633,9 @@ Instead change the require of ${basename} in ${parentPath} to a dynamic import()
   err.code = `ERR_REQUIRE_ESM`;
   return err;
 }
-function reportRequiredFilesToWatchMode(files) {
+function reportRequiredFilesToWatchMode(paths) {
   if (process.env.WATCH_REPORT_DEPENDENCIES && process.send) {
-    files = files.map((filename) => npath.fromPortablePath(VirtualFS.resolveVirtual(npath.toPortablePath(filename))));
+    const files = paths.map((filename) => npath.fromPortablePath(VirtualFS.resolveVirtual(filename)));
     if (WATCH_MODE_MESSAGE_USES_ARRAYS) {
       process.send({ "watch:require": files });
     } else {
@@ -8278,9 +8278,10 @@ Required by: ${issuerLocator.name}@${issuerLocator.reference} (via ${issuerForDi
     const candidates = [];
     const qualifiedPath = applyNodeExtensionResolution(unqualifiedPath, candidates, { extensions });
     if (qualifiedPath) {
+      reportRequiredFilesToWatchMode([qualifiedPath]);
       return ppath.normalize(qualifiedPath);
     } else {
-      reportRequiredFilesToWatchMode(candidates.map((candidate) => npath.fromPortablePath(candidate)));
+      reportRequiredFilesToWatchMode(candidates);
       const unqualifiedPathForDisplay = getPathForDisplay(unqualifiedPath);
       const containingPackage = findPackageLocator(unqualifiedPath);
       if (containingPackage) {
