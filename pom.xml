@@ -39,7 +39,7 @@ SPDX-License-Identifier: CC0-1.0
     <errorprone.annotations.version>2.48.0</errorprone.annotations.version>
     <errorprone.core.version>2.48.0</errorprone.core.version>
     <nullaway.version>0.13.4</nullaway.version>
-    <immutables.version>2.12.1</immutables.version>
+    <immutables.version>2.12.2</immutables.version>
     <picocli.version>4.7.7</picocli.version>
 
     <!-- Plugin versions -->
