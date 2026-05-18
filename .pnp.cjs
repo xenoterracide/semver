@@ -30,7 +30,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@prettier/plugin-xml", "virtual:b2f69d821ef07d6b0bd9eb6956daf482223e1bcdba1164b4395f7a0769d3283fe79762b3d0b719f8e1c9d7c7bfc0891a222bd14604b3cbabfe6c6fe7c6ea57dd#npm:3.4.2"],\
           ["git-conventional-commits", "npm:2.9.0"],\
-          ["lint-staged", "npm:16.4.0"],\
+          ["lint-staged", "npm:17.0.5"],\
           ["prettier", "npm:3.8.3"],\
           ["prettier-plugin-java", "virtual:b2f69d821ef07d6b0bd9eb6956daf482223e1bcdba1164b4395f7a0769d3283fe79762b3d0b719f8e1c9d7c7bfc0891a222bd14604b3cbabfe6c6fe7c6ea57dd#npm:2.8.1"],\
           ["prettier-plugin-properties", "virtual:b2f69d821ef07d6b0bd9eb6956daf482223e1bcdba1164b4395f7a0769d3283fe79762b3d0b719f8e1c9d7c7bfc0891a222bd14604b3cbabfe6c6fe7c6ea57dd#npm:0.3.1"],\
@@ -303,24 +303,6 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
-    ["colorette", [\
-      ["npm:2.0.20", {\
-        "packageLocation": "./.yarn/cache/colorette-npm-2.0.20-692d428726-e94116ff33.zip/node_modules/colorette/",\
-        "packageDependencies": [\
-          ["colorette", "npm:2.0.20"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["commander", [\
-      ["npm:14.0.3", {\
-        "packageLocation": "./.yarn/cache/commander-npm-14.0.3-93ab31471d-755652564b.zip/node_modules/commander/",\
-        "packageDependencies": [\
-          ["commander", "npm:14.0.3"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
     ["dot-properties", [\
       ["npm:1.1.1", {\
         "packageLocation": "./.yarn/cache/dot-properties-npm-1.1.1-f7a50759fe-2007ef4a8b.zip/node_modules/dot-properties/",\
@@ -444,31 +426,29 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["lint-staged", [\
-      ["npm:16.4.0", {\
-        "packageLocation": "./.yarn/cache/lint-staged-npm-16.4.0-bc70d40d4b-67625a49a2.zip/node_modules/lint-staged/",\
+      ["npm:17.0.5", {\
+        "packageLocation": "./.yarn/cache/lint-staged-npm-17.0.5-817319800d-6ecf202474.zip/node_modules/lint-staged/",\
         "packageDependencies": [\
-          ["commander", "npm:14.0.3"],\
-          ["lint-staged", "npm:16.4.0"],\
-          ["listr2", "npm:9.0.5"],\
+          ["lint-staged", "npm:17.0.5"],\
+          ["listr2", "npm:10.2.1"],\
           ["picomatch", "npm:4.0.4"],\
           ["string-argv", "npm:0.3.2"],\
-          ["tinyexec", "npm:1.0.4"],\
-          ["yaml", "npm:2.8.3"]\
+          ["tinyexec", "npm:1.1.2"],\
+          ["yaml", "npm:2.9.0"]\
         ],\
         "linkType": "HARD"\
       }]\
     ]],\
     ["listr2", [\
-      ["npm:9.0.5", {\
-        "packageLocation": "./.yarn/cache/listr2-npm-9.0.5-8443b39154-46448d1ba0.zip/node_modules/listr2/",\
+      ["npm:10.2.1", {\
+        "packageLocation": "./.yarn/cache/listr2-npm-10.2.1-0594073c77-a381a7aaef.zip/node_modules/listr2/",\
         "packageDependencies": [\
           ["cli-truncate", "npm:5.2.0"],\
-          ["colorette", "npm:2.0.20"],\
           ["eventemitter3", "npm:5.0.4"],\
-          ["listr2", "npm:9.0.5"],\
+          ["listr2", "npm:10.2.1"],\
           ["log-update", "npm:6.1.0"],\
           ["rfdc", "npm:1.4.1"],\
-          ["wrap-ansi", "npm:9.0.2"]\
+          ["wrap-ansi", "npm:10.0.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -721,7 +701,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@prettier/plugin-xml", "virtual:b2f69d821ef07d6b0bd9eb6956daf482223e1bcdba1164b4395f7a0769d3283fe79762b3d0b719f8e1c9d7c7bfc0891a222bd14604b3cbabfe6c6fe7c6ea57dd#npm:3.4.2"],\
           ["git-conventional-commits", "npm:2.9.0"],\
-          ["lint-staged", "npm:16.4.0"],\
+          ["lint-staged", "npm:17.0.5"],\
           ["prettier", "npm:3.8.3"],\
           ["prettier-plugin-java", "virtual:b2f69d821ef07d6b0bd9eb6956daf482223e1bcdba1164b4395f7a0769d3283fe79762b3d0b719f8e1c9d7c7bfc0891a222bd14604b3cbabfe6c6fe7c6ea57dd#npm:2.8.1"],\
           ["prettier-plugin-properties", "virtual:b2f69d821ef07d6b0bd9eb6956daf482223e1bcdba1164b4395f7a0769d3283fe79762b3d0b719f8e1c9d7c7bfc0891a222bd14604b3cbabfe6c6fe7c6ea57dd#npm:0.3.1"],\
@@ -820,15 +800,25 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["tinyexec", [\
-      ["npm:1.0.4", {\
-        "packageLocation": "./.yarn/cache/tinyexec-npm-1.0.4-c1df9ff8b1-d4a5bbcf6b.zip/node_modules/tinyexec/",\
+      ["npm:1.1.2", {\
+        "packageLocation": "./.yarn/cache/tinyexec-npm-1.1.2-1bfd8015d0-9e0ef6c001.zip/node_modules/tinyexec/",\
         "packageDependencies": [\
-          ["tinyexec", "npm:1.0.4"]\
+          ["tinyexec", "npm:1.1.2"]\
         ],\
         "linkType": "HARD"\
       }]\
     ]],\
     ["wrap-ansi", [\
+      ["npm:10.0.0", {\
+        "packageLocation": "./.yarn/cache/wrap-ansi-npm-10.0.0-4aa0845d6f-6b16345763.zip/node_modules/wrap-ansi/",\
+        "packageDependencies": [\
+          ["ansi-styles", "npm:6.2.3"],\
+          ["string-width", "npm:8.2.0"],\
+          ["strip-ansi", "npm:7.2.0"],\
+          ["wrap-ansi", "npm:10.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
       ["npm:7.0.0", {\
         "packageLocation": "./.yarn/cache/wrap-ansi-npm-7.0.0-ad6e1a0554-d15fc12c11.zip/node_modules/wrap-ansi/",\
         "packageDependencies": [\
@@ -864,6 +854,13 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/yaml-npm-2.8.3-dfea86f9e0-ddff0e11c1.zip/node_modules/yaml/",\
         "packageDependencies": [\
           ["yaml", "npm:2.8.3"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:2.9.0", {\
+        "packageLocation": "./.yarn/cache/yaml-npm-2.9.0-0cdd9bc0bc-f340718df4.zip/node_modules/yaml/",\
+        "packageDependencies": [\
+          ["yaml", "npm:2.9.0"]\
         ],\
         "linkType": "HARD"\
       }]\
