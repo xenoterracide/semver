@@ -25,7 +25,8 @@ class DistanceCalculator implements Function<String, Long> {
   }
 
   long distanceFromNoTag(ObjectId oid) {
-    return this.git.tryCommand(g -> g.log().add(oid).all())
+    return this.git
+      .tryCommand(g -> g.log().add(oid).all())
       .map(IterableTools::of)
       .map(Stream::count)
       .recover(NoSuchElementException.class, 0L)
@@ -35,7 +36,8 @@ class DistanceCalculator implements Function<String, Long> {
   }
 
   long distance(ObjectId oid) {
-    return this.git.tryGit(Describer.describe(oid))
+    return this.git
+      .tryGit(Describer.describe(oid))
       .map(Describer.Described::distance)
       .recover(NoSuchElementException.class, e -> this.distanceFromNoTag(oid))
       .onFailure(e -> this.log.error("failed to get distance", e))
@@ -50,7 +52,8 @@ class DistanceCalculator implements Function<String, Long> {
   }
 
   public long distanceBetween(ObjectId from, ObjectId to) {
-    return this.git.tryGit(g -> {
+    return this.git
+      .tryGit(g -> {
         var repo = g.getRepository();
         try (var walk = new RevWalk(repo)) {
           var fromCommit = walk.parseCommit(from);
