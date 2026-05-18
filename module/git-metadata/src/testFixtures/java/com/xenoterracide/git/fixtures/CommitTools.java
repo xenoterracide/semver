@@ -17,8 +17,8 @@ import org.jspecify.annotations.Nullable;
  */
 public final class CommitTools {
 
-  private static final ThreadLocal<IntSupplier> NEXT_INT = ThreadLocal.withInitial(() ->
-    IntStream.iterate(0, i -> i + 1).iterator()::nextInt
+  private static final ThreadLocal<IntSupplier> NEXT_INT = ThreadLocal.withInitial(
+    () -> IntStream.iterate(0, i -> i + 1).iterator()::nextInt
   );
 
   private CommitTools() {}

@@ -121,7 +121,8 @@ final class GitMetadataImpl implements GitMetadata {
 
   @Override
   public @Nullable String tag() {
-    return this.git.tryCommand(g -> g.describe().setMatch(VERSION_GLOB).setAbbrev(0))
+    return this.git
+      .tryCommand(g -> g.describe().setMatch(VERSION_GLOB).setAbbrev(0))
       .recover(NoSuchElementException.class, e -> null)
       .recover(GitMetadataImpl.allWith(null))
       .onFailure(e -> this.log.error("failed to get tag", e))
@@ -129,7 +130,8 @@ final class GitMetadataImpl implements GitMetadata {
   }
 
   long shortCount() {
-    return this.git.tryCommand(git -> git.log().setMaxCount(5))
+    return this.git
+      .tryCommand(git -> git.log().setMaxCount(5))
       .map(IterableTools::of)
       .map(Stream::count)
       .getOrElse(0L);
@@ -149,7 +151,8 @@ final class GitMetadataImpl implements GitMetadata {
 
   @Override
   public GitStatus status() {
-    return this.git.tryCommand(Git::status)
+    return this.git
+      .tryCommand(Git::status)
       .filter(Objects::nonNull)
       .map(status -> status.isClean() ? GitStatus.CLEAN : GitStatus.DIRTY)
       .recover(NoSuchElementException.class, e -> GitStatus.NO_REPO)
@@ -170,7 +173,8 @@ final class GitMetadataImpl implements GitMetadata {
 
   @Override
   public List<GitRemote> remotes() {
-    return this.git.tryCommand(Git::remoteList)
+    return this.git
+      .tryCommand(Git::remoteList)
       .map(Collection::stream)
       .map(s -> s.map(RemoteConfig::getName))
       .map(s -> s.filter(Objects::nonNull))

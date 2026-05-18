@@ -45,14 +45,14 @@ public final class SemverCommand implements Callable<Integer> {
 
   /** Path to the Git repository. */
   @Option(
-    names = { "--path", "-p" },
+    names = {"--path", "-p"},
     description = "Path to the Git repository (default: current directory)",
     defaultValue = "."
   )
   private @Nullable File path;
 
   /** Enable debug logging flag. */
-  @Option(names = { "--debug", "-d" }, description = "Enable debug logging")
+  @Option(names = {"--debug", "-d"}, description = "Enable debug logging")
   private boolean debug;
 
   @Override
@@ -106,7 +106,7 @@ public final class SemverCommand implements Callable<Integer> {
 
     @Override
     public String[] getVersion() {
-      return new String[] { "semver 0.0.0" };
+      return new String[] {"semver 0.0.0"};
     }
   }
 }
