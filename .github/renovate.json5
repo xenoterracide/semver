@@ -14,6 +14,8 @@
   // Subtrees are excluded - updates should be pulled via git subtree pull, not Renovate
   // Squash merges break subtree history
   ignorePaths: [".share/**", ".agents/**"],
+  // Remove the 'controls' section from PR body to avoid config noise in squash commits
+  prBodyTemplate: "{{{header}}}{{{table}}}{{{notes}}}{{{changelogs}}}{{{footer}}}",
   hostRules: [
     {
       hostType: "maven",
@@ -31,6 +33,7 @@
       matchManagers: ["github-actions"],
       matchDepNames: ["xenoterracide/**"],
       extends: ["helpers:pinGitHubActionDigests"],
+      branchTopic: "{{{depNameSanitized}}}-{{{newDigestShort}}}",
       automerge: true,
     },
   ],
