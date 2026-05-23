@@ -72,7 +72,7 @@ class GitContextTest {
   }
 
   @ParameterizedTest
-  @CsvSource({"v1.0.0, true", "v2.1.3-alpha.1, true", "null, false"})
+  @CsvSource({ "v1.0.0, true", "v2.1.3-alpha.1, true", "null, false" })
   void variousTagsReturnsExpected(String tag, boolean expected) {
     var ctx = GitContext.builder()
       .nearestTag("null".equals(tag) ? null : tag)
@@ -92,7 +92,7 @@ class GitContextTest {
   }
 
   @ParameterizedTest
-  @ValueSource(strings = {"v1.0.0", "v2.1.3-alpha.1", "v0.0.1"})
+  @ValueSource(strings = { "v1.0.0", "v2.1.3-alpha.1", "v0.0.1" })
   void withVPrefixStripsV(String tag) {
     var ctx = GitContext.builder()
       .nearestTag(tag)
@@ -112,7 +112,7 @@ class GitContextTest {
   }
 
   @ParameterizedTest
-  @ValueSource(strings = {"1.0.0", "2.1.3", "0.0.1-rc.1"})
+  @ValueSource(strings = { "1.0.0", "2.1.3", "0.0.1-rc.1" })
   void withoutVPrefixReturnsAsIs(String tag) {
     var ctx = GitContext.builder()
       .nearestTag(tag)
