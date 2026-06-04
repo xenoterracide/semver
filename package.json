@@ -1,6 +1,6 @@
 {
   "name": "semver",
-  "packageManager": "yarn@4.15.0",
+  "packageManager": "yarn@4.16.0",
   "private": true,
   "license": "GPL-3.0-or-later",
   "devDependencies": {
