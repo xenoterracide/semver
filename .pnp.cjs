@@ -32,7 +32,7 @@ const RAW_RUNTIME_STATE =
           ["git-conventional-commits", "npm:2.9.0"],\
           ["lint-staged", "npm:17.1.0"],\
           ["prettier", "npm:3.9.4"],\
-          ["prettier-plugin-java", "virtual:b2f69d821ef07d6b0bd9eb6956daf482223e1bcdba1164b4395f7a0769d3283fe79762b3d0b719f8e1c9d7c7bfc0891a222bd14604b3cbabfe6c6fe7c6ea57dd#npm:2.10.2"],\
+          ["prettier-plugin-java", "virtual:b2f69d821ef07d6b0bd9eb6956daf482223e1bcdba1164b4395f7a0769d3283fe79762b3d0b719f8e1c9d7c7bfc0891a222bd14604b3cbabfe6c6fe7c6ea57dd#npm:2.10.3"],\
           ["prettier-plugin-properties", "virtual:b2f69d821ef07d6b0bd9eb6956daf482223e1bcdba1164b4395f7a0769d3283fe79762b3d0b719f8e1c9d7c7bfc0891a222bd14604b3cbabfe6c6fe7c6ea57dd#npm:0.3.1"],\
           ["prettier-plugin-toml", "virtual:b2f69d821ef07d6b0bd9eb6956daf482223e1bcdba1164b4395f7a0769d3283fe79762b3d0b719f8e1c9d7c7bfc0891a222bd14604b3cbabfe6c6fe7c6ea57dd#npm:2.0.6"],\
           ["rimraf", "npm:6.1.3"],\
@@ -320,20 +320,20 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["prettier-plugin-java", [\
-      ["npm:2.10.2", {\
-        "packageLocation": "./.yarn/cache/prettier-plugin-java-npm-2.10.2-44adb98930-0b259194e5.zip/node_modules/prettier-plugin-java/",\
+      ["npm:2.10.3", {\
+        "packageLocation": "./.yarn/cache/prettier-plugin-java-npm-2.10.3-179f818e16-7d910608a4.zip/node_modules/prettier-plugin-java/",\
         "packageDependencies": [\
-          ["prettier-plugin-java", "npm:2.10.2"]\
+          ["prettier-plugin-java", "npm:2.10.3"]\
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:b2f69d821ef07d6b0bd9eb6956daf482223e1bcdba1164b4395f7a0769d3283fe79762b3d0b719f8e1c9d7c7bfc0891a222bd14604b3cbabfe6c6fe7c6ea57dd#npm:2.10.2", {\
-        "packageLocation": "./.yarn/__virtual__/prettier-plugin-java-virtual-904e868656/0/cache/prettier-plugin-java-npm-2.10.2-44adb98930-0b259194e5.zip/node_modules/prettier-plugin-java/",\
+      ["virtual:b2f69d821ef07d6b0bd9eb6956daf482223e1bcdba1164b4395f7a0769d3283fe79762b3d0b719f8e1c9d7c7bfc0891a222bd14604b3cbabfe6c6fe7c6ea57dd#npm:2.10.3", {\
+        "packageLocation": "./.yarn/__virtual__/prettier-plugin-java-virtual-7a61172454/0/cache/prettier-plugin-java-npm-2.10.3-179f818e16-7d910608a4.zip/node_modules/prettier-plugin-java/",\
         "packageDependencies": [\
           ["@types/prettier", null],\
           ["prettier", "npm:3.9.4"],\
-          ["prettier-plugin-java", "virtual:b2f69d821ef07d6b0bd9eb6956daf482223e1bcdba1164b4395f7a0769d3283fe79762b3d0b719f8e1c9d7c7bfc0891a222bd14604b3cbabfe6c6fe7c6ea57dd#npm:2.10.2"],\
-          ["web-tree-sitter", "npm:0.26.9"]\
+          ["prettier-plugin-java", "virtual:b2f69d821ef07d6b0bd9eb6956daf482223e1bcdba1164b4395f7a0769d3283fe79762b3d0b719f8e1c9d7c7bfc0891a222bd14604b3cbabfe6c6fe7c6ea57dd#npm:2.10.3"],\
+          ["web-tree-sitter", "npm:0.26.11"]\
         ],\
         "packagePeers": [\
           "@types/prettier",\
@@ -425,7 +425,7 @@ const RAW_RUNTIME_STATE =
           ["git-conventional-commits", "npm:2.9.0"],\
           ["lint-staged", "npm:17.1.0"],\
           ["prettier", "npm:3.9.4"],\
-          ["prettier-plugin-java", "virtual:b2f69d821ef07d6b0bd9eb6956daf482223e1bcdba1164b4395f7a0769d3283fe79762b3d0b719f8e1c9d7c7bfc0891a222bd14604b3cbabfe6c6fe7c6ea57dd#npm:2.10.2"],\
+          ["prettier-plugin-java", "virtual:b2f69d821ef07d6b0bd9eb6956daf482223e1bcdba1164b4395f7a0769d3283fe79762b3d0b719f8e1c9d7c7bfc0891a222bd14604b3cbabfe6c6fe7c6ea57dd#npm:2.10.3"],\
           ["prettier-plugin-properties", "virtual:b2f69d821ef07d6b0bd9eb6956daf482223e1bcdba1164b4395f7a0769d3283fe79762b3d0b719f8e1c9d7c7bfc0891a222bd14604b3cbabfe6c6fe7c6ea57dd#npm:0.3.1"],\
           ["prettier-plugin-toml", "virtual:b2f69d821ef07d6b0bd9eb6956daf482223e1bcdba1164b4395f7a0769d3283fe79762b3d0b719f8e1c9d7c7bfc0891a222bd14604b3cbabfe6c6fe7c6ea57dd#npm:2.0.6"],\
           ["rimraf", "npm:6.1.3"],\
@@ -475,10 +475,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["web-tree-sitter", [\
-      ["npm:0.26.9", {\
-        "packageLocation": "./.yarn/cache/web-tree-sitter-npm-0.26.9-6ee6f1f7d6-7df36536f6.zip/node_modules/web-tree-sitter/",\
+      ["npm:0.26.11", {\
+        "packageLocation": "./.yarn/cache/web-tree-sitter-npm-0.26.11-ac1c66390d-eb8fe10c04.zip/node_modules/web-tree-sitter/",\
         "packageDependencies": [\
-          ["web-tree-sitter", "npm:0.26.9"]\
+          ["web-tree-sitter", "npm:0.26.11"]\
         ],\
         "linkType": "HARD"\
       }]\
