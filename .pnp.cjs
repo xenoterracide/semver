@@ -30,7 +30,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@prettier/plugin-xml", "virtual:b2f69d821ef07d6b0bd9eb6956daf482223e1bcdba1164b4395f7a0769d3283fe79762b3d0b719f8e1c9d7c7bfc0891a222bd14604b3cbabfe6c6fe7c6ea57dd#npm:3.4.2"],\
           ["git-conventional-commits", "npm:2.9.0"],\
-          ["lint-staged", "npm:17.3.0"],\
+          ["lint-staged", "npm:17.4.1"],\
           ["prettier", "npm:3.9.5"],\
           ["prettier-plugin-java", "virtual:b2f69d821ef07d6b0bd9eb6956daf482223e1bcdba1164b4395f7a0769d3283fe79762b3d0b719f8e1c9d7c7bfc0891a222bd14604b3cbabfe6c6fe7c6ea57dd#npm:2.10.3"],\
           ["prettier-plugin-properties", "virtual:b2f69d821ef07d6b0bd9eb6956daf482223e1bcdba1164b4395f7a0769d3283fe79762b3d0b719f8e1c9d7c7bfc0891a222bd14604b3cbabfe6c6fe7c6ea57dd#npm:0.3.1"],\
@@ -241,13 +241,13 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["lint-staged", [\
-      ["npm:17.3.0", {\
-        "packageLocation": "./.yarn/cache/lint-staged-npm-17.3.0-8aaa067ba2-48703bf88f.zip/node_modules/lint-staged/",\
+      ["npm:17.4.1", {\
+        "packageLocation": "./.yarn/cache/lint-staged-npm-17.4.1-16fcd7147d-a9d30836ee.zip/node_modules/lint-staged/",\
         "packageDependencies": [\
-          ["lint-staged", "npm:17.3.0"],\
-          ["picomatch", "npm:4.0.5"],\
+          ["lint-staged", "npm:17.4.1"],\
+          ["picomatch", "npm:4.0.7"],\
           ["string-argv", "npm:0.3.2"],\
-          ["tinyexec", "npm:1.2.4"],\
+          ["tinyexec", "npm:1.3.1"],\
           ["yaml", "npm:2.9.0"]\
         ],\
         "linkType": "HARD"\
@@ -302,10 +302,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["picomatch", [\
-      ["npm:4.0.5", {\
-        "packageLocation": "./.yarn/cache/picomatch-npm-4.0.5-bb8e0de0f7-947bc6b6e1.zip/node_modules/picomatch/",\
+      ["npm:4.0.7", {\
+        "packageLocation": "./.yarn/cache/picomatch-npm-4.0.7-2906b103fe-beb6ae02c4.zip/node_modules/picomatch/",\
         "packageDependencies": [\
-          ["picomatch", "npm:4.0.5"]\
+          ["picomatch", "npm:4.0.7"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -423,7 +423,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@prettier/plugin-xml", "virtual:b2f69d821ef07d6b0bd9eb6956daf482223e1bcdba1164b4395f7a0769d3283fe79762b3d0b719f8e1c9d7c7bfc0891a222bd14604b3cbabfe6c6fe7c6ea57dd#npm:3.4.2"],\
           ["git-conventional-commits", "npm:2.9.0"],\
-          ["lint-staged", "npm:17.3.0"],\
+          ["lint-staged", "npm:17.4.1"],\
           ["prettier", "npm:3.9.5"],\
           ["prettier-plugin-java", "virtual:b2f69d821ef07d6b0bd9eb6956daf482223e1bcdba1164b4395f7a0769d3283fe79762b3d0b719f8e1c9d7c7bfc0891a222bd14604b3cbabfe6c6fe7c6ea57dd#npm:2.10.3"],\
           ["prettier-plugin-properties", "virtual:b2f69d821ef07d6b0bd9eb6956daf482223e1bcdba1164b4395f7a0769d3283fe79762b3d0b719f8e1c9d7c7bfc0891a222bd14604b3cbabfe6c6fe7c6ea57dd#npm:0.3.1"],\
@@ -466,10 +466,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["tinyexec", [\
-      ["npm:1.2.4", {\
-        "packageLocation": "./.yarn/cache/tinyexec-npm-1.2.4-5786d626f2-153b8db6b0.zip/node_modules/tinyexec/",\
+      ["npm:1.3.1", {\
+        "packageLocation": "./.yarn/cache/tinyexec-npm-1.3.1-9e3ecae92e-c590369cb3.zip/node_modules/tinyexec/",\
         "packageDependencies": [\
-          ["tinyexec", "npm:1.2.4"]\
+          ["tinyexec", "npm:1.3.1"]\
         ],\
         "linkType": "HARD"\
       }]\
