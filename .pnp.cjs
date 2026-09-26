@@ -34,11 +34,20 @@ const RAW_RUNTIME_STATE =
           ["prettier", "npm:3.9.8"],\
           ["prettier-plugin-java", "virtual:b2f69d821ef07d6b0bd9eb6956daf482223e1bcdba1164b4395f7a0769d3283fe79762b3d0b719f8e1c9d7c7bfc0891a222bd14604b3cbabfe6c6fe7c6ea57dd#npm:2.10.4"],\
           ["prettier-plugin-properties", "virtual:b2f69d821ef07d6b0bd9eb6956daf482223e1bcdba1164b4395f7a0769d3283fe79762b3d0b719f8e1c9d7c7bfc0891a222bd14604b3cbabfe6c6fe7c6ea57dd#npm:0.3.1"],\
-          ["prettier-plugin-toml", "virtual:b2f69d821ef07d6b0bd9eb6956daf482223e1bcdba1164b4395f7a0769d3283fe79762b3d0b719f8e1c9d7c7bfc0891a222bd14604b3cbabfe6c6fe7c6ea57dd#npm:2.0.6"],\
+          ["prettier-plugin-toml", "virtual:b2f69d821ef07d6b0bd9eb6956daf482223e1bcdba1164b4395f7a0769d3283fe79762b3d0b719f8e1c9d7c7bfc0891a222bd14604b3cbabfe6c6fe7c6ea57dd#npm:3.0.2"],\
           ["rimraf", "npm:6.1.3"],\
           ["semver", "workspace:."]\
         ],\
         "linkType": "SOFT"\
+      }]\
+    ]],\
+    ["@dual-bundle/import-meta-resolve", [\
+      ["npm:4.2.1", {\
+        "packageLocation": "./.yarn/cache/@dual-bundle-import-meta-resolve-npm-4.2.1-03539189f9-8f1e572c14.zip/node_modules/@dual-bundle/import-meta-resolve/",\
+        "packageDependencies": [\
+          ["@dual-bundle/import-meta-resolve", "npm:4.2.1"]\
+        ],\
+        "linkType": "HARD"\
       }]\
     ]],\
     ["@prettier/plugin-xml", [\
@@ -64,21 +73,11 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
-    ["@taplo/core", [\
-      ["npm:0.2.0", {\
-        "packageLocation": "./.yarn/cache/@taplo-core-npm-0.2.0-4e0938916c-4bbc3b696c.zip/node_modules/@taplo/core/",\
+    ["@tombi-toml/wasm-lib", [\
+      ["npm:1.5.5", {\
+        "packageLocation": "./.yarn/cache/@tombi-toml-wasm-lib-npm-1.5.5-b910b2574c-bec2dc1329.zip/node_modules/@tombi-toml/wasm-lib/",\
         "packageDependencies": [\
-          ["@taplo/core", "npm:0.2.0"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["@taplo/lib", [\
-      ["npm:0.5.0", {\
-        "packageLocation": "./.yarn/cache/@taplo-lib-npm-0.5.0-f586b308bd-0d1ea19058.zip/node_modules/@taplo/lib/",\
-        "packageDependencies": [\
-          ["@taplo/core", "npm:0.2.0"],\
-          ["@taplo/lib", "npm:0.5.0"]\
+          ["@tombi-toml/wasm-lib", "npm:1.5.5"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -366,20 +365,22 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["prettier-plugin-toml", [\
-      ["npm:2.0.6", {\
-        "packageLocation": "./.yarn/cache/prettier-plugin-toml-npm-2.0.6-24d3e2b8f4-8fd0817c2d.zip/node_modules/prettier-plugin-toml/",\
+      ["npm:3.0.2", {\
+        "packageLocation": "./.yarn/cache/prettier-plugin-toml-npm-3.0.2-762deb61d7-ce122d2bb0.zip/node_modules/prettier-plugin-toml/",\
         "packageDependencies": [\
-          ["prettier-plugin-toml", "npm:2.0.6"]\
+          ["prettier-plugin-toml", "npm:3.0.2"]\
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:b2f69d821ef07d6b0bd9eb6956daf482223e1bcdba1164b4395f7a0769d3283fe79762b3d0b719f8e1c9d7c7bfc0891a222bd14604b3cbabfe6c6fe7c6ea57dd#npm:2.0.6", {\
-        "packageLocation": "./.yarn/__virtual__/prettier-plugin-toml-virtual-fd535f042b/0/cache/prettier-plugin-toml-npm-2.0.6-24d3e2b8f4-8fd0817c2d.zip/node_modules/prettier-plugin-toml/",\
+      ["virtual:b2f69d821ef07d6b0bd9eb6956daf482223e1bcdba1164b4395f7a0769d3283fe79762b3d0b719f8e1c9d7c7bfc0891a222bd14604b3cbabfe6c6fe7c6ea57dd#npm:3.0.2", {\
+        "packageLocation": "./.yarn/__virtual__/prettier-plugin-toml-virtual-c12ae1e75a/0/cache/prettier-plugin-toml-npm-3.0.2-762deb61d7-ce122d2bb0.zip/node_modules/prettier-plugin-toml/",\
         "packageDependencies": [\
-          ["@taplo/lib", "npm:0.5.0"],\
+          ["@dual-bundle/import-meta-resolve", "npm:4.2.1"],\
+          ["@tombi-toml/wasm-lib", "npm:1.5.5"],\
           ["@types/prettier", null],\
           ["prettier", "npm:3.9.8"],\
-          ["prettier-plugin-toml", "virtual:b2f69d821ef07d6b0bd9eb6956daf482223e1bcdba1164b4395f7a0769d3283fe79762b3d0b719f8e1c9d7c7bfc0891a222bd14604b3cbabfe6c6fe7c6ea57dd#npm:2.0.6"]\
+          ["prettier-plugin-toml", "virtual:b2f69d821ef07d6b0bd9eb6956daf482223e1bcdba1164b4395f7a0769d3283fe79762b3d0b719f8e1c9d7c7bfc0891a222bd14604b3cbabfe6c6fe7c6ea57dd#npm:3.0.2"],\
+          ["smol-toml", "npm:1.9.0"]\
         ],\
         "packagePeers": [\
           "@types/prettier",\
@@ -427,11 +428,20 @@ const RAW_RUNTIME_STATE =
           ["prettier", "npm:3.9.8"],\
           ["prettier-plugin-java", "virtual:b2f69d821ef07d6b0bd9eb6956daf482223e1bcdba1164b4395f7a0769d3283fe79762b3d0b719f8e1c9d7c7bfc0891a222bd14604b3cbabfe6c6fe7c6ea57dd#npm:2.10.4"],\
           ["prettier-plugin-properties", "virtual:b2f69d821ef07d6b0bd9eb6956daf482223e1bcdba1164b4395f7a0769d3283fe79762b3d0b719f8e1c9d7c7bfc0891a222bd14604b3cbabfe6c6fe7c6ea57dd#npm:0.3.1"],\
-          ["prettier-plugin-toml", "virtual:b2f69d821ef07d6b0bd9eb6956daf482223e1bcdba1164b4395f7a0769d3283fe79762b3d0b719f8e1c9d7c7bfc0891a222bd14604b3cbabfe6c6fe7c6ea57dd#npm:2.0.6"],\
+          ["prettier-plugin-toml", "virtual:b2f69d821ef07d6b0bd9eb6956daf482223e1bcdba1164b4395f7a0769d3283fe79762b3d0b719f8e1c9d7c7bfc0891a222bd14604b3cbabfe6c6fe7c6ea57dd#npm:3.0.2"],\
           ["rimraf", "npm:6.1.3"],\
           ["semver", "workspace:."]\
         ],\
         "linkType": "SOFT"\
+      }]\
+    ]],\
+    ["smol-toml", [\
+      ["npm:1.9.0", {\
+        "packageLocation": "./.yarn/cache/smol-toml-npm-1.9.0-3bcc81642a-9a15a7560e.zip/node_modules/smol-toml/",\
+        "packageDependencies": [\
+          ["smol-toml", "npm:1.9.0"]\
+        ],\
+        "linkType": "HARD"\
       }]\
     ]],\
     ["string-argv", [\
