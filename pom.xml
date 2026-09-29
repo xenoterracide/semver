@@ -32,7 +32,7 @@ SPDX-License-Identifier: CC0-1.0
     <!-- Dependency versions -->
     <jgit.version>7.8.0.202609011348-r</jgit.version>
     <vavr.version>1.0.1</vavr.version>
-    <commons-lang3.version>3.20.0</commons-lang3.version>
+    <commons-lang3.version>3.21.0</commons-lang3.version>
     <guava.version>33.7.2-jre</guava.version>
     <jspecify.version>1.0.1</jspecify.version>
     <semver4j.version>6.0.0</semver4j.version>
