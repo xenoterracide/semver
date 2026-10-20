@@ -34,7 +34,7 @@ const RAW_RUNTIME_STATE =
           ["prettier", "npm:3.9.9"],\
           ["prettier-plugin-java", "virtual:b2f69d821ef07d6b0bd9eb6956daf482223e1bcdba1164b4395f7a0769d3283fe79762b3d0b719f8e1c9d7c7bfc0891a222bd14604b3cbabfe6c6fe7c6ea57dd#npm:2.11.0"],\
           ["prettier-plugin-properties", "virtual:b2f69d821ef07d6b0bd9eb6956daf482223e1bcdba1164b4395f7a0769d3283fe79762b3d0b719f8e1c9d7c7bfc0891a222bd14604b3cbabfe6c6fe7c6ea57dd#npm:0.3.1"],\
-          ["prettier-plugin-toml", "virtual:b2f69d821ef07d6b0bd9eb6956daf482223e1bcdba1164b4395f7a0769d3283fe79762b3d0b719f8e1c9d7c7bfc0891a222bd14604b3cbabfe6c6fe7c6ea57dd#npm:2.0.6"],\
+          ["prettier-plugin-toml", "virtual:b2f69d821ef07d6b0bd9eb6956daf482223e1bcdba1164b4395f7a0769d3283fe79762b3d0b719f8e1c9d7c7bfc0891a222bd14604b3cbabfe6c6fe7c6ea57dd#npm:4.1.0"],\
           ["rimraf", "npm:6.1.3"],\
           ["semver", "workspace:."]\
         ],\
@@ -64,21 +64,209 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
-    ["@taplo/core", [\
-      ["npm:0.2.0", {\
-        "packageLocation": "./.yarn/cache/@taplo-core-npm-0.2.0-4e0938916c-4bbc3b696c.zip/node_modules/@taplo/core/",\
+    ["@tombit/binding-android-arm-eabi", [\
+      ["npm:0.1.3", {\
+        "packageLocation": "./.yarn/unplugged/@tombit-binding-android-arm-eabi-npm-0.1.3-b7984b5b5c/node_modules/@tombit/binding-android-arm-eabi/",\
         "packageDependencies": [\
-          ["@taplo/core", "npm:0.2.0"]\
+          ["@tombit/binding-android-arm-eabi", "npm:0.1.3"]\
         ],\
         "linkType": "HARD"\
       }]\
     ]],\
-    ["@taplo/lib", [\
-      ["npm:0.5.0", {\
-        "packageLocation": "./.yarn/cache/@taplo-lib-npm-0.5.0-f586b308bd-0d1ea19058.zip/node_modules/@taplo/lib/",\
+    ["@tombit/binding-android-arm64", [\
+      ["npm:0.1.3", {\
+        "packageLocation": "./.yarn/unplugged/@tombit-binding-android-arm64-npm-0.1.3-92ef32102f/node_modules/@tombit/binding-android-arm64/",\
         "packageDependencies": [\
-          ["@taplo/core", "npm:0.2.0"],\
-          ["@taplo/lib", "npm:0.5.0"]\
+          ["@tombit/binding-android-arm64", "npm:0.1.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@tombit/binding-darwin-arm64", [\
+      ["npm:0.1.3", {\
+        "packageLocation": "./.yarn/unplugged/@tombit-binding-darwin-arm64-npm-0.1.3-d4f2655446/node_modules/@tombit/binding-darwin-arm64/",\
+        "packageDependencies": [\
+          ["@tombit/binding-darwin-arm64", "npm:0.1.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@tombit/binding-darwin-x64", [\
+      ["npm:0.1.3", {\
+        "packageLocation": "./.yarn/unplugged/@tombit-binding-darwin-x64-npm-0.1.3-fa50b92d7b/node_modules/@tombit/binding-darwin-x64/",\
+        "packageDependencies": [\
+          ["@tombit/binding-darwin-x64", "npm:0.1.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@tombit/binding-freebsd-x64", [\
+      ["npm:0.1.3", {\
+        "packageLocation": "./.yarn/unplugged/@tombit-binding-freebsd-x64-npm-0.1.3-0f36eac54f/node_modules/@tombit/binding-freebsd-x64/",\
+        "packageDependencies": [\
+          ["@tombit/binding-freebsd-x64", "npm:0.1.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@tombit/binding-linux-arm-gnueabihf", [\
+      ["npm:0.1.3", {\
+        "packageLocation": "./.yarn/unplugged/@tombit-binding-linux-arm-gnueabihf-npm-0.1.3-89c192ee29/node_modules/@tombit/binding-linux-arm-gnueabihf/",\
+        "packageDependencies": [\
+          ["@tombit/binding-linux-arm-gnueabihf", "npm:0.1.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@tombit/binding-linux-arm-musleabihf", [\
+      ["npm:0.1.3", {\
+        "packageLocation": "./.yarn/unplugged/@tombit-binding-linux-arm-musleabihf-npm-0.1.3-7b27afee30/node_modules/@tombit/binding-linux-arm-musleabihf/",\
+        "packageDependencies": [\
+          ["@tombit/binding-linux-arm-musleabihf", "npm:0.1.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@tombit/binding-linux-arm64-gnu", [\
+      ["npm:0.1.3", {\
+        "packageLocation": "./.yarn/unplugged/@tombit-binding-linux-arm64-gnu-npm-0.1.3-feb95efd6f/node_modules/@tombit/binding-linux-arm64-gnu/",\
+        "packageDependencies": [\
+          ["@tombit/binding-linux-arm64-gnu", "npm:0.1.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@tombit/binding-linux-arm64-musl", [\
+      ["npm:0.1.3", {\
+        "packageLocation": "./.yarn/unplugged/@tombit-binding-linux-arm64-musl-npm-0.1.3-689f0107eb/node_modules/@tombit/binding-linux-arm64-musl/",\
+        "packageDependencies": [\
+          ["@tombit/binding-linux-arm64-musl", "npm:0.1.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@tombit/binding-linux-loong64-gnu", [\
+      ["npm:0.1.3", {\
+        "packageLocation": "./.yarn/unplugged/@tombit-binding-linux-loong64-gnu-npm-0.1.3-f5416b630d/node_modules/@tombit/binding-linux-loong64-gnu/",\
+        "packageDependencies": [\
+          ["@tombit/binding-linux-loong64-gnu", "npm:0.1.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@tombit/binding-linux-loong64-musl", [\
+      ["npm:0.1.3", {\
+        "packageLocation": "./.yarn/unplugged/@tombit-binding-linux-loong64-musl-npm-0.1.3-d0c675200a/node_modules/@tombit/binding-linux-loong64-musl/",\
+        "packageDependencies": [\
+          ["@tombit/binding-linux-loong64-musl", "npm:0.1.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@tombit/binding-linux-ppc64-gnu", [\
+      ["npm:0.1.3", {\
+        "packageLocation": "./.yarn/unplugged/@tombit-binding-linux-ppc64-gnu-npm-0.1.3-22f0e11d89/node_modules/@tombit/binding-linux-ppc64-gnu/",\
+        "packageDependencies": [\
+          ["@tombit/binding-linux-ppc64-gnu", "npm:0.1.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@tombit/binding-linux-ppc64-musl", [\
+      ["npm:0.1.3", {\
+        "packageLocation": "./.yarn/unplugged/@tombit-binding-linux-ppc64-musl-npm-0.1.3-d75c9576e3/node_modules/@tombit/binding-linux-ppc64-musl/",\
+        "packageDependencies": [\
+          ["@tombit/binding-linux-ppc64-musl", "npm:0.1.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@tombit/binding-linux-riscv64-gnu", [\
+      ["npm:0.1.3", {\
+        "packageLocation": "./.yarn/unplugged/@tombit-binding-linux-riscv64-gnu-npm-0.1.3-c41f60c044/node_modules/@tombit/binding-linux-riscv64-gnu/",\
+        "packageDependencies": [\
+          ["@tombit/binding-linux-riscv64-gnu", "npm:0.1.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@tombit/binding-linux-riscv64-musl", [\
+      ["npm:0.1.3", {\
+        "packageLocation": "./.yarn/unplugged/@tombit-binding-linux-riscv64-musl-npm-0.1.3-0523e46d90/node_modules/@tombit/binding-linux-riscv64-musl/",\
+        "packageDependencies": [\
+          ["@tombit/binding-linux-riscv64-musl", "npm:0.1.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@tombit/binding-linux-s390x-gnu", [\
+      ["npm:0.1.3", {\
+        "packageLocation": "./.yarn/unplugged/@tombit-binding-linux-s390x-gnu-npm-0.1.3-956ef7b45a/node_modules/@tombit/binding-linux-s390x-gnu/",\
+        "packageDependencies": [\
+          ["@tombit/binding-linux-s390x-gnu", "npm:0.1.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@tombit/binding-linux-x64-gnu", [\
+      ["npm:0.1.3", {\
+        "packageLocation": "./.yarn/unplugged/@tombit-binding-linux-x64-gnu-npm-0.1.3-5eb4849c12/node_modules/@tombit/binding-linux-x64-gnu/",\
+        "packageDependencies": [\
+          ["@tombit/binding-linux-x64-gnu", "npm:0.1.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@tombit/binding-linux-x64-musl", [\
+      ["npm:0.1.3", {\
+        "packageLocation": "./.yarn/unplugged/@tombit-binding-linux-x64-musl-npm-0.1.3-2919eff6b9/node_modules/@tombit/binding-linux-x64-musl/",\
+        "packageDependencies": [\
+          ["@tombit/binding-linux-x64-musl", "npm:0.1.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@tombit/binding-openharmony-arm64", [\
+      ["npm:0.1.3", {\
+        "packageLocation": "./.yarn/unplugged/@tombit-binding-openharmony-arm64-npm-0.1.3-e99920ce4a/node_modules/@tombit/binding-openharmony-arm64/",\
+        "packageDependencies": [\
+          ["@tombit/binding-openharmony-arm64", "npm:0.1.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@tombit/binding-openharmony-x64", [\
+      ["npm:0.1.3", {\
+        "packageLocation": "./.yarn/unplugged/@tombit-binding-openharmony-x64-npm-0.1.3-bc31026851/node_modules/@tombit/binding-openharmony-x64/",\
+        "packageDependencies": [\
+          ["@tombit/binding-openharmony-x64", "npm:0.1.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@tombit/binding-win32-arm64-msvc", [\
+      ["npm:0.1.3", {\
+        "packageLocation": "./.yarn/unplugged/@tombit-binding-win32-arm64-msvc-npm-0.1.3-e1a3e145d6/node_modules/@tombit/binding-win32-arm64-msvc/",\
+        "packageDependencies": [\
+          ["@tombit/binding-win32-arm64-msvc", "npm:0.1.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@tombit/binding-win32-ia32-msvc", [\
+      ["npm:0.1.3", {\
+        "packageLocation": "./.yarn/unplugged/@tombit-binding-win32-ia32-msvc-npm-0.1.3-8ed7cb5ce1/node_modules/@tombit/binding-win32-ia32-msvc/",\
+        "packageDependencies": [\
+          ["@tombit/binding-win32-ia32-msvc", "npm:0.1.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@tombit/binding-win32-x64-msvc", [\
+      ["npm:0.1.3", {\
+        "packageLocation": "./.yarn/unplugged/@tombit-binding-win32-x64-msvc-npm-0.1.3-7071d043f5/node_modules/@tombit/binding-win32-x64-msvc/",\
+        "packageDependencies": [\
+          ["@tombit/binding-win32-x64-msvc", "npm:0.1.3"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -366,20 +554,20 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["prettier-plugin-toml", [\
-      ["npm:2.0.6", {\
-        "packageLocation": "./.yarn/cache/prettier-plugin-toml-npm-2.0.6-24d3e2b8f4-8fd0817c2d.zip/node_modules/prettier-plugin-toml/",\
+      ["npm:4.1.0", {\
+        "packageLocation": "./.yarn/cache/prettier-plugin-toml-npm-4.1.0-09e45230ba-36322b7530.zip/node_modules/prettier-plugin-toml/",\
         "packageDependencies": [\
-          ["prettier-plugin-toml", "npm:2.0.6"]\
+          ["prettier-plugin-toml", "npm:4.1.0"]\
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:b2f69d821ef07d6b0bd9eb6956daf482223e1bcdba1164b4395f7a0769d3283fe79762b3d0b719f8e1c9d7c7bfc0891a222bd14604b3cbabfe6c6fe7c6ea57dd#npm:2.0.6", {\
-        "packageLocation": "./.yarn/__virtual__/prettier-plugin-toml-virtual-fd535f042b/0/cache/prettier-plugin-toml-npm-2.0.6-24d3e2b8f4-8fd0817c2d.zip/node_modules/prettier-plugin-toml/",\
+      ["virtual:b2f69d821ef07d6b0bd9eb6956daf482223e1bcdba1164b4395f7a0769d3283fe79762b3d0b719f8e1c9d7c7bfc0891a222bd14604b3cbabfe6c6fe7c6ea57dd#npm:4.1.0", {\
+        "packageLocation": "./.yarn/__virtual__/prettier-plugin-toml-virtual-d05b53513d/0/cache/prettier-plugin-toml-npm-4.1.0-09e45230ba-36322b7530.zip/node_modules/prettier-plugin-toml/",\
         "packageDependencies": [\
-          ["@taplo/lib", "npm:0.5.0"],\
           ["@types/prettier", null],\
           ["prettier", "npm:3.9.9"],\
-          ["prettier-plugin-toml", "virtual:b2f69d821ef07d6b0bd9eb6956daf482223e1bcdba1164b4395f7a0769d3283fe79762b3d0b719f8e1c9d7c7bfc0891a222bd14604b3cbabfe6c6fe7c6ea57dd#npm:2.0.6"]\
+          ["prettier-plugin-toml", "virtual:b2f69d821ef07d6b0bd9eb6956daf482223e1bcdba1164b4395f7a0769d3283fe79762b3d0b719f8e1c9d7c7bfc0891a222bd14604b3cbabfe6c6fe7c6ea57dd#npm:4.1.0"],\
+          ["tombit", "npm:0.1.3"]\
         ],\
         "packagePeers": [\
           "@types/prettier",\
@@ -427,7 +615,7 @@ const RAW_RUNTIME_STATE =
           ["prettier", "npm:3.9.9"],\
           ["prettier-plugin-java", "virtual:b2f69d821ef07d6b0bd9eb6956daf482223e1bcdba1164b4395f7a0769d3283fe79762b3d0b719f8e1c9d7c7bfc0891a222bd14604b3cbabfe6c6fe7c6ea57dd#npm:2.11.0"],\
           ["prettier-plugin-properties", "virtual:b2f69d821ef07d6b0bd9eb6956daf482223e1bcdba1164b4395f7a0769d3283fe79762b3d0b719f8e1c9d7c7bfc0891a222bd14604b3cbabfe6c6fe7c6ea57dd#npm:0.3.1"],\
-          ["prettier-plugin-toml", "virtual:b2f69d821ef07d6b0bd9eb6956daf482223e1bcdba1164b4395f7a0769d3283fe79762b3d0b719f8e1c9d7c7bfc0891a222bd14604b3cbabfe6c6fe7c6ea57dd#npm:2.0.6"],\
+          ["prettier-plugin-toml", "virtual:b2f69d821ef07d6b0bd9eb6956daf482223e1bcdba1164b4395f7a0769d3283fe79762b3d0b719f8e1c9d7c7bfc0891a222bd14604b3cbabfe6c6fe7c6ea57dd#npm:4.1.0"],\
           ["rimraf", "npm:6.1.3"],\
           ["semver", "workspace:."]\
         ],\
@@ -470,6 +658,38 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/tinyexec-npm-1.3.1-9e3ecae92e-c590369cb3.zip/node_modules/tinyexec/",\
         "packageDependencies": [\
           ["tinyexec", "npm:1.3.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["tombit", [\
+      ["npm:0.1.3", {\
+        "packageLocation": "./.yarn/cache/tombit-npm-0.1.3-a14fb7f937-ae4a4e77a3.zip/node_modules/tombit/",\
+        "packageDependencies": [\
+          ["@tombit/binding-android-arm-eabi", "npm:0.1.3"],\
+          ["@tombit/binding-android-arm64", "npm:0.1.3"],\
+          ["@tombit/binding-darwin-arm64", "npm:0.1.3"],\
+          ["@tombit/binding-darwin-x64", "npm:0.1.3"],\
+          ["@tombit/binding-freebsd-x64", "npm:0.1.3"],\
+          ["@tombit/binding-linux-arm-gnueabihf", "npm:0.1.3"],\
+          ["@tombit/binding-linux-arm-musleabihf", "npm:0.1.3"],\
+          ["@tombit/binding-linux-arm64-gnu", "npm:0.1.3"],\
+          ["@tombit/binding-linux-arm64-musl", "npm:0.1.3"],\
+          ["@tombit/binding-linux-loong64-gnu", "npm:0.1.3"],\
+          ["@tombit/binding-linux-loong64-musl", "npm:0.1.3"],\
+          ["@tombit/binding-linux-ppc64-gnu", "npm:0.1.3"],\
+          ["@tombit/binding-linux-ppc64-musl", "npm:0.1.3"],\
+          ["@tombit/binding-linux-riscv64-gnu", "npm:0.1.3"],\
+          ["@tombit/binding-linux-riscv64-musl", "npm:0.1.3"],\
+          ["@tombit/binding-linux-s390x-gnu", "npm:0.1.3"],\
+          ["@tombit/binding-linux-x64-gnu", "npm:0.1.3"],\
+          ["@tombit/binding-linux-x64-musl", "npm:0.1.3"],\
+          ["@tombit/binding-openharmony-arm64", "npm:0.1.3"],\
+          ["@tombit/binding-openharmony-x64", "npm:0.1.3"],\
+          ["@tombit/binding-win32-arm64-msvc", "npm:0.1.3"],\
+          ["@tombit/binding-win32-ia32-msvc", "npm:0.1.3"],\
+          ["@tombit/binding-win32-x64-msvc", "npm:0.1.3"],\
+          ["tombit", "npm:0.1.3"]\
         ],\
         "linkType": "HARD"\
       }]\
