@@ -22,7 +22,7 @@ Read these files instead of trusting a copy of their contents here.
 | pnpm version              | `packageManager` in `package.json` |
 | Java dependencies         | `pom.xml`                          |
 | Python dependencies       | `pyproject.toml`, `uv.lock`        |
-| Formatting rules          | `.editorconfig`, `.prettierrc.cjs` |
+| Formatting rules          | `.editorconfig`, `.prettierrc.yml` |
 | Conventional commit types | `git-conventional-commits.yaml`    |
 | Pre-commit rules          | `.lintstagedrc.cjs`                |
 | License headers           | `REUSE.toml`, `.lintstagedrc.cjs`  |
@@ -32,13 +32,13 @@ Read these files instead of trusting a copy of their contents here.
 ## Build and Test
 
 ```bash
-pnpm contribute # bootstrap once after clone: tools, deps, hooks
+npm run contribute # bootstrap once after clone: tools, deps, hooks
 pnpm lint # prettier + REUSE
 ./mvnw -q verify # compile, test, checkstyle, spotbugs, jacoco
 ./mvnw -q test # unit tests only
 ```
 
-`pnpm contribute` heals the toolchain through
+`npm run contribute` heals the toolchain through
 `.config/git/hooks/heal.sh`. A failed heal never breaks a checkout.
 
 ## Module Architecture
@@ -117,7 +117,7 @@ Shared tooling comes from
 through copier. Refresh it with:
 
 ```bash
-copier update --trust
+uv run --group dev copier update --trust
 ```
 
 Conflicts land as `.rej` files. Resolve them by hand. Renovate opens an
