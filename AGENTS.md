@@ -8,6 +8,7 @@ SPDX-License-Identifier: CC-BY-NC-SA-4.0
 
 Java library for semantic version calculation from Git metadata. Three modules:
 
+<<<<<<< before updating
 - **git-metadata** — reads tags, commits, branches, remotes, and status.
 - **semver-calculator** — turns that metadata into a version.
 - **semver-cli** — command-line entry point. `main.java` is a JBang wrapper.
@@ -70,6 +71,21 @@ Exports `com.xenoterracide.semver`:
 Strategies in the `internal` package are selected by tag relationship
 (`ON_EXACT_TAG`, `AFTER_TAG`, `NO_TAG`) and branch type (`HEAD_BRANCH`,
 `TOPIC_BRANCH`):
+=======
+- `npm run contribute` — bootstrap tooling (run once after clone)
+- `pnpm check` — run all checks
+- `pnpm lint:prettier` — prettier check
+- `pnpm lint:reuse` — REUSE compliance check
+- `./mvnw -q verify` — Maven build + checkstyle + spotbugs + jacoco + tests
+
+## Source of Truth
+
+- Template: `copier.yml` in [xenoterracide/base-template](https://github.com/xenoterracide/base-template)
+- Answers: `.copier-answers.yml` in this repo
+- Updates: `uv run --group dev copier update --trust` refreshes from template
+- Hooks heal the toolchain: `.envrc`, `contribute`, and the post hooks call
+  `.config/git/hooks/heal.sh`. A failed heal never breaks a checkout.
+>>>>>>> after updating
 
 - `OnExactTagHeadStrategy`, `OnExactTagTopicStrategy`
 - `AfterTagHeadStrategy`, `AfterTagTopicStrategy`

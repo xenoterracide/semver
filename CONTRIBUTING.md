@@ -9,8 +9,13 @@ SPDX-License-Identifier: CC-BY-NC-SA-4.0
 ## Bootstrap
 
     git clone <repo-url>
+<<<<<<< before updating
     cd semver
     pnpm contribute
+=======
+    cd <project>
+    npm run contribute
+>>>>>>> after updating
 
 ## Linting and testing
 
@@ -19,7 +24,7 @@ SPDX-License-Identifier: CC-BY-NC-SA-4.0
 
 ## Updating from the template
 
-    copier update --trust
+    uv run --group dev copier update --trust
 
 Conflicts appear as `.rej` files. Resolve them and commit.
 
