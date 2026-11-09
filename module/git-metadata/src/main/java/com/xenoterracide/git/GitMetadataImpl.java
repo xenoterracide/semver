@@ -208,7 +208,7 @@ final class GitMetadataImpl implements GitMetadata {
       this.headBranchRefName = headBranchRefName;
     }
 
-    static GitRemote nullCheck(@Nullable String name, @Nullable String headBranchRefName) {
+    static GitRemote nullCheck(String name, @Nullable String headBranchRefName) {
       return new RemoteImpl(Objects.requireNonNull(name), headBranchRefName);
     }
 
