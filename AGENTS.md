@@ -58,7 +58,6 @@ Exports `com.xenoterracide.git`:
 Test fixtures live in `src/testFixtures/java`:
 
 - `CommitTools` — commits with auto-incrementing messages.
-- `GitRemotes` — runs `git remote set-head --auto`.
 
 ### semver-calculator
 
