@@ -1,0 +1,19 @@
+# SPDX-FileCopyrightText: Copyright © 2026 Caleb Cushing
+#
+# SPDX-License-Identifier: MIT
+
+# Managed by copier; do not edit. Run `copier update` to refresh.
+_commit: v26.11.2
+_src_path: https://github.com/xenoterracide/base-template
+include_skeleton: false
+java_group_id: com.xenoterracide
+java_module: semver
+java_package: com.xenoterracide.semver
+java_package_path: com/xenoterracide/semver
+java_version: 0.0.0
+license: GPL-3.0-or-later
+npm_scope: ''
+project_name: semver
+project_title: semver
+template_type: java
+

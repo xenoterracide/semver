@@ -16,12 +16,12 @@ import org.jspecify.annotations.Nullable;
  * from files or paths.</p>
  *
  * <p>Example usage:</p>
- * <pre>{@code
+ * {@snippet :
  * var metadata = GitMetadataFactory.create(new File("."));
  * if (metadata != null) {
  *   System.out.println(metadata.tag());
  * }
- * }</pre>
+ * }
  */
 public final class GitMetadataFactory {
 

@@ -20,7 +20,7 @@ import picocli.CommandLine.Option;
  * Semver CLI - Calculate semantic versions from Git repository metadata.
  *
  * <p>Usage examples:</p>
- * <pre>
+ * {@snippet lang="sh" :
  * # Print version for current directory
  * jbang semver.java
  *
@@ -33,7 +33,7 @@ import picocli.CommandLine.Option;
  * # Use in shell scripts
  * VERSION=$(jbang semver.java)
  * mvn versions:set -DnewVersion="$VERSION"
- * </pre>
+ * }
  */
 @Command(
   name = "semver",
@@ -85,7 +85,7 @@ public final class SemverCommand implements Callable<Integer> {
     return GitMetadataFactory.create(path);
   }
 
-  // CHECKSTYLE:OFF: UncommentedMain - Main method is the entry point for CLI
+  // CHECKSTYLE.OFF: UncommentedMain - Main method is the entry point for CLI
   /**
    * Main entry point for the CLI.
    *
@@ -97,7 +97,7 @@ public final class SemverCommand implements Callable<Integer> {
     System.exit(exitCode);
   }
 
-  // CHECKSTYLE:ON: UncommentedMain
+  // CHECKSTYLE.ON: UncommentedMain
 
   /**
    * Provides version information for the CLI.
