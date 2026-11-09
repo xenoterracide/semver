@@ -9,13 +9,8 @@ SPDX-License-Identifier: CC-BY-NC-SA-4.0
 ## Bootstrap
 
     git clone <repo-url>
-<<<<<<< before updating
     cd semver
-    pnpm contribute
-=======
-    cd <project>
     npm run contribute
->>>>>>> after updating
 
 ## Linting and testing
 

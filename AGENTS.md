@@ -8,7 +8,6 @@ SPDX-License-Identifier: CC-BY-NC-SA-4.0
 
 Java library for semantic version calculation from Git metadata. Three modules:
 
-<<<<<<< before updating
 - **git-metadata** — reads tags, commits, branches, remotes, and status.
 - **semver-calculator** — turns that metadata into a version.
 - **semver-cli** — command-line entry point. `main.java` is a JBang wrapper.
@@ -23,7 +22,7 @@ Read these files instead of trusting a copy of their contents here.
 | pnpm version              | `packageManager` in `package.json` |
 | Java dependencies         | `pom.xml`                          |
 | Python dependencies       | `pyproject.toml`, `uv.lock`        |
-| Formatting rules          | `.editorconfig`, `.prettierrc.cjs` |
+| Formatting rules          | `.editorconfig`, `.prettierrc.yml` |
 | Conventional commit types | `git-conventional-commits.yaml`    |
 | Pre-commit rules          | `.lintstagedrc.cjs`                |
 | License headers           | `REUSE.toml`, `.lintstagedrc.cjs`  |
@@ -33,13 +32,13 @@ Read these files instead of trusting a copy of their contents here.
 ## Build and Test
 
 ```bash
-pnpm contribute # bootstrap once after clone: tools, deps, hooks
+npm run contribute # bootstrap once after clone: tools, deps, hooks
 pnpm lint # prettier + REUSE
 ./mvnw -q verify # compile, test, checkstyle, spotbugs, jacoco
 ./mvnw -q test # unit tests only
 ```
 
-`pnpm contribute` heals the toolchain through
+`npm run contribute` heals the toolchain through
 `.config/git/hooks/heal.sh`. A failed heal never breaks a checkout.
 
 ## Module Architecture
@@ -71,21 +70,6 @@ Exports `com.xenoterracide.semver`:
 Strategies in the `internal` package are selected by tag relationship
 (`ON_EXACT_TAG`, `AFTER_TAG`, `NO_TAG`) and branch type (`HEAD_BRANCH`,
 `TOPIC_BRANCH`):
-=======
-- `npm run contribute` — bootstrap tooling (run once after clone)
-- `pnpm check` — run all checks
-- `pnpm lint:prettier` — prettier check
-- `pnpm lint:reuse` — REUSE compliance check
-- `./mvnw -q verify` — Maven build + checkstyle + spotbugs + jacoco + tests
-
-## Source of Truth
-
-- Template: `copier.yml` in [xenoterracide/base-template](https://github.com/xenoterracide/base-template)
-- Answers: `.copier-answers.yml` in this repo
-- Updates: `uv run --group dev copier update --trust` refreshes from template
-- Hooks heal the toolchain: `.envrc`, `contribute`, and the post hooks call
-  `.config/git/hooks/heal.sh`. A failed heal never breaks a checkout.
->>>>>>> after updating
 
 - `OnExactTagHeadStrategy`, `OnExactTagTopicStrategy`
 - `AfterTagHeadStrategy`, `AfterTagTopicStrategy`
@@ -133,7 +117,7 @@ Shared tooling comes from
 through copier. Refresh it with:
 
 ```bash
-copier update --trust
+uv run --group dev copier update --trust
 ```
 
 Conflicts land as `.rej` files. Resolve them by hand. Renovate opens an

@@ -22,13 +22,8 @@ SPDX-License-Identifier: CC0-1.0
       <property name="tokens" value="PACKAGE_DEF, IMPORT, STATIC_IMPORT" />
     </module>
     <module name="SuppressionCommentFilter">
-<<<<<<< before updating
-      <property name="offCommentFormat" value="CHECKSTYLE.OFF: ([\w\|]+)" />
-      <property name="onCommentFormat" value="CHECKSTYLE.ON: ([\w\|]+)" />
-=======
       <property name="offCommentFormat" value="CHECKSTYLE.OFF\: ([\w\|]+)" />
       <property name="onCommentFormat" value="CHECKSTYLE.ON\: ([\w\|]+)" />
->>>>>>> after updating
       <property name="checkFormat" value="$1" />
     </module>
     <module name="LeftCurly" />

@@ -16,20 +16,14 @@ Semantic version calculation from Git metadata.
 
 ## Getting started
 
-<<<<<<< before updating
     asdf install
-    pnpm contribute
+    npm run contribute
     ./mvnw -q verify
-=======
-- `npm run contribute` installs tools and dependencies, and heals the
-  toolchain through `.config/git/hooks/heal.sh`. Node 25+ drops corepack,
-  so the bootstrap starts from npm.
-- `direnv allow` (if you use direnv) loads the environment.
->>>>>>> after updating
 
-`pnpm contribute` installs tools and dependencies, and heals the toolchain
-through `.config/git/hooks/heal.sh`. `direnv allow` loads the environment
-if you use direnv.
+`npm run contribute` installs tools and dependencies, and heals the
+toolchain through `.config/git/hooks/heal.sh`. Node 25+ drops corepack, so
+the bootstrap starts from npm. `direnv allow` loads the environment if you
+use direnv.
 
 ## Build and test
 
