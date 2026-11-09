@@ -4,26 +4,21 @@
 
 version = 1
 
-# file is mostly used for vendored and generated files as they are hard to maintain the license for
-
-# yarn
 [[annotations]]
-path = ".pnp.cjs"
+path = "**/*.lockfile"
 SPDX-FileCopyrightText = "NONE"
 SPDX-License-Identifier = "CC0-1.0"
 
 [[annotations]]
-path = "yarn.lock"
+path = "pnpm-lock.yaml"
 SPDX-FileCopyrightText = "NONE"
 SPDX-License-Identifier = "CC0-1.0"
 
-# asdf
 [[annotations]]
 path = ".tool-versions"
 SPDX-FileCopyrightText = "NONE"
 SPDX-License-Identifier = "CC0-1.0"
 
-# uv/python
 [[annotations]]
 path = "uv.lock"
 SPDX-FileCopyrightText = "NONE"
@@ -34,19 +29,32 @@ path = ".python-version"
 SPDX-FileCopyrightText = "NONE"
 SPDX-License-Identifier = "CC0-1.0"
 
-# maven
 [[annotations]]
-path = "mvnw*"
-SPDX-FileCopyrightText = "NONE"
+path = "mvnw"
+SPDX-FileCopyrightText = "See license header in file"
 SPDX-License-Identifier = "Apache-2.0"
 
 [[annotations]]
-path = ".mvn/wrapper/*"
-SPDX-FileCopyrightText = "NONE"
+path = "mvnw.cmd"
+SPDX-FileCopyrightText = "See license header in file"
 SPDX-License-Identifier = "Apache-2.0"
 
-# gitmodules
 [[annotations]]
-path = ".gitmodules"
+path = ".mvn/jvm.config"
+SPDX-FileCopyrightText = "NONE"
+SPDX-License-Identifier = "CC0-1.0"
+
+[[annotations]]
+path = ".mvn/wrapper/maven-wrapper.properties"
+SPDX-FileCopyrightText = "NONE"
+SPDX-License-Identifier = "CC0-1.0"
+
+[[annotations]]
+path = "**/package.json"
+SPDX-FileCopyrightText = "Copyright © 2013-2026 Caleb Cushing"
+SPDX-License-Identifier = "MIT"
+
+[[annotations]]
+path = "**/tsconfig*.json"
 SPDX-FileCopyrightText = "NONE"
 SPDX-License-Identifier = "CC0-1.0"

@@ -11,7 +11,8 @@ import org.semver4j.Semver;
  * Each implementation represents a specific calculation strategy
  * for a particular git scenario.
  */
-// CHECKSTYLE.OFF: LeftCurly
+// prettier-java puts the brace on its own line for a multi-line permits list.
+@SuppressWarnings("LeftCurly")
 public sealed interface VersionStrategy
   permits
     OnExactTagHeadStrategy,
@@ -21,7 +22,6 @@ public sealed interface VersionStrategy
     NoTagHeadStrategy,
     NoTagTopicStrategy
 {
-  // CHECKSTYLE.ON: LeftCurly
   /**
    * Calculates the semantic version for this strategy.
    *

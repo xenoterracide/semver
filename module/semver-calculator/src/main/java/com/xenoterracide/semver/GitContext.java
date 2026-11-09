@@ -23,6 +23,7 @@ import org.jspecify.annotations.Nullable;
  * @param isDirty true if working tree has uncommitted changes
  * @param isShallowClone true if repository is a shallow clone
  */
+@SuppressWarnings("RecordComponentNumber") // the context carries the full git state
 @Value.Builder
 @Data
 public record GitContext(

@@ -4,7 +4,6 @@
 
 package com.xenoterracide.semver.cli;
 
-import com.xenoterracide.git.GitMetadata;
 import com.xenoterracide.git.GitMetadataFactory;
 import com.xenoterracide.git.GitStatus;
 import com.xenoterracide.semver.VersionCalculator;
@@ -20,7 +19,7 @@ import picocli.CommandLine.Option;
  * Semver CLI - Calculate semantic versions from Git repository metadata.
  *
  * <p>Usage examples:</p>
- * <pre>
+ * {@snippet lang="sh" :
  * # Print version for current directory
  * jbang semver.java
  *
@@ -33,7 +32,7 @@ import picocli.CommandLine.Option;
  * # Use in shell scripts
  * VERSION=$(jbang semver.java)
  * mvn versions:set -DnewVersion="$VERSION"
- * </pre>
+ * }
  */
 @Command(
   name = "semver",
@@ -59,21 +58,23 @@ public final class SemverCommand implements Callable<Integer> {
   public Integer call() {
     this.configureLogging();
 
-    if (this.path == null) {
-      System.err.println("Error: Path must not be null");
-      return 1;
-    }
-
-    var metadata = createMetadata(this.path);
+    var metadata = this.path == null ? null : GitMetadataFactory.create(this.path);
     if (metadata == null || metadata.status() == GitStatus.NO_REPO) {
-      System.err.println("Error: Not a valid Git repository: " + this.path);
+      this.reportError();
       return 1;
     }
 
-    var version = VersionCalculator.calculate(metadata);
-    System.out.println(version);
+    System.out.println(VersionCalculator.calculate(metadata));
 
     return 0;
+  }
+
+  private void reportError() {
+    if (this.path == null) {
+      System.err.println("Error: Path must not be null");
+    } else {
+      System.err.println("Error: Not a valid Git repository: " + this.path);
+    }
   }
 
   private void configureLogging() {
@@ -81,11 +82,7 @@ public final class SemverCommand implements Callable<Integer> {
     System.setProperty("org.slf4j.simpleLogger.defaultLogLevel", level);
   }
 
-  private static @Nullable GitMetadata createMetadata(File path) {
-    return GitMetadataFactory.create(path);
-  }
-
-  // CHECKSTYLE:OFF: UncommentedMain - Main method is the entry point for CLI
+  // CHECKSTYLE.OFF: UncommentedMain
   /**
    * Main entry point for the CLI.
    *
@@ -97,7 +94,7 @@ public final class SemverCommand implements Callable<Integer> {
     System.exit(exitCode);
   }
 
-  // CHECKSTYLE:ON: UncommentedMain
+  // CHECKSTYLE.ON: UncommentedMain
 
   /**
    * Provides version information for the CLI.

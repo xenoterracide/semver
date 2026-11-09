@@ -4,341 +4,136 @@ SPDX-FileCopyrightText: Copyright © 2026 Caleb Cushing
 SPDX-License-Identifier: CC-BY-NC-SA-4.0
 -->
 
-# Project Overview
+# semver
 
-This is **semver**, a Java library for semantic versioning calculation based on Git metadata. It provides tools to extract Git repository information and calculate semantic versions according to the SemVer specification.
+Java library for semantic version calculation from Git metadata. Three modules:
 
-The project consists of two main modules:
+- **git-metadata** — reads tags, commits, branches, remotes, and status.
+- **semver-calculator** — turns that metadata into a version.
+- **semver-cli** — command-line entry point. `main.java` is a JBang wrapper.
 
-1. **git-metadata**: Extracts Git repository metadata (tags, commits, branches, remotes, status)
-2. **semver-calculator**: Calculates semantic versions from Git metadata using various strategies
+## Source of Truth
 
-## Technology Stack
+Read these files instead of trusting a copy of their contents here.
 
-- **Java**: 21+ (Temurin distribution)
-- **Build Tool**: Maven 3.x (with wrapper `./mvnw`)
-- **Module System**: JPMS (Java Platform Module System)
-- **Git Library**: Eclipse JGit 7.6.0
-- **Version Parsing**: Semver4j 6.0.0
-- **Functional Programming**: Vavr 1.0.1
-- **Null Safety**: JSpecify 1.0.0 annotations
-- **Immutables**: Immutables 2.12.1 for value objects
+| For                       | See                                |
+| ------------------------- | ---------------------------------- |
+| Tool versions             | `.tool-versions`                   |
+| pnpm version              | `packageManager` in `package.json` |
+| Java dependencies         | `pom.xml`                          |
+| Python dependencies       | `pyproject.toml`, `uv.lock`        |
+| Formatting rules          | `.editorconfig`, `.prettierrc.cjs` |
+| Conventional commit types | `git-conventional-commits.yaml`    |
+| Pre-commit rules          | `.lintstagedrc.cjs`                |
+| License headers           | `REUSE.toml`, `.lintstagedrc.cjs`  |
+| Git hooks                 | `.config/git/hooks`                |
+| Template answers          | `.copier-answers.yml`              |
 
-### Tooling Stack
+## Build and Test
 
-- **Python**: 3.12+ (managed via `uv`)
-- **Node.js**: 24.14.1 (managed via `yarn` 4.13.0 with Plug'n'Play)
-- **Formatting**: Prettier 3.x with plugins for Java, XML, TOML, Properties
-- **License Compliance**: REUSE specification via `reuse` tool
-- **Git Hooks**: Custom hooks for commit validation and dependency syncing
-
-## Project Structure
-
+```bash
+pnpm contribute # bootstrap once after clone: tools, deps, hooks
+pnpm lint # prettier + REUSE
+./mvnw -q verify # compile, test, checkstyle, spotbugs, jacoco
+./mvnw -q test # unit tests only
 ```
-.
-├── module/                          # Maven multi-modules
-│   ├── git-metadata/               # Git metadata extraction library
-│   │   ├── src/
-│   │   │   ├── main/java/          # Production code
-│   │   │   │   └── com/xenoterracide/git/
-│   │   │   ├── test/java/          # Unit tests
-│   │   │   └── testFixtures/java/  # Test fixtures (CommitTools)
-│   │   └── pom.xml
-│   └── semver-calculator/          # Semantic version calculation
-│       ├── src/
-│       │   ├── main/java/          # Production code
-│       │   │   ├── com/xenoterracide/semver/
-│       │   │   └── com/xenoterracide/semver/internal/  # Strategy implementations
-│       │   └── test/java/          # Unit tests
-│       └── pom.xml
-├── pom.xml                          # Parent POM
-├── package.json                     # Node.js tooling configuration
-├── pyproject.toml                   # Python tooling configuration
-├── .share/                          # Shared git hooks and tooling (git submodule)
-├── .github/workflows/               # GitHub Actions
-│   ├── build.yml                   # Build and test workflow
-│   └── pre-commit.yml              # License and formatting checks
-└── config/                         # Checkstyle configuration (created on build)
-```
+
+`pnpm contribute` heals the toolchain through
+`.config/git/hooks/heal.sh`. A failed heal never breaks a checkout.
 
 ## Module Architecture
 
-### git-metadata Module
+### git-metadata
 
-Exports `com.xenoterracide.git` package:
+Exports `com.xenoterracide.git`:
 
-- `GitMetadata` - Interface for Git metadata access
-- `GitMetadataImpl` - Implementation using JGit
-- `GitStatus` - Enum for repository status (CLEAN, DIRTY, NO_REPO)
-- `GitRemote` - Interface for remote repository info
-- `DistanceCalculator` - Calculates commit distance from tags
-- `MergeBaseFinder` - Finds merge base between branches
-- `TryGit` - Functional wrapper for JGit operations
+- `GitMetadata` — interface for Git metadata access.
+- `GitMetadataImpl` — JGit implementation.
+- `GitStatus` — repository status: `CLEAN`, `DIRTY`, `NO_REPO`.
+- `GitRemote` — interface for remote repository info.
+- `DistanceCalculator` — commit distance from tags.
+- `MergeBaseFinder` — merge base between branches.
+- `TryGit` — functional wrapper for JGit operations.
 
-**Test Fixtures** (`src/testFixtures/java`):
+Test fixtures live in `src/testFixtures/java`:
 
-- `CommitTools` - Helper for creating test commits with auto-incrementing messages
+- `CommitTools` — commits with auto-incrementing messages.
+- `GitRemotes` — runs `git remote set-head --auto`.
 
-### semver-calculator Module
+### semver-calculator
 
-Exports `com.xenoterracide.semver` package:
+Exports `com.xenoterracide.semver`:
 
-- `VersionCalculator` - Main entry point for version calculation
-- `GitContext` - Immutable context object built via Immutables
-- `VersionStrategy` - Interface for version calculation strategies
+- `VersionCalculator` — version calculation entry point.
+- `GitContext` — immutable context built with Immutables.
+- `VersionStrategy` — strategy interface.
 
-**Internal Strategies** (`internal` package):
+Strategies in the `internal` package are selected by tag relationship
+(`ON_EXACT_TAG`, `AFTER_TAG`, `NO_TAG`) and branch type (`HEAD_BRANCH`,
+`TOPIC_BRANCH`):
 
-Strategies are selected based on two dimensions:
+- `OnExactTagHeadStrategy`, `OnExactTagTopicStrategy`
+- `AfterTagHeadStrategy`, `AfterTagTopicStrategy`
+- `NoTagHeadStrategy`, `NoTagTopicStrategy`
+- `VersionStrategyFactory` — picks the strategy.
 
-1. Tag relationship: `ON_EXACT_TAG`, `AFTER_TAG`, or `NO_TAG`
-2. Branch type: `HEAD_BRANCH` or `TOPIC_BRANCH`
+## Code Style
 
-- `OnExactTagHeadStrategy` - On a tag on the main branch
-- `OnExactTagTopicStrategy` - On a tag on a topic branch
-- `AfterTagHeadStrategy` - After a tag on the main branch
-- `AfterTagTopicStrategy` - After a tag on a topic branch
-- `NoTagHeadStrategy` - No tags exist, on main branch
-- `NoTagTopicStrategy` - No tags exist, on topic branch
-- `VersionStrategyFactory` - Factory to determine appropriate strategy
+- Read `.editorconfig` before editing. Every text file ends with a newline.
+- Prettier formats Java, XML, YAML, TOML, JSON, and Markdown.
+- Java compiles to release 17. Tests compile to release 25.
+- Annotate nullable types with JSpecify `@Nullable`. NullAway enforces the
+  rest.
+- Use Immutables `@Value.Immutable` for value objects with Jakarta
+  annotations.
+- Prefer package-private visibility over `private` for methods.
 
-## Build and Test Commands
+## Testing
 
-### Maven Commands
-
-```bash
-# Compile all modules
-./mvnw compile
-
-# Run unit tests
-./mvnw test
-
-# Run integration tests (in src/testIntegration/java)
-./mvnw verify
-
-# Run full build with all checks
-./mvnw clean verify --batch-mode --fail-at-end
-
-# Generate code coverage report (JaCoCo)
-./mvnw jacoco:report
-
-# Run code quality checks (Checkstyle, SpotBugs)
-./mvnw checkstyle:check spotbugs:check
-
-# Install to local repository
-./mvnw install
-```
-
-### Yarn/Node Commands
-
-```bash
-# Setup development environment (run after clone)
-yarn contribute
-
-# Run all linting checks
-yarn lint
-
-# Check formatting with Prettier
-yarn lint:prettier
-
-# Check license compliance
-yarn lint:reuse
-
-# Run all workspace tests
-yarn test
-```
-
-### Python/uv Commands
-
-```bash
-# Sync Python dependencies
-uv sync --frozen
-
-# Run REUSE license tool
-uv run --frozen --group dev reuse lint
-```
-
-## Code Style Guidelines
-
-### EditorConfig (`.editorconfig`)
-
-- **Charset**: UTF-8
-- **Line endings**: LF
-- **Indent**: 2 spaces
-- **Final newline**: Required
-
-### Java Code Style
-
-- **Source/Target**: Java 21
-- **Print width**: 120 characters (Prettier)
-- **Null annotations**: Use JSpecify `@Nullable` and `@NonNull`
-- **Immutables**: Use `@Value.Immutable` for value objects with Jakarta annotations
-- **Package-private**: Prefer package-private visibility for internal classes
-
-### File Type Conventions
-
-| File Type                              | License          | Formatter            |
-| -------------------------------------- | ---------------- | -------------------- |
-| `*.java`                               | GPL-3.0-or-later | Prettier             |
-| `*.js`, `*.cjs`, `*.yml`               | MIT              | Prettier             |
-| `package.json`                         | MIT              | Prettier             |
-| `*.json` (non-package)                 | CC0-1.0          | Prettier             |
-| `*.md`                                 | CC-BY-NC-SA-4.0  | Prettier             |
-| `*.xml`, `*.yaml`, `*.toml`, `*.json5` | CC0-1.0          | Prettier             |
-| Shell scripts                          | MIT              | shfmt (python style) |
-
-### Licensing
-
-All files MUST have SPDX license headers. The project uses:
-
-- **REUSE specification** for license compliance
-- **lint-staged** automatically adds headers via `reuse annotate`
-
-Licenses used:
-
-- **GPL-3.0-or-later**: Source code (Java, TypeScript)
-- **MIT**: Scripts, configuration, GitHub workflows
-- **CC0-1.0**: Configuration files, generated files
-- **CC-BY-NC-SA-4.0**: Documentation (README, AGENTS.md)
-
-## Testing Instructions
-
-### Unit Tests
-
-```bash
-# Run all unit tests
-./mvnw test
-```
-
-Uses:
-
-- **JUnit 5** (Jupiter) for test framework
-- **AssertJ** for assertions
-- **JGit** in-memory repositories for Git testing
-- `@TempDir` with `CleanupMode.ON_SUCCESS` for temporary directories
-
-### Test Fixtures
-
-The `git-metadata` module provides test fixtures in `src/testFixtures/java`:
-
-- `CommitTools.commit(Git)` - Creates a commit with auto-incrementing message
-- `CommitTools.supplies(ObjectId, Supplier<T>)` - Helper for chaining in tests
-
-### Integration Tests
-
-Integration tests are in `src/testIntegration/java` and run via Maven Failsafe plugin:
-
-```bash
-./mvnw verify  # Runs both unit and integration tests
-```
-
-### Code Coverage
-
-JaCoCo is configured with a minimum 30% line coverage threshold:
-
-```bash
-./mvnw jacoco:report  # Generate HTML report in target/site/jacoco/
-```
+- JUnit 5 (Jupiter) and AssertJ.
+- JGit in-memory repositories for Git tests.
+- `@TempDir` with `CleanupMode.ON_SUCCESS` for temporary directories.
+- Integration tests live in `src/testIntegration/java` and run during
+  `verify`.
 
 ## Git Workflow
 
-### Conventional Commits
+Conventional commits. Types come from `git-conventional-commits.yaml`.
+Release tags follow `v[0-9]*.[0-9]*.[0-9]*`.
 
-Allowed types (from `git-conventional-commits.yaml`):
+Hooks live in `.config/git/hooks`:
 
-- `ci`, `feat`, `fix`, `perf`, `refactor`, `style`, `test`
-- `build`, `ops`, `docs`, `chore`, `merge`, `revert`
+- `pre-commit` — runs lint-staged: formatting and SPDX headers.
+- `commit-msg` — validates the conventional commit format.
+- `post-checkout` and `post-merge` — heal the toolchain when lockfiles
+  change.
 
-Release tags follow pattern: `v[0-9]*.[0-9]*.[0-9]*`
+## Template Updates
 
-### Git Hooks
-
-Git hooks are configured via `git config core.hooksPath .share/git/hooks`:
-
-1. **pre-commit**: Runs `lint-staged` to format and add license headers
-2. **commit-msg**: Validates conventional commit format
-3. **post-checkout/post-merge**: Auto-runs dependency sync if lockfiles changed
-
-### AI-Assisted Merge Workflow
-
-The `.share/` directory (git submodule) provides AI-assisted PR workflows:
+Shared tooling comes from
+[xenoterracide/base-template](https://github.com/xenoterracide/base-template)
+through copier. Refresh it with:
 
 ```bash
-# Generate PR message and merge using different AI engines
-yarn merge:kimi      # Uses Kimi CLI
-yarn merge:junie     # Uses Junie CLI
-yarn merge:copilot   # Uses GitHub Copilot CLI
+copier update --trust
 ```
 
-## Security Considerations
+Conflicts land as `.rej` files. Resolve them by hand. Renovate opens an
+update PR whenever the template tags a release.
 
-1. **CI Detection**: Git hooks check `[ -n "$CI" ]` and exit early in CI environments
-2. **Shallow Clone Detection**: Code warns when repository has fewer than 4 commits
-3. **Error Handling**: Uses Vavr's `Try` for functional error handling
-4. **Null Safety**: JSpecify annotations for compile-time null checking
+Staged workflows live in `staged/.github/workflows/`. The active copies in
+`.github/workflows/` are consumer-owned. Copy them with credentials that
+carry the `workflow` scope:
 
-## Development Setup
+```bash
+cp -r staged/.github/workflows .github/workflows
+```
 
-1. Install prerequisites:
+## Licensing
 
-   ```bash
-   asdf install  # Reads .tool-versions (Java 25, Node.js 24)
-   ```
+All files carry SPDX headers. REUSE enforces them.
 
-2. Setup environment:
-
-   ```bash
-   yarn contribute
-   # This will:
-   # - Initialize git submodules
-   # - Sync Python virtual environment
-   # - Configure git hooks path
-   ```
-
-3. Verify build:
-   ```bash
-   ./mvnw clean verify
-   ```
-
-## Dependency Management
-
-### Key Dependencies
-
-| Dependency          | Version | Purpose                         |
-| ------------------- | ------- | ------------------------------- |
-| Eclipse JGit        | 7.6.0   | Git operations                  |
-| Semver4j            | 6.0.0   | Semantic version parsing        |
-| Vavr                | 1.0.1   | Functional programming          |
-| Guava               | 33.5.0  | Utility libraries               |
-| Apache Commons Lang | 3.20.0  | String utilities                |
-| Immutables          | 2.12.1  | Code generation for value types |
-| JSpecify            | 1.0.0   | Nullability annotations         |
-
-### Quality Plugins
-
-| Plugin     | Version | Purpose               |
-| ---------- | ------- | --------------------- |
-| Checkstyle | 13.3.0  | Code style checking   |
-| SpotBugs   | 4.9.8   | Bug pattern detection |
-| JaCoCo     | 0.8.14  | Code coverage         |
-
-### Lock Files
-
-- `uv.lock` - Python dependencies
-- `yarn.lock` - Node.js dependencies
-- Changes trigger automatic sync via git hooks
-
-## CI/CD
-
-### GitHub Actions Workflows
-
-**build.yml**:
-
-- Runs on every push to any branch and version tags
-- Uses Java 21 (Temurin)
-- Executes `./mvnw verify --batch-mode --fail-at-end`
-
-**pre-commit.yml**:
-
-- Runs license and prettier checks
-- Uses reusable workflows from `xenoterracide/github`
+- **GPL-3.0-or-later** — source code.
+- **MIT** — scripts, configuration, workflows.
+- **CC0-1.0** — configuration and generated files.
+- **CC-BY-NC-SA-4.0** — documentation.

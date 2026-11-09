@@ -11,8 +11,6 @@ module com.xenoterracide.git {
   requires org.apache.commons.lang3;
   requires com.google.common;
   requires org.slf4j;
-
-  // Compile-time only annotations
   requires static org.jspecify;
 
   exports com.xenoterracide.git;

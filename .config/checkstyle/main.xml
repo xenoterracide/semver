@@ -1,6 +1,6 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!--
-SPDX-FileCopyrightText: Copyright © 2024-2026 Caleb Cushing
+SPDX-FileCopyrightText: Copyright © 2015-2026 Caleb Cushing
 
 SPDX-License-Identifier: CC0-1.0
 -->
@@ -8,21 +8,18 @@ SPDX-License-Identifier: CC0-1.0
   "https://checkstyle.org/dtds/configuration_1_3.dtd">
 <module name="Checker">
   <module name="SuppressWarningsFilter" />
+  <!-- prettier-java keeps a module annotation inline with the module keyword -->
+  <module name="SuppressionSingleFilter">
+    <property name="files" value="(^|/)module\-info\.java$" />
+    <property name="checks" value="AnnotationLocation" />
+  </module>
 
   <!--- PRETTIER START -->
 
-  <module name="BeforeExecutionExclusionFileFilter">
-    <property name="fileNamePattern" value="module\-info\.java$" />
-  </module>
   <module name="TreeWalker">
     <module name="OuterTypeFilename" />
     <module name="NoLineWrap">
       <property name="tokens" value="PACKAGE_DEF, IMPORT, STATIC_IMPORT" />
-    </module>
-    <module name="SuppressionCommentFilter">
-      <property name="offCommentFormat" value="CHECKSTYLE.OFF: ([\w\|]+)" />
-      <property name="onCommentFormat" value="CHECKSTYLE.ON: ([\w\|]+)" />
-      <property name="checkFormat" value="$1" />
     </module>
     <module name="LeftCurly" />
     <module name="RightCurly" />
@@ -125,18 +122,25 @@ SPDX-License-Identifier: CC0-1.0
 
     <!-- https://checkstyle.sourceforge.io/checks/javadoc/ checked all 2024 -->
     <module name="AtclauseOrder" />
+    <module name="InappropriateJavadocBlockTagsOnField" />
+    <module name="InappropriateJavadocBlockTagsOnPackage" />
+    <module name="InappropriateJavadocBlockTagsOnType" />
     <module name="InvalidJavadocPosition" />
     <module name="JavadocBlockTagLocation" />
     <module name="JavadocContentLocation" />
+    <module name="JavadocEndCommentDelimiter" />
+    <module name="JavadocLinkWellKnownApi" />
     <module name="JavadocMethod" />
     <module name="JavadocMissingLeadingAsterisk" />
     <module name="JavadocMissingWhitespaceAfterAsterisk" />
+    <module name="JavadocNoErrorInThrowsTag" />
     <module name="JavadocParagraph" />
-    <module name="JavadocStyle" />
+    <module name="JavadocParamOrder" />
+    <module name="JavadocSeeTagOrder" />
     <module name="JavadocTagContinuationIndentation">
       <property name="violateExecutionOnNonTightHtml" value="true" />
-      <property name="offset" value="2" />
     </module>
+    <module name="JavadocThrowsOrder" />
     <module name="JavadocType">
       <property name="allowUnknownTags" value="true" />
     </module>
@@ -147,6 +151,8 @@ SPDX-License-Identifier: CC0-1.0
     <module name="MissingJavadocPackage" />
     <module name="MissingJavadocType" />
     <module name="NonEmptyAtclauseDescription" />
+    <module name="PreferCodeOrSnippetJavadocInlineTag" />
+    <module name="PreferLiteralJavadocInlineTag" />
     <module name="RequireEmptyLineBeforeBlockTagGroup" />
     <module name="SingleLineJavadoc" />
     <module name="SummaryJavadoc" />
@@ -163,9 +169,7 @@ SPDX-License-Identifier: CC0-1.0
     <module name="StaticVariableName" />
     <module name="TypeName" />
     <module name="ParameterAssignment" />
-    <module name="ReturnCount">
-      <property name="max" value="3" />
-    </module>
+    <module name="ReturnCount" />
     <module name="StringLiteralEquality" />
     <module name="CatchParameterName" />
     <module name="ClassTypeParameterName">
@@ -184,6 +188,7 @@ SPDX-License-Identifier: CC0-1.0
     <module name="IllegalImport" />
     <!-- defaults to sun.* packages -->
     <module name="RedundantImport" />
+    <module name="UnnecessaryFullyQualifiedType" />
     <module name="UnusedImports">
       <property name="processJavadoc" value="false" />
     </module>
@@ -201,13 +206,7 @@ SPDX-License-Identifier: CC0-1.0
     <module name="ExecutableStatementCount">
       <property name="max" value="20" />
     </module>
-    <module name="ExecutableStatementCount">
-      <property name="max" value="10" />
-      <property name="tokens" value="LAMBDA" />
-    </module>
-    <module name="LambdaBodyLength">
-      <property name="max" value="20" />
-    </module>
+    <module name="LambdaBodyLength" />
     <module name="MethodCount">
       <property name="maxTotal" value="20" />
     </module>
@@ -216,6 +215,7 @@ SPDX-License-Identifier: CC0-1.0
     </module>
     <module name="OuterTypeNumber" />
     <module name="ParameterNumber" />
+    <module name="RecordComponentNumber" />
 
     <!-- whitespace https://checkstyle.org/checks/whitespace/ -->
     <module name="OperatorWrap">
@@ -253,15 +253,19 @@ SPDX-License-Identifier: CC0-1.0
     <module name="MutableException" />
 
     <module name="UnnecessaryParentheses" />
+    <module name="UnnecessaryPermitsClause" />
     <module name="UnnecessarySemicolonAfterOuterTypeDeclaration" />
     <module name="UnnecessarySemicolonAfterTypeMemberDeclaration" />
     <module name="UnnecessarySemicolonInEnumeration" />
     <module name="UnnecessarySemicolonInTryWithResources" />
+    <module name="UnnecessaryTypeArgumentsWithRecordPattern" />
+    <module name="UnusedPrivateField" />
     <module name="VariableDeclarationUsageDistance" />
 
     <!-- Modifier Checks                                    -->
     <!-- See https://checkstyle.org/config_modifiers.html -->
     <module name="RedundantModifier" />
+    <module name="AbstractClassName" />
 
     <!-- https://checkstyle.sourceforge.io/checks/blocks/ -->
     <module name="AvoidNestedBlocks">
@@ -291,7 +295,9 @@ SPDX-License-Identifier: CC0-1.0
     <module name="SimplifyBooleanExpression" />
     <module name="SimplifyBooleanReturn" />
     <module name="ModifiedControlVariable" />
-    <module name="MultipleStringLiterals" />
+    <module name="MultipleStringLiterals">
+      <property name="allowedDuplicates" value="2" />
+    </module>
     <module name="NestedForDepth" />
     <module name="NestedIfDepth" />
     <module name="NestedTryDepth" />
@@ -299,6 +305,9 @@ SPDX-License-Identifier: CC0-1.0
     <module name="NoClone" />
     <module name="NoFinalizer" />
     <module name="PackageDeclaration" />
+
+    <!-- modules https://checkstyle.org/checks/modules/ -->
+    <module name="ModuleDirectiveOrder" />
 
     <!-- design https://checkstyle.org/checks/design/ -->
     <module name="FinalClass" />
@@ -314,6 +323,7 @@ SPDX-License-Identifier: CC0-1.0
 
     <!-- Miscellaneous https://checkstyle.org/checks/misc/ -->
     <module name="ArrayTypeStyle" />
+    <module name="MultilineCommentLeadingAsteriskPresence" />
     <module name="TodoComment" />
     <module name="UpperEll" />
     <module name="UncommentedMain">
@@ -338,8 +348,8 @@ SPDX-License-Identifier: CC0-1.0
   <module name="JavadocPackage" />
 
   <!-- Miscellaneous https://checkstyle.org/checks/misc/ -->
-  <module name="FileLength" />
   <!-- use method count for SRP instead -->
+  <module name="FileLength" />
   <module name="LineLength">
     <property name="max" value="120" />
     <property name="fileExtensions" value="java" />

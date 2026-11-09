@@ -10,8 +10,6 @@ module com.xenoterracide.semver {
   requires org.semver4j;
   requires com.google.common;
   requires org.jspecify;
-
-  // Compile-time only annotations
   requires static org.immutables.value.annotations;
   requires static org.immutables.datatype;
   requires static com.google.errorprone.annotations;

@@ -49,7 +49,7 @@ SPDX-License-Identifier: CC0-1.0
     <maven-surefire-plugin.version>3.6.1</maven-surefire-plugin.version>
     <maven-failsafe-plugin.version>3.6.1</maven-failsafe-plugin.version>
     <maven-checkstyle-plugin.version>3.6.0</maven-checkstyle-plugin.version>
-    <checkstyle.version>13.8.0</checkstyle.version>
+    <checkstyle.version>14.4.0</checkstyle.version>
     <spotbugs-maven-plugin.version>4.10.5.0</spotbugs-maven-plugin.version>
     <spotbugs.version>4.9.8</spotbugs.version>
     <jacoco-maven-plugin.version>0.8.16</jacoco-maven-plugin.version>
@@ -291,7 +291,7 @@ SPDX-License-Identifier: CC0-1.0
             <threshold>Low</threshold>
             <xmlOutput>true</xmlOutput>
             <failOnError>true</failOnError>
-            <excludeFilterFile>${project.basedir}/.config/spotbugs/exclude.xml</excludeFilterFile>
+            <excludeFilterFile>${maven.multiModuleProjectDirectory}/.config/spotbugs/exclude.xml</excludeFilterFile>
           </configuration>
         </plugin>
 
@@ -386,8 +386,7 @@ SPDX-License-Identifier: CC0-1.0
               <goal>check</goal>
             </goals>
             <configuration>
-              <configLocation>.config/checkstyle/main.xml</configLocation>
-              <suppressionsLocation>.config/checkstyle/suppressions-main.xml</suppressionsLocation>
+              <configLocation>${maven.multiModuleProjectDirectory}/.config/checkstyle/main.xml</configLocation>
               <sourceDirectories>
                 <sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
               </sourceDirectories>
@@ -400,8 +399,7 @@ SPDX-License-Identifier: CC0-1.0
               <goal>check</goal>
             </goals>
             <configuration>
-              <configLocation>.config/checkstyle/test.xml</configLocation>
-              <suppressionsLocation>.config/checkstyle/suppressions-test.xml</suppressionsLocation>
+              <configLocation>${maven.multiModuleProjectDirectory}/.config/checkstyle/test.xml</configLocation>
               <sourceDirectories>
                 <sourceDirectory>${project.basedir}/src/test/java</sourceDirectory>
                 <sourceDirectory>${project.basedir}/src/testFixtures/java</sourceDirectory>
@@ -474,8 +472,8 @@ SPDX-License-Identifier: CC0-1.0
 
   <licenses>
     <license>
-      <name>MIT</name>
-      <url>https://opensource.org/licenses/MIT</url>
+      <name>GPL-3.0-or-later</name>
+      <url>https://www.gnu.org/licenses/gpl-3.0.txt</url>
     </license>
   </licenses>
 
