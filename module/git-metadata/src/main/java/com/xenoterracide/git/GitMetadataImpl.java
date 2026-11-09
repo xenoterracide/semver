@@ -91,7 +91,7 @@ final class GitMetadataImpl implements GitMetadata {
    * Gets object id for.
    *
    * @param shalike
-   *     the shalike
+   *   the shalike
    * @return the object id for
    */
   public Try<ObjectId> getObjectIdFor(@NonNull String shalike) {

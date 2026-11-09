@@ -22,9 +22,9 @@ public interface TryGit extends Supplier<@Nullable Git> {
    * Wraps a {@link GitCommand} in a {@link Try} to handle exceptions.
    *
    * @param <R>
-   *     return type
+   *   return type
    * @param command
-   *     command to run
+   *   command to run
    * @return the result of the function
    */
   default <R> Try<R> tryCommand(CheckedFunction1<Git, GitCommand<R>> command) {
@@ -35,9 +35,9 @@ public interface TryGit extends Supplier<@Nullable Git> {
    * Wraps a Git command in a {@link Try} to handle exceptions.
    *
    * @param <R>
-   *     result of the function
+   *   result of the function
    * @param command
-   *     to run
+   *   to run
    * @return result of the function with filtered nulls
    */
   default <R> Try<R> tryGit(CheckedFunction1<Git, R> command) {

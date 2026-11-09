@@ -34,7 +34,7 @@ public final class GitMetadataFactory {
    *
    * @param directory the directory containing a Git repository
    * @return a GitMetadata instance, or null if the directory
-   *     is not a valid Git repository
+   *   is not a valid Git repository
    */
   public static @Nullable GitMetadata create(File directory) {
     try {
@@ -50,7 +50,7 @@ public final class GitMetadataFactory {
    *
    * @param path the path to a directory containing a Git repository
    * @return a GitMetadata instance, or null if the path
-   *     is not a valid Git repository
+   *   is not a valid Git repository
    */
   public static @Nullable GitMetadata create(String path) {
     return create(new File(path));

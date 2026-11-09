@@ -5,7 +5,6 @@
 package com.xenoterracide.git;
 
 import static com.xenoterracide.git.fixtures.CommitTools.commit;
-import static com.xenoterracide.git.fixtures.GitRemotes.setHeadAuto;
 import static java.util.function.Predicate.isEqual;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -18,6 +17,7 @@ import java.util.function.Supplier;
 import org.assertj.core.api.Condition;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
+import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.transport.URIish;
 import org.jspecify.annotations.NonNull;
@@ -73,9 +73,20 @@ class MergeBaseFinderTest {
         g.push().call();
       })
       .get();
-    this.git = Try.withResources(() -> Git.cloneRepository().setDirectory(projectDir).setURI(uri).call()).of(g ->
-      setHeadAuto(g, projectDir)
-    )::get;
+    this.git = Try.withResources(() -> Git.cloneRepository().setDirectory(projectDir).setURI(uri).call()).of(g -> {
+      var p = new ProcessBuilder()
+        .directory(projectDir)
+        .command("git", "remote", "set-head", "--auto", "origin")
+        .start();
+      try (var input = p.inputReader()) {
+        log.warn("set-head: {}", input.lines().toList());
+      }
+      p.waitFor();
+      var remoteRef = Constants.R_REMOTES + "origin" + "/" + Constants.HEAD;
+      var file = g.getRepository().getDirectory().toPath().resolve(remoteRef).toFile();
+      log.warn("project: '{} with remoteRef: '{}' exists: {}", projectDir, file, file.exists());
+      return g;
+    })::get;
   }
 
   @Test

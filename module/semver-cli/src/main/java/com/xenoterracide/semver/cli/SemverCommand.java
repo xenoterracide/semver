@@ -4,6 +4,7 @@
 
 package com.xenoterracide.semver.cli;
 
+import com.xenoterracide.git.GitMetadata;
 import com.xenoterracide.git.GitMetadataFactory;
 import com.xenoterracide.git.GitStatus;
 import com.xenoterracide.semver.VersionCalculator;
@@ -58,23 +59,21 @@ public final class SemverCommand implements Callable<Integer> {
   public Integer call() {
     this.configureLogging();
 
-    var metadata = this.path == null ? null : GitMetadataFactory.create(this.path);
-    if (metadata == null || metadata.status() == GitStatus.NO_REPO) {
-      this.reportError();
+    if (this.path == null) {
+      System.err.println("Error: Path must not be null");
       return 1;
     }
 
-    System.out.println(VersionCalculator.calculate(metadata));
+    var metadata = createMetadata(this.path);
+    if (metadata == null || metadata.status() == GitStatus.NO_REPO) {
+      System.err.println("Error: Not a valid Git repository: " + this.path);
+      return 1;
+    }
+
+    var version = VersionCalculator.calculate(metadata);
+    System.out.println(version);
 
     return 0;
-  }
-
-  private void reportError() {
-    if (this.path == null) {
-      System.err.println("Error: Path must not be null");
-    } else {
-      System.err.println("Error: Not a valid Git repository: " + this.path);
-    }
   }
 
   private void configureLogging() {
@@ -82,7 +81,11 @@ public final class SemverCommand implements Callable<Integer> {
     System.setProperty("org.slf4j.simpleLogger.defaultLogLevel", level);
   }
 
-  // CHECKSTYLE.OFF: UncommentedMain
+  private static @Nullable GitMetadata createMetadata(File path) {
+    return GitMetadataFactory.create(path);
+  }
+
+  // CHECKSTYLE.OFF: UncommentedMain - Main method is the entry point for CLI
   /**
    * Main entry point for the CLI.
    *
