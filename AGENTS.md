@@ -81,6 +81,9 @@ Strategies in the `internal` package are selected by tag relationship
 
 - Read `.editorconfig` before editing. Every text file ends with a newline.
 - Prettier formats Java, XML, YAML, TOML, JSON, and Markdown.
+- Checkstyle runs one config per source set, under `.config/checkstyle/`:
+  `main.xml`, `test.xml`, `testFixtures.xml`, `testIntegration.xml`.
+  Fixtures follow main's size caps plus stricter design checks.
 - Java compiles to release 17. Tests compile to release 25.
 - Annotate nullable types with JSpecify `@Nullable`. NullAway enforces the
   rest.
