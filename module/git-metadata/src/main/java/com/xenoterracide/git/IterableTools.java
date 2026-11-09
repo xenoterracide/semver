@@ -17,8 +17,8 @@ final class IterableTools {
   /**
    * Converts an iterable to a stream.
    *
-   * @param iterable the iterable
    * @param <T> the element type
+   * @param iterable the iterable
    * @return a stream
    */
   static <T> Stream<T> of(Iterable<T> iterable) {

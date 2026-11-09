@@ -16,11 +16,11 @@ import org.semver4j.Semver;
  * and produces a semantic version based on the current git state.</p>
  *
  * <p>Example usage:</p>
- * <pre>{@code
+ * {@snippet :
  * var gitMetadata = GitMetadataFactory.create(new File("."));
  * var version = VersionCalculator.calculate(gitMetadata);
  * System.out.println(version); // e.g., "1.0.1-alpha.0.5+git.5.abc123"
- * }</pre>
+ * }
  */
 public final class VersionCalculator {
 
