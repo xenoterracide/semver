@@ -16,9 +16,16 @@ Semantic version calculation from Git metadata.
 
 ## Getting started
 
+<<<<<<< before updating
     asdf install
     pnpm contribute
     ./mvnw -q verify
+=======
+- `npm run contribute` installs tools and dependencies, and heals the
+  toolchain through `.config/git/hooks/heal.sh`. Node 25+ drops corepack,
+  so the bootstrap starts from npm.
+- `direnv allow` (if you use direnv) loads the environment.
+>>>>>>> after updating
 
 `pnpm contribute` installs tools and dependencies, and heals the toolchain
 through `.config/git/hooks/heal.sh`. `direnv allow` loads the environment
@@ -37,7 +44,7 @@ shared tooling lives in
 [xenoterracide/base-template](https://github.com/xenoterracide/base-template).
 Refresh it with:
 
-    copier update --trust
+    uv run --group dev copier update --trust
 
 Renovate opens an update PR whenever the template tags a release. Merge it
 like any other dependency update.
