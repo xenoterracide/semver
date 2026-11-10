@@ -8,7 +8,7 @@ permissions:
   contents: read
 jobs:
   maven:
-    uses: xenoterracide/github/.github/workflows/maven.yml@a698f006242a7e423d664168be78c484189e1330 # develop
+    uses: xenoterracide/github/.github/workflows/maven.yml@a6e829fa40d64d8b7e929b2819d3bb34e1047365 # develop
     permissions:
       actions: write
       contents: read
