@@ -62,7 +62,7 @@ public final class VersionCalculator {
       .currentBranch(branch)
       .headBranch(headBranch)
       .isHeadBranch(isHeadBranch)
-      .distanceFromMergeBase(distance)
+      .distanceFromMergeBase(metadata.distanceFromMergeBase())
       .shortSha(metadata.uniqueShort())
       .fullSha(metadata.commit())
       .isDirty(metadata.status().name().equals("DIRTY"))

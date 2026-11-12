@@ -152,7 +152,7 @@ class VersionCalculatorTest {
 
   @Test
   void noRemotesNullHeadBranch() {
-    var metadata = new SimpleGitMetadata("v1.0.0", 0, "main", null, "abc123", GitStatus.CLEAN, List.of());
+    var metadata = new SimpleGitMetadata("v1.0.0", 0, 0, "main", null, "abc123", GitStatus.CLEAN, List.of());
 
     var version = VersionCalculator.calculate(metadata);
 
@@ -161,6 +161,25 @@ class VersionCalculatorTest {
     assertThat(version.getPatch()).isEqualTo(0);
     // no origin remote, so current branch != head branch (null), treated as topic
     assertThat(version.getBuild()).containsExactly("branch", "main", "git", "0", "abc123");
+  }
+
+  @Test
+  void afterTagTopicBranchUsesMergeBaseDistance() {
+    var metadata = createMetadata("v1.0.0", 5, "feature-x", "main", "abc123", GitStatus.CLEAN, 3);
+
+    var version = VersionCalculator.calculate(metadata);
+
+    assertThat(version.getPreRelease()).containsExactly("alpha", "0", "5");
+    assertThat(version.getBuild()).containsExactly("branch", "feature-x", "git", "3", "abc123");
+  }
+
+  @Test
+  void mergeBaseDistanceLargerThanTagDistance() {
+    var metadata = createMetadata("v1.0.0", 5, "feature-x", "main", "abc123", GitStatus.CLEAN, 11);
+
+    var version = VersionCalculator.calculate(metadata);
+
+    assertThat(version).hasToString("1.0.1-alpha.0.5+branch.feature-x.git.11.abc123");
   }
 
   // Helper methods
@@ -173,9 +192,21 @@ class VersionCalculatorTest {
     String shortSha,
     GitStatus status
   ) {
+    return createMetadata(tag, distance, branch, headBranch, shortSha, status, distance);
+  }
+
+  private static GitMetadata createMetadata(
+    @Nullable String tag,
+    long distance,
+    @Nullable String branch,
+    @Nullable String headBranch,
+    String shortSha,
+    GitStatus status,
+    long mergeBaseDistance
+  ) {
     var remote = headBranch != null ? new SimpleGitRemote("origin", headBranch) : null;
     var remotes = remote != null ? java.util.List.<GitRemote>of(remote) : java.util.List.<GitRemote>of();
-    return new SimpleGitMetadata(tag, distance, branch, "fullsha123", shortSha, status, remotes);
+    return new SimpleGitMetadata(tag, distance, mergeBaseDistance, branch, "fullsha123", shortSha, status, remotes);
   }
 
   /**
@@ -184,12 +215,18 @@ class VersionCalculatorTest {
   private record SimpleGitMetadata(
     @Nullable String tag,
     long distance,
+    long mergeBaseDistance,
     @Nullable String branch,
     @Nullable String commit,
     @Nullable String uniqueShort,
     GitStatus status,
     List<GitRemote> remotes
-  ) implements GitMetadata {}
+  ) implements GitMetadata {
+    @Override
+    public long distanceFromMergeBase() {
+      return this.mergeBaseDistance;
+    }
+  }
 
   /**
    * Simple record implementation of GitRemote for testing.
