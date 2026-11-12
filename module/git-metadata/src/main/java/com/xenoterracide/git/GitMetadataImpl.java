@@ -152,6 +152,13 @@ final class GitMetadataImpl implements GitMetadata {
 
   @Override
   public long distanceFromMergeBase() {
+    var onBranch = this.gitRepository()
+      .mapTry(Repository::getFullBranch)
+      .map(fullBranch -> fullBranch != null && fullBranch.startsWith(Constants.R_HEADS))
+      .getOrElse(false);
+    if (!onBranch) {
+      return this.distance();
+    }
     return this.remotes()
       .stream()
       .filter(remote -> "origin".equals(remote.name()))

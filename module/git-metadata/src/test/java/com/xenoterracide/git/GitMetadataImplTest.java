@@ -236,6 +236,22 @@ class GitMetadataImplTest {
     }
   }
 
+  @Test
+  void distanceFromMergeBaseDetachedHeadFallsBackToDistance(
+    @TempDir(cleanup = CleanupMode.ON_SUCCESS) File bareRemote,
+    @TempDir(cleanup = CleanupMode.ON_SUCCESS) File devDir,
+    @TempDir(cleanup = CleanupMode.ON_SUCCESS) File workDir
+  ) throws GitAPIException, IOException, InterruptedException, URISyntaxException {
+    try (var git = cloneWithOriginHead(bareRemote, devDir, workDir)) {
+      git.tag().setName("v0.1.1").call();
+      var commitA = git.commit().setMessage("A").call();
+      git.push().call();
+      git.checkout().setName(commitA.getId().getName()).call();
+      var pg = new GitMetadataImpl(() -> git);
+      assertThat(pg.distanceFromMergeBase()).isEqualTo(pg.distance());
+    }
+  }
+
   private static Git cloneWithOriginHead(File bareRemote, File devDir, File workDir)
     throws GitAPIException, IOException, InterruptedException, URISyntaxException {
     var uri = bareRemote.toURI().toASCIIString();
