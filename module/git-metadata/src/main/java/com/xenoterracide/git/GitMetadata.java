@@ -35,6 +35,18 @@ public interface GitMetadata {
   long distance();
 
   /**
+   * Gets the number of commits from the merge base to HEAD.
+   *
+   * <p>The merge base is the common ancestor of HEAD and the origin HEAD branch. When there is no
+   * origin, no remote HEAD, or no common ancestor, this falls back to {@link #distance()}.</p>
+   *
+   * @return the merge-base distance
+   */
+  default long distanceFromMergeBase() {
+    return this.distance();
+  }
+
+  /**
    * Gets status.
    *
    * @return the status
