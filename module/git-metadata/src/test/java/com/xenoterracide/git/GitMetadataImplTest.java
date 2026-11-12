@@ -199,4 +199,74 @@ class GitMetadataImplTest {
       );
     }
   }
+
+  @Test
+  void distanceFromMergeBaseFallsBackWithoutOrigin() throws Exception {
+    try (var git = Git.init().setDirectory(projectDir).call()) {
+      commit(git);
+      var pg = new GitMetadataImpl(() -> git);
+      assertThat(pg.distanceFromMergeBase()).isEqualTo(pg.distance());
+    }
+  }
+
+  @Test
+  void distanceFromMergeBaseOnHeadBranchIsZero(
+    @TempDir(cleanup = CleanupMode.ON_SUCCESS) File bareRemote,
+    @TempDir(cleanup = CleanupMode.ON_SUCCESS) File devDir,
+    @TempDir(cleanup = CleanupMode.ON_SUCCESS) File workDir
+  ) throws GitAPIException, IOException, InterruptedException, URISyntaxException {
+    try (var git = cloneWithOriginHead(bareRemote, devDir, workDir)) {
+      var pg = new GitMetadataImpl(() -> git);
+      assertThat(pg.distanceFromMergeBase()).isEqualTo(0L);
+    }
+  }
+
+  @Test
+  void distanceFromMergeBaseTopicBranchCountsOwnCommits(
+    @TempDir(cleanup = CleanupMode.ON_SUCCESS) File bareRemote,
+    @TempDir(cleanup = CleanupMode.ON_SUCCESS) File devDir,
+    @TempDir(cleanup = CleanupMode.ON_SUCCESS) File workDir
+  ) throws GitAPIException, IOException, InterruptedException, URISyntaxException {
+    try (var git = cloneWithOriginHead(bareRemote, devDir, workDir)) {
+      git.checkout().setCreateBranch(true).setName("topic/foo").call();
+      commit(git);
+      commit(git);
+      var pg = new GitMetadataImpl(() -> git);
+      assertThat(pg.distanceFromMergeBase()).isEqualTo(2L);
+    }
+  }
+
+  @Test
+  void distanceFromMergeBaseDetachedHeadFallsBackToDistance(
+    @TempDir(cleanup = CleanupMode.ON_SUCCESS) File bareRemote,
+    @TempDir(cleanup = CleanupMode.ON_SUCCESS) File devDir,
+    @TempDir(cleanup = CleanupMode.ON_SUCCESS) File workDir
+  ) throws GitAPIException, IOException, InterruptedException, URISyntaxException {
+    try (var git = cloneWithOriginHead(bareRemote, devDir, workDir)) {
+      git.tag().setName("v0.1.1").call();
+      var commitA = git.commit().setMessage("A").call();
+      git.push().call();
+      git.checkout().setName(commitA.getId().getName()).call();
+      var pg = new GitMetadataImpl(() -> git);
+      assertThat(pg.distanceFromMergeBase()).isEqualTo(pg.distance());
+    }
+  }
+
+  private static Git cloneWithOriginHead(File bareRemote, File devDir, File workDir)
+    throws GitAPIException, IOException, InterruptedException, URISyntaxException {
+    var uri = bareRemote.toURI().toASCIIString();
+    Git.init().setDirectory(bareRemote).setBare(true).call().close();
+    try (var dev = Git.init().setDirectory(devDir).call()) {
+      dev.remoteAdd().setName(ORIGIN).setUri(new URIish(uri)).call();
+      dev.commit().setMessage("initial commit").call();
+      dev.push().call();
+    }
+    var git = Git.cloneRepository().setDirectory(workDir).setURI(uri).call();
+    var setHead = new ProcessBuilder("git", "remote", "set-head", "--auto", ORIGIN)
+      .directory(workDir)
+      .redirectError(ProcessBuilder.Redirect.DISCARD)
+      .start();
+    setHead.waitFor();
+    return git;
+  }
 }

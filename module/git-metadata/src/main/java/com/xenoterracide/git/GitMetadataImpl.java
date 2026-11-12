@@ -15,6 +15,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -147,6 +148,33 @@ final class GitMetadataImpl implements GitMetadata {
       .recover(NoSuchElementException.class, 0L)
       .recover(RepositoryNotFoundException.class, 0L)
       .getOrElseThrow(Exceptions::toRuntime);
+  }
+
+  @Override
+  public long distanceFromMergeBase() {
+    var onBranch = this.gitRepository()
+      .mapTry(Repository::getFullBranch)
+      .map(fullBranch -> fullBranch != null && fullBranch.startsWith(Constants.R_HEADS))
+      .getOrElse(false);
+    if (!onBranch) {
+      return this.distance();
+    }
+    return this.remotes()
+      .stream()
+      .filter(remote -> "origin".equals(remote.name()))
+      .findFirst()
+      .flatMap(remote ->
+        this.gitRepository()
+          .map(repo -> new MergeBaseFinder(repo).find(remote))
+          .onFailure(e -> this.log.error("failed to find merge base", e))
+          .getOrElse(Optional.empty())
+      )
+      .map(mergeBase ->
+        this.getObjectIdFor(Constants.HEAD)
+          .map(head -> new DistanceCalculator(this.git).distanceBetween(mergeBase, head))
+          .getOrElse(this::distance)
+      )
+      .orElseGet(this::distance);
   }
 
   @Override

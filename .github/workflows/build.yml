@@ -19,7 +19,7 @@ jobs:
         with:
           java-version: "25.0.5+8.0.LTS"
           distribution: "temurin"
-      - run: ./mvnw install -DskipTests -q --batch-mode
+      - run: ./mvnw install -DskipTests -DskipITs -q --batch-mode
       - uses: jbangdev/setup-jbang@2b1b465a7b75f4222b81426f23a01e013aa7b95c # v0.1.1
       - run: jbang main.java --help
       - run: jbang main.java

@@ -13,6 +13,7 @@ module com.xenoterracide.semver {
   requires static org.immutables.value.annotations;
   requires static org.immutables.datatype;
   requires static com.google.errorprone.annotations;
+  requires static org.eclipse.jgit;
 
   exports com.xenoterracide.semver;
 }

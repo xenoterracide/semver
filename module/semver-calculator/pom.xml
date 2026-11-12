@@ -39,6 +39,11 @@ SPDX-License-Identifier: CC0-1.0
       <groupId>org.jspecify</groupId>
       <artifactId>jspecify</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.eclipse.jgit</groupId>
+      <artifactId>org.eclipse.jgit</artifactId>
+      <optional>true</optional>
+    </dependency>
 
     <!-- compile only -->
 

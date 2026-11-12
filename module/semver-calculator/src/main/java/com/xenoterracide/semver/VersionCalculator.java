@@ -54,6 +54,7 @@ public final class VersionCalculator {
     var branch = metadata.branch();
     var headBranch = extractHeadBranch(metadata);
     var isHeadBranch = branch != null && branch.equals(headBranch);
+    var distanceFromMergeBase = isHeadBranch ? distance : metadata.distanceFromMergeBase();
 
     return GitContext.builder()
       .nearestTag(tag)
@@ -62,7 +63,7 @@ public final class VersionCalculator {
       .currentBranch(branch)
       .headBranch(headBranch)
       .isHeadBranch(isHeadBranch)
-      .distanceFromMergeBase(distance)
+      .distanceFromMergeBase(distanceFromMergeBase)
       .shortSha(metadata.uniqueShort())
       .fullSha(metadata.commit())
       .isDirty(metadata.status().name().equals("DIRTY"))
