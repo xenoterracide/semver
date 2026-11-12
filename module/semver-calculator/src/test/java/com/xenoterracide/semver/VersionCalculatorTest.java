@@ -67,7 +67,7 @@ class VersionCalculatorTest {
 
   @Test
   void afterTagTopicBranchReturnsVersionWithBranchMetadata() {
-    var metadata = createMetadata("v1.0.0", 5, "feature-x", "main", "abc123", GitStatus.CLEAN);
+    var metadata = createMetadata("v1.0.0", 5, "feature-x", "main", "abc123", GitStatus.CLEAN, 3);
 
     var version = VersionCalculator.calculate(metadata);
 
@@ -75,7 +75,7 @@ class VersionCalculatorTest {
     assertThat(version.getMinor()).isEqualTo(0);
     assertThat(version.getPatch()).isEqualTo(1);
     assertThat(version.getPreRelease()).containsExactly("alpha", "0", "5");
-    assertThat(version.getBuild()).containsExactly("branch", "feature-x", "git", "5", "abc123");
+    assertThat(version.getBuild()).containsExactly("branch", "feature-x", "git", "3", "abc123");
   }
 
   @Test
@@ -93,7 +93,7 @@ class VersionCalculatorTest {
 
   @Test
   void noTagTopicBranchReturnsZeroVersionWithBranchMetadata() {
-    var metadata = createMetadata(null, 5, "feature-x", "main", "abc123", GitStatus.CLEAN);
+    var metadata = createMetadata(null, 5, "feature-x", "main", "abc123", GitStatus.CLEAN, 3);
 
     var version = VersionCalculator.calculate(metadata);
 
@@ -101,7 +101,7 @@ class VersionCalculatorTest {
     assertThat(version.getMinor()).isEqualTo(0);
     assertThat(version.getPatch()).isEqualTo(1);
     assertThat(version.getPreRelease()).containsExactly("alpha", "0", "5");
-    assertThat(version.getBuild()).containsExactly("branch", "feature-x", "git", "5", "abc123");
+    assertThat(version.getBuild()).containsExactly("branch", "feature-x", "git", "3", "abc123");
   }
 
   @Test

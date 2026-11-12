@@ -166,6 +166,7 @@ final class GitMetadataImpl implements GitMetadata {
       .flatMap(remote ->
         this.gitRepository()
           .map(repo -> new MergeBaseFinder(repo).find(remote))
+          .onFailure(e -> this.log.error("failed to find merge base", e))
           .getOrElse(Optional.empty())
       )
       .map(mergeBase ->
