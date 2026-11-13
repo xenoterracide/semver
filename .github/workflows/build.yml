@@ -19,7 +19,7 @@ jobs:
       contents: write
       packages: write
     concurrency:
-      group: publish
+      group: publish-${{ github.ref_type }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -32,6 +32,7 @@ jobs:
         with:
           java-version: "25.0.5+8.0.LTS"
           distribution: "temurin"
+          cache: maven
       - uses: jbangdev/setup-jbang@2b1b465a7b75f4222b81426f23a01e013aa7b95c # v0.1.1
       - name: Configure Maven settings for GitHub Packages
         run: |
@@ -51,10 +52,15 @@ jobs:
       - run: ./mvnw -B -q --no-transfer-progress -DskipTests -DskipITs install
       - run: echo "VERSION=$(jbang --quiet main.java)" >> "$GITHUB_ENV"
       - run: ./mvnw -B -q --no-transfer-progress versions:set -DnewVersion="$VERSION" -DprocessAllModules -DgenerateBackupPoms=false
-      - run: ./mvnw -B -q --no-transfer-progress -DskipTests -DskipITs -Psign clean deploy -Dgpg.passphrase="$GPG_PASSPHRASE"
+      - name: deploy (retry once on transient 409)
+        run: |
+          ./mvnw -B -q --no-transfer-progress -DskipTests -DskipITs -Psign clean deploy -Dgpg.passphrase="$GPG_PASSPHRASE" \
+            || { sleep 30; ./mvnw -B -q --no-transfer-progress -DskipTests -DskipITs -Psign clean deploy -Dgpg.passphrase="$GPG_PASSPHRASE"; }
         env:
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
       - run: git restore .
+      - name: isolate local maven repository for consumability check
+        run: rm -rf ~/.m2/repository/com/xenoterracide
       - name: Verify published artifact is consumable
         run: |
           test "$(jbang --quiet --repos=gh=https://maven.pkg.github.com/xenoterracide/semver "com.xenoterracide:semver-cli:$VERSION")" = "$VERSION"

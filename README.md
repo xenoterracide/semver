@@ -79,7 +79,7 @@ Version distance is wrong from a shallow clone, so the CLI fails fast with an
 error telling you to fetch the full history. Locally, run:
 
 ```bash
-git fetch --all --unshallow
+git fetch --unshallow origin
 ```
 
 In GitHub Actions, use `actions/checkout` with `filter: "blob:none"` and

@@ -39,7 +39,7 @@ public final class VersionCalculator {
     Objects.requireNonNull(metadata, "metadata must not be null");
     if (metadata.isShallowClone()) {
       throw new IllegalStateException(
-        "cannot calculate version from a shallow clone; run: git fetch --all --unshallow," +
+        "cannot calculate version from a shallow clone; run: git fetch --unshallow origin," +
           " or set fetch-depth: 0 on actions/checkout"
       );
     }

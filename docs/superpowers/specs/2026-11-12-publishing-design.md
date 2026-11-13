@@ -84,7 +84,7 @@ must land before the publish workflow, or it publishes wrong versions.
    GitHub's default checkout is shallow (`fetch-depth: 1`) — the
    gradle-semver publish job grew `fetch-depth: 0` + `fetch-tags: true`
    (b609d50) for exactly this reason. The recovery command is
-   `git fetch --all --unshallow`; in GitHub Actions, use `fetch-depth: 0`.
+   `git fetch --unshallow origin`; in GitHub Actions, use `fetch-depth: 0`.
 
 ## Constraints
 
@@ -104,33 +104,46 @@ must land before the publish workflow, or it publishes wrong versions.
 ## Flow
 
 `publish` job in `build.yml` (`needs: build`, `packages: write`,
-concurrency-serialized):
+concurrency by ref type):
 
 1. Full clone (`fetch-depth: 0`, `fetch-tags: true`),
    `git remote set-head --auto origin`.
-2. Write `~/.m2/settings.xml`: server `gh` with `github.actor` /
+2. `actions/setup-java` with `cache: maven`.
+3. Write `~/.m2/settings.xml`: server `gh` with `github.actor` /
    `github.token`.
-3. Import the GPG key from `GPG_SECRET_KEY`.
-4. `./mvnw -DskipTests -DskipITs install` — the tree's CLI lands at `0.0.0`
+4. Import the GPG key from `GPG_SECRET_KEY`.
+5. `./mvnw -DskipTests -DskipITs install` — the tree's CLI lands at `0.0.0`
    in `~/.m2`.
-5. `VERSION=$(jbang main.java)` — `main.java` unchanged: pin `0.0.0`, repos
+6. `VERSION=$(jbang main.java)` — `main.java` unchanged: pin `0.0.0`, repos
    `mavencentral,mavenlocal`. Runs the tree's code.
-6. `./mvnw versions:set -DnewVersion="$VERSION" -DprocessAllModules
+7. `./mvnw versions:set -DnewVersion="$VERSION" -DprocessAllModules
 -DgenerateBackupPoms=false`.
-7. `./mvnw -DskipTests -DskipITs -Psign deploy`.
-8. Post-publish, same job — resolve and run what was just deployed:
-   - `jbang com.xenoterracide:semver-cli:"$VERSION"` — output must equal
-     `VERSION`.
-   - `jbang com.xenoterracide:semver-cli:0+` — latest-resolution check (the
-     metadata consumers rely on); output must equal `VERSION`.
-9. Tag pushes only: `gh release create --verify-tag --generate-notes` with
-   the module jars attached.
+8. `./mvnw -DskipTests -DskipITs -Psign clean deploy`, retried once after 30
+   seconds. The retry handles transient GHP 409s on the first
+   `maven-metadata.xml` touch; a genuine duplicate version still fails because
+   both attempts 409.
+9. `git restore .` to undo `versions:set`, then
+   `rm -rf ~/.m2/repository/com/xenoterracide` to isolate the local Maven
+   repository for the consumability check. Without this, Maven resolves the
+   just-installed local copy instead of downloading from GitHub Packages.
+10. Post-publish, same job — verify what was just deployed:
+    - `jbang --repos=gh=… com.xenoterracide:semver-cli:"$VERSION"` — output
+      must equal `VERSION`.
+    - `curl` the `maven-metadata.xml` for `semver-cli` and assert it contains
+      `<version>$VERSION</version>`. This replaces the earlier `0+` range
+      check: because the CLI prints the checkout's computed version, a range
+      resolution could pass vacuously even if it fetched an older artifact.
+      The metadata check proves the version is present in the repository.
+11. Tag pushes only: `gh release create --verify-tag --generate-notes` with
+    the module jars attached.
 
-The `jbang` job is absorbed by step 8 — delete it.
+Concurrency is grouped by `github.ref_type`, so tag publishes serialize only
+against other tags and branch publishes serialize among themselves. A queued
+tag publish is not replaced by a later branch push.
 
 Self-sufficient from the first push: the version comes from the local
-install, and the post-publish checks resolve artifacts this same job
-deployed. No bootstrap step.
+install, and the post-publish checks verify artifacts this same job deployed.
+No bootstrap step.
 
 ## Follow-ups
 

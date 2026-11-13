@@ -45,7 +45,7 @@ class SemverCommandTest {
     assertThat(exitCode).isEqualTo(1);
     assertThat(capturedErr())
       .contains("shallow clone")
-      .contains("git fetch --all --unshallow")
+      .contains("git fetch --unshallow origin")
       .contains("fetch-depth: 0");
   }
 
@@ -72,10 +72,10 @@ class SemverCommandTest {
   }
 
   @Test
-  void versionProviderReturnsVersion() throws Exception {
+  void versionProviderFallsBackWhenNotPackaged() throws Exception {
     var version = new SemverCommand.VersionProvider().getVersion();
 
-    assertThat(version).containsExactly("semver 0.0.0");
+    assertThat(version).containsExactly("semver 0.0.0 (development)");
   }
 
   @Test

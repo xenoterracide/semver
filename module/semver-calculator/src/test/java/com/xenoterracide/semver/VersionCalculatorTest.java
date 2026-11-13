@@ -198,7 +198,7 @@ class VersionCalculatorTest {
     assertThatThrownBy(() -> VersionCalculator.calculate(metadata))
       .isInstanceOf(IllegalStateException.class)
       .hasMessageContaining("shallow")
-      .hasMessageContaining("git fetch --all --unshallow")
+      .hasMessageContaining("git fetch --unshallow origin")
       .hasMessageContaining("fetch-depth: 0");
   }
 

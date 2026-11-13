@@ -125,7 +125,8 @@ public final class SemverCommand implements Callable<Integer> {
 
     @Override
     public String[] getVersion() {
-      return new String[] { "semver 0.0.0" };
+      var version = SemverCommand.class.getPackage().getImplementationVersion();
+      return new String[] { "semver " + (version != null ? version : "0.0.0 (development)") };
     }
   }
 }
