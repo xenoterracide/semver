@@ -9,7 +9,7 @@ module com.xenoterracide.semver.cli {
   requires com.xenoterracide.git;
   requires com.xenoterracide.semver;
   requires info.picocli;
-  requires org.eclipse.jgit;
+  requires static org.eclipse.jgit;
   requires static org.jspecify;
   requires org.slf4j;
 

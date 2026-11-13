@@ -305,9 +305,9 @@ git commit -m "build: resolve semver-cli from GitHub Packages in jbang wrapper"
 8. `run: echo "VERSION=$(jbang --quiet main.java)" >> "$GITHUB_ENV"` — if jbang banner text pollutes stdout, keep `--quiet` (global flag) and confirm stderr separation.
 9. `run: ./mvnw -B -q --no-transfer-progress versions:set -DnewVersion="$VERSION" -DprocessAllModules -DgenerateBackupPoms=false` (env: `VERSION` from step 8).
 10. `run: ./mvnw -B -q --no-transfer-progress -DskipTests -DskipITs -Psign deploy -Dgpg.passphrase="$GPG_PASSPHRASE"` with `env: GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}`.
-11. Post-publish consumability checks (both must hold, else the job fails):
-    - `test "$(jbang --quiet "com.xenoterracide:semver-cli:$VERSION")" = "$VERSION"`
-    - `test "$(jbang --quiet "com.xenoterracide:semver-cli:0+")" = "$VERSION"` (latest-resolution check; runner `~/.m2` holds only this build's `0.0.0` and what deploy just pushed, so highest = `$VERSION`)
+11. Post-publish consumability checks (both must hold, else the job fails). GAV runs don't read `main.java`'s directives, so each names the repo explicitly (`gh` matches the settings.xml server id; JBang adds it to its defaults):
+    - `test "$(jbang --quiet --repos=gh=https://maven.pkg.github.com/xenoterracide/semver "com.xenoterracide:semver-cli:$VERSION")" = "$VERSION"`
+    - `test "$(jbang --quiet --repos=gh=https://maven.pkg.github.com/xenoterracide/semver "com.xenoterracide:semver-cli:0+")" = "$VERSION"` (latest-resolution check; runner `~/.m2` holds only this build's `0.0.0` and `$VERSION` sorts higher, so highest = `$VERSION`)
 12. On tag push only (`startsWith(github.ref, 'refs/tags/')`): `gh release create "$GITHUB_REF_NAME" --generate-notes --verify-tag module/*/target/*.jar` with `GH_TOKEN: ${{ github.token }}`.
 
 Delete the standalone `jbang` job — step 11 absorbs it.

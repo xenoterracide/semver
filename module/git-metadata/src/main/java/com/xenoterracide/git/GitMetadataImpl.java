@@ -134,7 +134,7 @@ final class GitMetadataImpl implements GitMetadata {
   public boolean isShallowClone() {
     return this.gitRepository()
       .mapTry(r -> {
-        var dir = r.getDirectory();
+        var dir = r.getCommonDirectory();
         return dir != null && new File(dir, "shallow").length() > 0;
       })
       .getOrElse(false);

@@ -297,6 +297,33 @@ class GitMetadataImplTest {
     }
   }
 
+  @Test
+  void isShallowCloneTrueForLinkedWorktree(@TempDir(cleanup = CleanupMode.ON_SUCCESS) File worktreeDir)
+    throws GitAPIException, IOException, InterruptedException {
+    try (var git = Git.init().setDirectory(projectDir).call()) {
+      var initial = git.commit().setMessage("initial commit").call();
+      var sha = initial.getId().getName();
+
+      var worktree = new ProcessBuilder("git", "worktree", "add", worktreeDir.getAbsolutePath(), "-b", "wt")
+        .directory(projectDir)
+        .redirectError(ProcessBuilder.Redirect.DISCARD)
+        .start();
+      var worktreeExit = worktree.waitFor();
+      assertThat(worktreeExit).isEqualTo(0);
+
+      Files.writeString(
+        new File(git.getRepository().getCommonDirectory(), "shallow").toPath(),
+        sha,
+        StandardCharsets.UTF_8
+      );
+
+      try (var wtGit = Git.open(worktreeDir)) {
+        var pg = new GitMetadataImpl(() -> wtGit);
+        assertThat(pg.isShallowClone()).isTrue();
+      }
+    }
+  }
+
   private static Git cloneWithOriginHead(File bareRemote, File devDir, File workDir)
     throws GitAPIException, IOException, InterruptedException, URISyntaxException {
     var uri = bareRemote.toURI().toASCIIString();

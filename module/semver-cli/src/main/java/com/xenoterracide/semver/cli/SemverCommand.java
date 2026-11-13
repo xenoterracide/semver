@@ -72,20 +72,23 @@ public final class SemverCommand implements Callable<Integer> {
       return 1;
     }
 
-    var version = VersionCalculator.calculate(Objects.requireNonNull(metadata));
-    System.out.println(version);
+    return calculateVersion(Objects.requireNonNull(metadata));
+  }
 
-    return 0;
+  private static int calculateVersion(GitMetadata metadata) {
+    try {
+      var version = VersionCalculator.calculate(metadata);
+      System.out.println(version);
+      return 0;
+    } catch (IllegalStateException e) {
+      System.err.println("Error: " + e.getMessage());
+      return 1;
+    }
   }
 
   private static @Nullable String validateMetadata(File path, @Nullable GitMetadata metadata) {
     if (metadata == null || metadata.status() == GitStatus.NO_REPO) {
       return "Error: Not a valid Git repository: " + path;
-    }
-    if (metadata.isShallowClone()) {
-      var message =
-        "Error: shallow clone; run: git fetch --all --filter=blob:none," + " or set fetch-depth: 0 on actions/checkout";
-      return message;
     }
     return null;
   }

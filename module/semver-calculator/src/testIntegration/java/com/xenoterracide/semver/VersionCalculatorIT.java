@@ -150,7 +150,8 @@ class VersionCalculatorIT {
         .directory(workDir)
         .redirectError(ProcessBuilder.Redirect.DISCARD)
         .start();
-      tag.waitFor();
+      var exitCode = tag.waitFor();
+      assertThat(exitCode).isEqualTo(0);
       assertThat(version()).hasToString("1.0.0");
     }
   }

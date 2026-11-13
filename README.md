@@ -51,12 +51,19 @@ Artifacts are published to
 Run the CLI with JBang (the `gh` repo matches the server id above):
 
 ```bash
-jbang --repos=gh=https://maven.pkg.github.com/xenoterracide/semver com.xenoterracide:semver-cli:<version>
+jbang --repos=gh=https://maven.pkg.github.com/xenoterracide/semver com.xenoterracide:semver-cli:VERSION
 ```
 
 Or add the library as a Maven dependency:
 
 ```xml
+<repositories>
+  <repository>
+    <id>gh</id>
+    <url>https://maven.pkg.github.com/xenoterracide/semver</url>
+  </repository>
+</repositories>
+
 <dependency>
   <groupId>com.xenoterracide</groupId>
   <artifactId>semver-calculator</artifactId>
@@ -72,7 +79,7 @@ Version distance is wrong from a shallow clone, so the CLI fails fast with an
 error telling you to fetch the full history. Locally, run:
 
 ```bash
-git fetch --all --filter blob:none
+git fetch --all --unshallow
 ```
 
 In GitHub Actions, use `actions/checkout` with `filter: "blob:none"` and

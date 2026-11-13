@@ -84,7 +84,8 @@ must land before the publish workflow, or it publishes wrong versions.
    wrong. The publish workflow's `fetch-depth: 0` means CI never trips it.
    GitHub's default checkout is shallow (`fetch-depth: 1`) — the
    gradle-semver publish job grew `fetch-depth: 0` + `fetch-tags: true`
-   (b609d50) for exactly this reason.
+   (b609d50) for exactly this reason. The recovery command is
+   `git fetch --all --unshallow`; in GitHub Actions, use `fetch-depth: 0`.
 
 ## Constraints
 

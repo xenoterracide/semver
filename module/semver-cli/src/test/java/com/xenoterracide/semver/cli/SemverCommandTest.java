@@ -13,6 +13,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.function.IntSupplier;
 import org.eclipse.jgit.api.Git;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.CleanupMode;
 import org.junit.jupiter.api.io.TempDir;
@@ -24,6 +25,11 @@ class SemverCommandTest {
 
   @TempDir(cleanup = CleanupMode.ON_SUCCESS)
   File projectDir;
+
+  @AfterEach
+  void clearStdErr() {
+    STDERR.remove();
+  }
 
   @Test
   void shallowClonePrintsErrorAndReturnsOne() throws Exception {
@@ -39,7 +45,7 @@ class SemverCommandTest {
     assertThat(exitCode).isEqualTo(1);
     assertThat(capturedErr())
       .contains("shallow clone")
-      .contains("git fetch --all --filter=blob:none")
+      .contains("git fetch --all --unshallow")
       .contains("fetch-depth: 0");
   }
 
