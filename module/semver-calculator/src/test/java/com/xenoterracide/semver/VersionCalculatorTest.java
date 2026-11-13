@@ -138,29 +138,38 @@ class VersionCalculatorTest {
   }
 
   @Test
-  void detachedHeadNoBranch() {
-    var metadata = createMetadata("v1.0.0", 0, null, "main", "abc123", GitStatus.CLEAN);
+  void noRemoteHeadTreatsCurrentBranchAsHead() {
+    var metadata = createMetadata("v1.0.0", 0, "main", null, "abc123", GitStatus.CLEAN);
 
     var version = VersionCalculator.calculate(metadata);
 
     assertThat(version.getMajor()).isEqualTo(1);
     assertThat(version.getMinor()).isEqualTo(0);
     assertThat(version.getPatch()).isEqualTo(0);
-    // detached HEAD is treated as topic branch
-    assertThat(version.getBuild()).containsExactly("branch", "unknown", "git", "0", "abc123");
+    assertThat(version.getPreRelease()).isEmpty();
+    assertThat(version.getBuild()).isEmpty();
   }
 
   @Test
-  void noRemotesNullHeadBranch() {
-    var metadata = new SimpleGitMetadata("v1.0.0", 0, 0, "main", null, "abc123", GitStatus.CLEAN, List.of());
+  void detachedHeadOnTagReturnsCleanVersion() {
+    var metadata = createMetadata("v1.0.0", 0, null, "develop", "abc123", GitStatus.CLEAN);
 
     var version = VersionCalculator.calculate(metadata);
 
     assertThat(version.getMajor()).isEqualTo(1);
     assertThat(version.getMinor()).isEqualTo(0);
     assertThat(version.getPatch()).isEqualTo(0);
-    // no origin remote, so current branch != head branch (null), treated as topic
-    assertThat(version.getBuild()).containsExactly("branch", "main", "git", "0", "abc123");
+    assertThat(version.getPreRelease()).isEmpty();
+    assertThat(version.getBuild()).isEmpty();
+  }
+
+  @Test
+  void detachedHeadAfterTagUsesHeadStyleMetadata() {
+    var metadata = createMetadata("v1.0.0", 2, null, "develop", "abc123", GitStatus.CLEAN);
+
+    var version = VersionCalculator.calculate(metadata);
+
+    assertThat(version).hasToString("1.0.1-alpha.0.2+git.2.abc123");
   }
 
   @Test
@@ -180,6 +189,17 @@ class VersionCalculatorTest {
     var version = VersionCalculator.calculate(metadata);
 
     assertThat(version).hasToString("1.0.1-alpha.0.5+branch.feature-x.git.11.abc123");
+  }
+
+  @Test
+  void shallowCloneThrows() {
+    var metadata = createMetadata("v1.0.0", 0, "main", "main", "abc123", GitStatus.CLEAN, 0, true);
+
+    assertThatThrownBy(() -> VersionCalculator.calculate(metadata))
+      .isInstanceOf(IllegalStateException.class)
+      .hasMessageContaining("shallow")
+      .hasMessageContaining("git fetch --all --filter=blob:none")
+      .hasMessageContaining("fetch-depth: 0");
   }
 
   // Helper methods
@@ -204,11 +224,37 @@ class VersionCalculatorTest {
     GitStatus status,
     long mergeBaseDistance
   ) {
-    var remote = headBranch != null ? new SimpleGitRemote("origin", headBranch) : null;
-    var remotes = remote != null ? java.util.List.<GitRemote>of(remote) : java.util.List.<GitRemote>of();
-    return new SimpleGitMetadata(tag, distance, mergeBaseDistance, branch, "fullsha123", shortSha, status, remotes);
+    return createMetadata(tag, distance, branch, headBranch, shortSha, status, mergeBaseDistance, false);
   }
 
+  // CHECKSTYLE.OFF: ParameterNumber - test helper needs every metadata field
+  private static GitMetadata createMetadata(
+    @Nullable String tag,
+    long distance,
+    @Nullable String branch,
+    @Nullable String headBranch,
+    String shortSha,
+    GitStatus status,
+    long mergeBaseDistance,
+    boolean isShallowClone
+  ) {
+    // CHECKSTYLE.ON: ParameterNumber
+    var remote = headBranch != null ? new SimpleGitRemote("origin", headBranch) : null;
+    var remotes = remote != null ? java.util.List.<GitRemote>of(remote) : java.util.List.<GitRemote>of();
+    return new SimpleGitMetadata(
+      tag,
+      distance,
+      mergeBaseDistance,
+      branch,
+      "fullsha123",
+      shortSha,
+      status,
+      remotes,
+      isShallowClone
+    );
+  }
+
+  // CHECKSTYLE.OFF: RecordComponentNumber - test record mirrors GitMetadata interface
   /**
    * Simple record implementation of GitMetadata for testing.
    */
@@ -220,8 +266,10 @@ class VersionCalculatorTest {
     @Nullable String commit,
     @Nullable String uniqueShort,
     GitStatus status,
-    List<GitRemote> remotes
+    List<GitRemote> remotes,
+    boolean isShallowClone
   ) implements GitMetadata {
+    // CHECKSTYLE.ON: RecordComponentNumber
     @Override
     public long distanceFromMergeBase() {
       return this.mergeBaseDistance;

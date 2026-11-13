@@ -9,6 +9,7 @@ import com.xenoterracide.git.GitMetadataFactory;
 import com.xenoterracide.git.GitStatus;
 import com.xenoterracide.semver.VersionCalculator;
 import java.io.File;
+import java.util.Objects;
 import java.util.concurrent.Callable;
 import org.jspecify.annotations.Nullable;
 import picocli.CommandLine;
@@ -65,15 +66,28 @@ public final class SemverCommand implements Callable<Integer> {
     }
 
     var metadata = createMetadata(this.path);
-    if (metadata == null || metadata.status() == GitStatus.NO_REPO) {
-      System.err.println("Error: Not a valid Git repository: " + this.path);
+    var error = validateMetadata(this.path, metadata);
+    if (error != null) {
+      System.err.println(error);
       return 1;
     }
 
-    var version = VersionCalculator.calculate(metadata);
+    var version = VersionCalculator.calculate(Objects.requireNonNull(metadata));
     System.out.println(version);
 
     return 0;
+  }
+
+  private static @Nullable String validateMetadata(File path, @Nullable GitMetadata metadata) {
+    if (metadata == null || metadata.status() == GitStatus.NO_REPO) {
+      return "Error: Not a valid Git repository: " + path;
+    }
+    if (metadata.isShallowClone()) {
+      var message =
+        "Error: shallow clone; run: git fetch --all --filter=blob:none," + " or set fetch-depth: 0 on actions/checkout";
+      return message;
+    }
+    return null;
   }
 
   private void configureLogging() {
@@ -92,9 +106,11 @@ public final class SemverCommand implements Callable<Integer> {
    * @param args command line arguments
    */
   public static void main(String[] args) {
-    var cmd = new CommandLine(new SemverCommand());
-    var exitCode = cmd.execute(args);
-    System.exit(exitCode);
+    System.exit(run(args));
+  }
+
+  static int run(String[] args) {
+    return new CommandLine(new SemverCommand()).execute(args);
   }
 
   // CHECKSTYLE.ON: UncommentedMain
