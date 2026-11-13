@@ -92,10 +92,28 @@ SPDX-License-Identifier: CC0-1.0
         <configuration>
           <archive>
             <manifest>
+              <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+              <addClasspath>true</addClasspath>
+              <classpathPrefix>lib/</classpathPrefix>
               <mainClass>com.xenoterracide.semver.cli.SemverCommand</mainClass>
             </manifest>
           </archive>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>copy-dependencies</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${project.build.directory}/lib</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>

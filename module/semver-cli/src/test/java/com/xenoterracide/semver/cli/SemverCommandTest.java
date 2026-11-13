@@ -43,10 +43,7 @@ class SemverCommandTest {
     );
 
     assertThat(exitCode).isEqualTo(1);
-    assertThat(capturedErr())
-      .contains("shallow clone")
-      .contains("git fetch --unshallow origin")
-      .contains("fetch-depth: 0");
+    assertThat(capturedErr()).contains("shallow clone", "git fetch --unshallow origin", "fetch-depth: 0");
   }
 
   @Test

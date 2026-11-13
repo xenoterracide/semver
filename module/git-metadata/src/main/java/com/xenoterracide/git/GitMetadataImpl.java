@@ -10,7 +10,7 @@ import static io.vavr.API.Match;
 import static io.vavr.Predicates.instanceOf;
 
 import io.vavr.control.Try;
-import java.io.File;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -135,7 +135,7 @@ final class GitMetadataImpl implements GitMetadata {
     return this.gitRepository()
       .mapTry(r -> {
         var dir = r.getCommonDirectory();
-        return dir != null && new File(dir, "shallow").length() > 0;
+        return dir != null && Files.size(dir.toPath().resolve("shallow")) > 0;
       })
       .getOrElse(false);
   }
