@@ -10,6 +10,7 @@ import static io.vavr.API.Match;
 import static io.vavr.Predicates.instanceOf;
 
 import io.vavr.control.Try;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -18,7 +19,6 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.RefNotFoundException;
 import org.eclipse.jgit.errors.RepositoryNotFoundException;
@@ -44,9 +44,6 @@ final class GitMetadataImpl implements GitMetadata {
 
   /** Separator used in Git ref paths. */
   private static final String GIT_SEPARATOR = "/";
-
-  /** Warning message for shallow clone detection. */
-  private static final String SHALLOW_CLONE_DETECTED = "shallow clone detected";
 
   /** Logger instance for this class. */
   private final Logger log = LoggerFactory.getLogger(this.getClass());
@@ -78,12 +75,15 @@ final class GitMetadataImpl implements GitMetadata {
   /**
    * Gets branch.
    *
-   * @return the branch
+   * @return the branch, or null when HEAD is detached
    */
   @Override
   public @Nullable String branch() {
     return this.gitRepository()
-      .mapTry(Repository::getBranch)
+      .mapTry(Repository::getFullBranch)
+      .filter(Objects::nonNull)
+      .filter(fullBranch -> fullBranch.startsWith(Constants.R_HEADS))
+      .map(fullBranch -> fullBranch.substring(Constants.R_HEADS.length()))
       .recover(NoSuchElementException.class, e -> null)
       .getOrNull();
   }
@@ -123,27 +123,25 @@ final class GitMetadataImpl implements GitMetadata {
   @Override
   public @Nullable String tag() {
     return this.git
-      .tryCommand(g -> g.describe().setMatch(VERSION_GLOB).setAbbrev(0))
+      .tryCommand(g -> g.describe().setMatch(VERSION_GLOB).setAbbrev(0).setTags(true))
       .recover(NoSuchElementException.class, e -> null)
       .recover(GitMetadataImpl.allWith(null))
       .onFailure(e -> this.log.error("failed to get tag", e))
       .getOrNull();
   }
 
-  long shortCount() {
-    return this.git
-      .tryCommand(git -> git.log().setMaxCount(5))
-      .map(IterableTools::of)
-      .map(Stream::count)
-      .getOrElse(0L);
+  @Override
+  public boolean isShallowClone() {
+    return this.gitRepository()
+      .mapTry(r -> {
+        var dir = r.getCommonDirectory();
+        return dir != null && Files.size(dir.toPath().resolve("shallow")) > 0;
+      })
+      .getOrElse(false);
   }
 
   @Override
   public long distance() {
-    var shortCount = this.shortCount();
-    if (shortCount < 4) {
-      this.log.warn(SHALLOW_CLONE_DETECTED);
-    }
     return Try.of(() -> new DistanceCalculator(this.git).apply(Constants.HEAD))
       .recover(NoSuchElementException.class, 0L)
       .recover(RepositoryNotFoundException.class, 0L)

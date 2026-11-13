@@ -11,6 +11,8 @@ import com.xenoterracide.git.GitMetadata;
 import com.xenoterracide.git.GitRemote;
 import com.xenoterracide.git.GitStatus;
 import java.util.List;
+import org.immutables.datatype.Data;
+import org.immutables.value.Value;
 import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
@@ -28,7 +30,17 @@ class VersionCalculatorTest {
 
   @Test
   void onExactTagHeadBranchReturnsCleanVersion() {
-    var metadata = createMetadata("v1.0.0", 0, "main", "main", "abc123", GitStatus.CLEAN);
+    var metadata = SimpleGitMetadata.builder()
+      .tag("v1.0.0")
+      .distance(0)
+      .mergeBaseDistance(0)
+      .branch("main")
+      .commit("fullsha123")
+      .uniqueShort("abc123")
+      .status(GitStatus.CLEAN)
+      .remotes(List.of(new SimpleGitRemote("origin", "main")))
+      .isShallowClone(false)
+      .build();
 
     var version = VersionCalculator.calculate(metadata);
 
@@ -41,7 +53,17 @@ class VersionCalculatorTest {
 
   @Test
   void onExactTagTopicBranchReturnsVersionWithBranchMetadata() {
-    var metadata = createMetadata("v1.0.0", 0, "feature-x", "main", "abc123", GitStatus.CLEAN);
+    var metadata = SimpleGitMetadata.builder()
+      .tag("v1.0.0")
+      .distance(0)
+      .mergeBaseDistance(0)
+      .branch("feature-x")
+      .commit("fullsha123")
+      .uniqueShort("abc123")
+      .status(GitStatus.CLEAN)
+      .remotes(List.of(new SimpleGitRemote("origin", "main")))
+      .isShallowClone(false)
+      .build();
 
     var version = VersionCalculator.calculate(metadata);
 
@@ -54,7 +76,17 @@ class VersionCalculatorTest {
 
   @Test
   void afterTagHeadBranchReturnsVersionWithPrerelease() {
-    var metadata = createMetadata("v1.0.0", 5, "main", "main", "abc123", GitStatus.CLEAN);
+    var metadata = SimpleGitMetadata.builder()
+      .tag("v1.0.0")
+      .distance(5)
+      .mergeBaseDistance(5)
+      .branch("main")
+      .commit("fullsha123")
+      .uniqueShort("abc123")
+      .status(GitStatus.CLEAN)
+      .remotes(List.of(new SimpleGitRemote("origin", "main")))
+      .isShallowClone(false)
+      .build();
 
     var version = VersionCalculator.calculate(metadata);
 
@@ -67,7 +99,17 @@ class VersionCalculatorTest {
 
   @Test
   void afterTagTopicBranchReturnsVersionWithBranchMetadata() {
-    var metadata = createMetadata("v1.0.0", 5, "feature-x", "main", "abc123", GitStatus.CLEAN, 3);
+    var metadata = SimpleGitMetadata.builder()
+      .tag("v1.0.0")
+      .distance(5)
+      .mergeBaseDistance(3)
+      .branch("feature-x")
+      .commit("fullsha123")
+      .uniqueShort("abc123")
+      .status(GitStatus.CLEAN)
+      .remotes(List.of(new SimpleGitRemote("origin", "main")))
+      .isShallowClone(false)
+      .build();
 
     var version = VersionCalculator.calculate(metadata);
 
@@ -80,7 +122,16 @@ class VersionCalculatorTest {
 
   @Test
   void noTagHeadBranchReturnsZeroVersionWithPrerelease() {
-    var metadata = createMetadata(null, 5, "main", "main", "abc123", GitStatus.CLEAN);
+    var metadata = SimpleGitMetadata.builder()
+      .distance(5)
+      .mergeBaseDistance(5)
+      .branch("main")
+      .commit("fullsha123")
+      .uniqueShort("abc123")
+      .status(GitStatus.CLEAN)
+      .remotes(List.of(new SimpleGitRemote("origin", "main")))
+      .isShallowClone(false)
+      .build();
 
     var version = VersionCalculator.calculate(metadata);
 
@@ -93,7 +144,16 @@ class VersionCalculatorTest {
 
   @Test
   void noTagTopicBranchReturnsZeroVersionWithBranchMetadata() {
-    var metadata = createMetadata(null, 5, "feature-x", "main", "abc123", GitStatus.CLEAN, 3);
+    var metadata = SimpleGitMetadata.builder()
+      .distance(5)
+      .mergeBaseDistance(3)
+      .branch("feature-x")
+      .commit("fullsha123")
+      .uniqueShort("abc123")
+      .status(GitStatus.CLEAN)
+      .remotes(List.of(new SimpleGitRemote("origin", "main")))
+      .isShallowClone(false)
+      .build();
 
     var version = VersionCalculator.calculate(metadata);
 
@@ -106,7 +166,17 @@ class VersionCalculatorTest {
 
   @Test
   void prereleaseTagAfterTagHeadBranchAppendsDistance() {
-    var metadata = createMetadata("v1.0.0-rc.1", 3, "main", "main", "abc123", GitStatus.CLEAN);
+    var metadata = SimpleGitMetadata.builder()
+      .tag("v1.0.0-rc.1")
+      .distance(3)
+      .mergeBaseDistance(3)
+      .branch("main")
+      .commit("fullsha123")
+      .uniqueShort("abc123")
+      .status(GitStatus.CLEAN)
+      .remotes(List.of(new SimpleGitRemote("origin", "main")))
+      .isShallowClone(false)
+      .build();
 
     var version = VersionCalculator.calculate(metadata);
 
@@ -119,7 +189,17 @@ class VersionCalculatorTest {
 
   @Test
   void dirtyWorkingTreeAfterTagAddsDirtyMarker() {
-    var metadata = createMetadata("v1.0.0", 3, "main", "main", "abc123", GitStatus.DIRTY);
+    var metadata = SimpleGitMetadata.builder()
+      .tag("v1.0.0")
+      .distance(3)
+      .mergeBaseDistance(3)
+      .branch("main")
+      .commit("fullsha123")
+      .uniqueShort("abc123")
+      .status(GitStatus.DIRTY)
+      .remotes(List.of(new SimpleGitRemote("origin", "main")))
+      .isShallowClone(false)
+      .build();
 
     var version = VersionCalculator.calculate(metadata);
 
@@ -128,7 +208,17 @@ class VersionCalculatorTest {
 
   @Test
   void tagWithoutVPrefixParsesCorrectly() {
-    var metadata = createMetadata("1.0.0", 0, "main", "main", "abc123", GitStatus.CLEAN);
+    var metadata = SimpleGitMetadata.builder()
+      .tag("1.0.0")
+      .distance(0)
+      .mergeBaseDistance(0)
+      .branch("main")
+      .commit("fullsha123")
+      .uniqueShort("abc123")
+      .status(GitStatus.CLEAN)
+      .remotes(List.of(new SimpleGitRemote("origin", "main")))
+      .isShallowClone(false)
+      .build();
 
     var version = VersionCalculator.calculate(metadata);
 
@@ -138,34 +228,82 @@ class VersionCalculatorTest {
   }
 
   @Test
-  void detachedHeadNoBranch() {
-    var metadata = createMetadata("v1.0.0", 0, null, "main", "abc123", GitStatus.CLEAN);
+  void noRemoteHeadTreatsCurrentBranchAsHead() {
+    var metadata = SimpleGitMetadata.builder()
+      .tag("v1.0.0")
+      .distance(0)
+      .mergeBaseDistance(0)
+      .branch("main")
+      .commit("fullsha123")
+      .uniqueShort("abc123")
+      .status(GitStatus.CLEAN)
+      .isShallowClone(false)
+      .build();
 
     var version = VersionCalculator.calculate(metadata);
 
     assertThat(version.getMajor()).isEqualTo(1);
     assertThat(version.getMinor()).isEqualTo(0);
     assertThat(version.getPatch()).isEqualTo(0);
-    // detached HEAD is treated as topic branch
-    assertThat(version.getBuild()).containsExactly("branch", "unknown", "git", "0", "abc123");
+    assertThat(version.getPreRelease()).isEmpty();
+    assertThat(version.getBuild()).isEmpty();
   }
 
   @Test
-  void noRemotesNullHeadBranch() {
-    var metadata = new SimpleGitMetadata("v1.0.0", 0, 0, "main", null, "abc123", GitStatus.CLEAN, List.of());
+  void detachedHeadOnTagReturnsCleanVersion() {
+    var metadata = SimpleGitMetadata.builder()
+      .tag("v1.0.0")
+      .distance(0)
+      .mergeBaseDistance(0)
+      .branch(null)
+      .commit("fullsha123")
+      .uniqueShort("abc123")
+      .status(GitStatus.CLEAN)
+      .remotes(List.of(new SimpleGitRemote("origin", "develop")))
+      .isShallowClone(false)
+      .build();
 
     var version = VersionCalculator.calculate(metadata);
 
     assertThat(version.getMajor()).isEqualTo(1);
     assertThat(version.getMinor()).isEqualTo(0);
     assertThat(version.getPatch()).isEqualTo(0);
-    // no origin remote, so current branch != head branch (null), treated as topic
-    assertThat(version.getBuild()).containsExactly("branch", "main", "git", "0", "abc123");
+    assertThat(version.getPreRelease()).isEmpty();
+    assertThat(version.getBuild()).isEmpty();
+  }
+
+  @Test
+  void detachedHeadAfterTagUsesHeadStyleMetadata() {
+    var metadata = SimpleGitMetadata.builder()
+      .tag("v1.0.0")
+      .distance(2)
+      .mergeBaseDistance(2)
+      .branch(null)
+      .commit("fullsha123")
+      .uniqueShort("abc123")
+      .status(GitStatus.CLEAN)
+      .remotes(List.of(new SimpleGitRemote("origin", "develop")))
+      .isShallowClone(false)
+      .build();
+
+    var version = VersionCalculator.calculate(metadata);
+
+    assertThat(version).hasToString("1.0.1-alpha.0.2+git.2.abc123");
   }
 
   @Test
   void afterTagTopicBranchUsesMergeBaseDistance() {
-    var metadata = createMetadata("v1.0.0", 5, "feature-x", "main", "abc123", GitStatus.CLEAN, 3);
+    var metadata = SimpleGitMetadata.builder()
+      .tag("v1.0.0")
+      .distance(5)
+      .mergeBaseDistance(3)
+      .branch("feature-x")
+      .commit("fullsha123")
+      .uniqueShort("abc123")
+      .status(GitStatus.CLEAN)
+      .remotes(List.of(new SimpleGitRemote("origin", "main")))
+      .isShallowClone(false)
+      .build();
 
     var version = VersionCalculator.calculate(metadata);
 
@@ -175,44 +313,50 @@ class VersionCalculatorTest {
 
   @Test
   void mergeBaseDistanceLargerThanTagDistance() {
-    var metadata = createMetadata("v1.0.0", 5, "feature-x", "main", "abc123", GitStatus.CLEAN, 11);
+    var metadata = SimpleGitMetadata.builder()
+      .tag("v1.0.0")
+      .distance(5)
+      .mergeBaseDistance(11)
+      .branch("feature-x")
+      .commit("fullsha123")
+      .uniqueShort("abc123")
+      .status(GitStatus.CLEAN)
+      .remotes(List.of(new SimpleGitRemote("origin", "main")))
+      .isShallowClone(false)
+      .build();
 
     var version = VersionCalculator.calculate(metadata);
 
     assertThat(version).hasToString("1.0.1-alpha.0.5+branch.feature-x.git.11.abc123");
   }
 
-  // Helper methods
+  @Test
+  void shallowCloneThrows() {
+    var metadata = SimpleGitMetadata.builder()
+      .tag("v1.0.0")
+      .distance(0)
+      .mergeBaseDistance(0)
+      .branch("main")
+      .commit("fullsha123")
+      .uniqueShort("abc123")
+      .status(GitStatus.CLEAN)
+      .remotes(List.of(new SimpleGitRemote("origin", "main")))
+      .isShallowClone(true)
+      .build();
 
-  private static GitMetadata createMetadata(
-    @Nullable String tag,
-    long distance,
-    @Nullable String branch,
-    @Nullable String headBranch,
-    String shortSha,
-    GitStatus status
-  ) {
-    return createMetadata(tag, distance, branch, headBranch, shortSha, status, distance);
-  }
-
-  private static GitMetadata createMetadata(
-    @Nullable String tag,
-    long distance,
-    @Nullable String branch,
-    @Nullable String headBranch,
-    String shortSha,
-    GitStatus status,
-    long mergeBaseDistance
-  ) {
-    var remote = headBranch != null ? new SimpleGitRemote("origin", headBranch) : null;
-    var remotes = remote != null ? java.util.List.<GitRemote>of(remote) : java.util.List.<GitRemote>of();
-    return new SimpleGitMetadata(tag, distance, mergeBaseDistance, branch, "fullsha123", shortSha, status, remotes);
+    assertThatThrownBy(() -> VersionCalculator.calculate(metadata))
+      .isInstanceOf(IllegalStateException.class)
+      .hasMessageContaining("shallow")
+      .hasMessageContaining("git fetch --unshallow origin")
+      .hasMessageContaining("fetch-depth: 0");
   }
 
   /**
    * Simple record implementation of GitMetadata for testing.
    */
-  private record SimpleGitMetadata(
+  @Value.Builder
+  @Data
+  record SimpleGitMetadata(
     @Nullable String tag,
     long distance,
     long mergeBaseDistance,
@@ -220,18 +364,23 @@ class VersionCalculatorTest {
     @Nullable String commit,
     @Nullable String uniqueShort,
     GitStatus status,
-    List<GitRemote> remotes
+    List<GitRemote> remotes,
+    boolean isShallowClone
   ) implements GitMetadata {
     @Override
     public long distanceFromMergeBase() {
       return this.mergeBaseDistance;
+    }
+
+    static SimpleGitMetadataBuilder builder() {
+      return new SimpleGitMetadataBuilder();
     }
   }
 
   /**
    * Simple record implementation of GitRemote for testing.
    */
-  private record SimpleGitRemote(String name, String headBranch) implements GitRemote {
+  record SimpleGitRemote(String name, String headBranch) implements GitRemote {
     @Override
     public String headBranchRefName() {
       return headBranch != null ? "refs/remotes/" + name + "/" + headBranch : null;

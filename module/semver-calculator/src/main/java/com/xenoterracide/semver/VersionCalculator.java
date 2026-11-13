@@ -37,6 +37,12 @@ public final class VersionCalculator {
    */
   public static Semver calculate(GitMetadata metadata) {
     Objects.requireNonNull(metadata, "metadata must not be null");
+    if (metadata.isShallowClone()) {
+      throw new IllegalStateException(
+        "cannot calculate version from a shallow clone; run: git fetch --unshallow origin," +
+          " or set fetch-depth: 0 on actions/checkout"
+      );
+    }
     var ctx = toGitContext(metadata);
     var strategy = VersionStrategyFactory.determineStrategy(ctx);
     return strategy.calculate();
@@ -53,7 +59,7 @@ public final class VersionCalculator {
     var distance = metadata.distance();
     var branch = metadata.branch();
     var headBranch = extractHeadBranch(metadata);
-    var isHeadBranch = branch != null && branch.equals(headBranch);
+    var isHeadBranch = branch == null || headBranch == null || Objects.equals(branch, headBranch);
     var distanceFromMergeBase = isHeadBranch ? distance : metadata.distanceFromMergeBase();
 
     return GitContext.builder()
@@ -67,7 +73,7 @@ public final class VersionCalculator {
       .shortSha(metadata.uniqueShort())
       .fullSha(metadata.commit())
       .isDirty(metadata.status().name().equals("DIRTY"))
-      .isShallowClone(false)
+      .isShallowClone(metadata.isShallowClone())
       .build();
   }
 
