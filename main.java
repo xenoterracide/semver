@@ -3,10 +3,11 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 // JAVA 17+
-// REPOS mavencentral,mavenlocal
+// REPOS mavencentral,mavenlocal,gh=https://maven.pkg.github.com/xenoterracide/semver
 
-// Dependencies will be resolved from Maven Central once published
-// For now, requires 'mvn install' to be run first
+// The 0.0.0 pin resolves from mavenlocal for development ('mvn install' first).
+// Consumers run jbang com.xenoterracide:semver-cli:<version>, resolved from the
+// gh repo, which matches the settings.xml server id gh.
 //DEPS com.xenoterracide:semver-cli:0.0.0
 //DEPS org.slf4j:slf4j-simple:2.0.17
 
