@@ -11,6 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.function.Supplier;
 import org.eclipse.jgit.api.Git;
@@ -249,6 +250,50 @@ class GitMetadataImplTest {
       git.checkout().setName(commitA.getId().getName()).call();
       var pg = new GitMetadataImpl(() -> git);
       assertThat(pg.distanceFromMergeBase()).isEqualTo(pg.distance());
+    }
+  }
+
+  @Test
+  void tagFindsLightweightTag() throws GitAPIException {
+    try (var git = Git.init().setDirectory(projectDir).call()) {
+      git.commit().setMessage("initial commit").call();
+      git.tag().setName("v1.0.0").setAnnotated(false).call();
+
+      var pg = new GitMetadataImpl(() -> git);
+      assertThat(pg.tag()).isEqualTo("v1.0.0");
+    }
+  }
+
+  @Test
+  void branchIsNullWhenDetached() throws GitAPIException {
+    try (var git = Git.init().setDirectory(projectDir).call()) {
+      var initial = git.commit().setMessage("initial commit").call();
+      git.checkout().setName(initial.getId().getName()).call();
+
+      var pg = new GitMetadataImpl(() -> git);
+      assertThat(pg.branch()).isNull();
+    }
+  }
+
+  @Test
+  void isShallowCloneFalseForFreshInit() throws GitAPIException {
+    try (var git = Git.init().setDirectory(projectDir).call()) {
+      git.commit().setMessage("initial commit").call();
+
+      var pg = new GitMetadataImpl(() -> git);
+      assertThat(pg.isShallowClone()).isFalse();
+    }
+  }
+
+  @Test
+  void isShallowCloneTrueWhenShallowFileExists() throws Exception {
+    try (var git = Git.init().setDirectory(projectDir).call()) {
+      var initial = git.commit().setMessage("initial commit").call();
+      var sha = initial.getId().getName();
+      Files.writeString(new File(git.getRepository().getDirectory(), "shallow").toPath(), sha, StandardCharsets.UTF_8);
+
+      var pg = new GitMetadataImpl(() -> git);
+      assertThat(pg.isShallowClone()).isTrue();
     }
   }
 

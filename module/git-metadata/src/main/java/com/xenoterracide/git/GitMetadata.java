@@ -75,4 +75,13 @@ public interface GitMetadata {
    * @return the configured remotes or an empty list
    */
   List<GitRemote> remotes();
+
+  /**
+   * Whether this checkout is a shallow clone.
+   *
+   * @return true when the repository is a shallow clone
+   */
+  default boolean isShallowClone() {
+    return false;
+  }
 }
