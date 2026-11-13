@@ -42,6 +42,9 @@ class VersionCalculatorIT {
   @TempDir(cleanup = CleanupMode.ON_SUCCESS)
   File workDir;
 
+  @TempDir(cleanup = CleanupMode.ON_SUCCESS)
+  File localDir;
+
   @Test
   @SuppressWarnings({ "checkstyle:JavaNCSS", "checkstyle:ExecutableStatementCount" })
   void headBranch() throws GitAPIException, IOException, InterruptedException, URISyntaxException {
@@ -116,8 +119,48 @@ class VersionCalculatorIT {
     }
   }
 
+  @Test
+  void tagPushCheckoutReturnsCleanVersion()
+    throws GitAPIException, IOException, InterruptedException, URISyntaxException {
+    try (var git = setupRepository()) {
+      git.tag().setName("v1.0.0").call();
+      git.push().setPushTags().call();
+      git.checkout().setName("v1.0.0").call();
+      assertThat(version()).hasToString("1.0.0");
+    }
+  }
+
+  @Test
+  void localRepositoryWithoutOriginTreatsBranchAsHead() throws GitAPIException, IOException {
+    try (var git = Git.init().setDirectory(localDir).setInitialBranch(MAIN).call()) {
+      git.commit().setMessage("initial commit").call();
+      git.tag().setName("v1.0.0").call();
+      assertThat(version(localDir)).hasToString("1.0.0");
+
+      git.commit().setMessage("after v1.0.0").call();
+      assertThat(version(localDir)).asString().startsWith("1.0.1-alpha.0.1+git.1.");
+    }
+  }
+
+  @Test
+  void lightweightTagFromGitCliIsDetected()
+    throws GitAPIException, IOException, InterruptedException, URISyntaxException {
+    try (var ignored = setupRepository()) {
+      var tag = new ProcessBuilder("git", "tag", "v1.0.0")
+        .directory(workDir)
+        .redirectError(ProcessBuilder.Redirect.DISCARD)
+        .start();
+      tag.waitFor();
+      assertThat(version()).hasToString("1.0.0");
+    }
+  }
+
   private Semver version() {
-    var metadata = GitMetadataFactory.create(workDir);
+    return version(workDir);
+  }
+
+  private static Semver version(File directory) {
+    var metadata = GitMetadataFactory.create(directory);
     assertThat(metadata).isNotNull();
     return VersionCalculator.calculate(metadata);
   }
