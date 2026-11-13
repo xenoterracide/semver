@@ -11,15 +11,55 @@ jobs:
       actions: write
       contents: read
       packages: read
-  jbang:
+  publish:
+    needs: build
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      packages: write
+    concurrency:
+      group: publish
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.ref_name }}
+          filter: "blob:none"
+          fetch-depth: 0
+          fetch-tags: true
+      - run: git remote set-head --auto origin
       - uses: actions/setup-java@77dd5b2ce225ea11469928ac317850245a74ae78 # v6.2.0
         with:
           java-version: "25.0.5+8.0.LTS"
           distribution: "temurin"
-      - run: ./mvnw install -DskipTests -DskipITs -q --batch-mode
       - uses: jbangdev/setup-jbang@2b1b465a7b75f4222b81426f23a01e013aa7b95c # v0.1.1
-      - run: jbang main.java --help
-      - run: jbang main.java
+      - name: Configure Maven settings for GitHub Packages
+        run: |
+          mkdir -p ~/.m2
+          cat > ~/.m2/settings.xml <<'EOF'
+          <settings>
+            <servers>
+              <server>
+                <id>gh</id>
+                <username>${{ github.actor }}</username>
+                <password>${{ github.token }}</password>
+              </server>
+            </servers>
+          </settings>
+          EOF
+      - run: echo "${{ secrets.GPG_SECRET_KEY }}" | gpg --batch --import
+      - run: ./mvnw -B -q --no-transfer-progress -DskipTests -DskipITs install
+      - run: echo "VERSION=$(jbang --quiet main.java)" >> "$GITHUB_ENV"
+      - run: ./mvnw -B -q --no-transfer-progress versions:set -DnewVersion="$VERSION" -DprocessAllModules -DgenerateBackupPoms=false
+      - run: ./mvnw -B -q --no-transfer-progress -DskipTests -DskipITs -Psign deploy -Dgpg.passphrase="$GPG_PASSPHRASE"
+        env:
+          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+      - name: Verify published artifact is consumable
+        run: |
+          test "$(jbang --quiet --repos=gh=https://maven.pkg.github.com/xenoterracide/semver "com.xenoterracide:semver-cli:$VERSION")" = "$VERSION"
+          test "$(jbang --quiet --repos=gh=https://maven.pkg.github.com/xenoterracide/semver "com.xenoterracide:semver-cli:0+")" = "$VERSION"
+      - name: Create GitHub release
+        if: startsWith(github.ref, 'refs/tags/')
+        run: gh release create "$GITHUB_REF_NAME" --generate-notes --verify-tag module/*/target/*.jar
+        env:
+          GH_TOKEN: ${{ github.token }}
