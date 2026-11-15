@@ -1,6 +1,6 @@
 {
   "name": "semver",
-  "packageManager": "pnpm@12.18.0",
+  "packageManager": "pnpm@12.20.0",
   "private": true,
   "license": "GPL-3.0-or-later",
   "devDependencies": {
