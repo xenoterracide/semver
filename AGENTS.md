@@ -31,12 +31,12 @@ Read these files instead of trusting a copy of their contents here.
 
 ## Build and Test
 
-```bash
-npm run contribute # bootstrap once after clone: tools, deps, hooks
-pnpm lint # prettier + REUSE
-./mvnw -q verify # compile, test, checkstyle, spotbugs, jacoco
-./mvnw -q test # unit tests only
-```
+- `npm run contribute` — bootstrap tools, dependencies, and hooks.
+- `pnpm lint` — prettier, shellcheck, Maven lint, and REUSE. `git push` runs it.
+- `pnpm check` — lint.
+- `pnpm lint:reuse` — REUSE check alone.
+- `./mvnw -q verify` — compile, test, checkstyle, spotbugs, jacoco.
+- `./mvnw -q test` — unit tests only.
 
 `npm run contribute` heals the toolchain through
 `.config/git/hooks/heal.sh`. A failed heal never breaks a checkout.
@@ -109,6 +109,7 @@ Hooks live in `.config/git/hooks`:
 - `commit-msg` — validates the conventional commit format.
 - `post-checkout` and `post-merge` — heal the toolchain when lockfiles
   change.
+- `pre-push` — runs `pnpm lint` before pushing.
 
 ## Template Updates
 
@@ -117,7 +118,7 @@ Shared tooling comes from
 through copier. Refresh it with:
 
 ```bash
-uv run --group dev copier update --trust
+uvx copier update --trust
 ```
 
 Conflicts land as `.rej` files. Resolve them by hand. Renovate opens an
