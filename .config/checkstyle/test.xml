@@ -14,10 +14,14 @@ SPDX-License-Identifier: CC0-1.0
     <property name="checks" value="AnnotationLocation" />
   </module>
 
+<<<<<<< before updating
   <!--- PRETTIER START -->
 
   <!--- PRETTIER END -->
 
+=======
+  
+>>>>>>> after updating
   <module name="TreeWalker">
     <module name="OuterTypeFilename" />
     <!-- https://checkstyle.org/config_filters.html#SuppressionFilter -->
