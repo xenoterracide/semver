@@ -32,7 +32,7 @@ Read these files instead of trusting a copy of their contents here.
 ## Build and Test
 
 - `npm run contribute` — bootstrap tools, dependencies, and hooks.
-- `pnpm lint` — prettier, shellcheck, Maven lint, and REUSE. `git push` runs it.
+- `pnpm lint` — prettier, shellcheck, Maven lint, and REUSE.
 - `pnpm check` — lint.
 - `pnpm lint:reuse` — REUSE check alone.
 - `./mvnw -q verify` — compile, test, checkstyle, spotbugs, jacoco.
