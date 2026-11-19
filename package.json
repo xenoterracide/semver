@@ -13,13 +13,15 @@
     "prettier-plugin-toml": "^4.0.0"
   },
   "scripts": {
-    "check": "pnpm lint:prettier",
+    "check": "pnpm lint",
     "contribute": "sh .config/git/hooks/heal.sh",
     "lint:prettier": "prettier --ignore-unknown --cache --check '**'",
-    "lint:reuse": "pnpm reuse download --all && pnpm reuse lint",
+    "lint:reuse": "pnpm reuse lint",
+    "lint:shellcheck": "git ls-files -z -- '*.sh' '.envrc' ':(glob)**/git/hooks/*' | xargs -0 shellcheck",
     "precontribute": "npm run setup:corepack",
     "reuse": "uv run --frozen --group dev reuse",
     "setup:corepack": "npm install --global corepack && mkdir -p ~/.local/bin && corepack enable --install-directory ~/.local/bin",
-    "lint": "pnpm lint:prettier && pnpm lint:reuse"
+    "lint:maven": "./mvnw -B -q --no-transfer-progress test-compile checkstyle:check@checkstyle-main checkstyle:check@checkstyle-test spotbugs:check@spotbugs-check",
+    "lint": "pnpm lint:prettier && pnpm lint:shellcheck && pnpm lint:maven && pnpm lint:reuse"
   }
 }

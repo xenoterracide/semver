@@ -8,9 +8,19 @@ SPDX-License-Identifier: CC-BY-NC-SA-4.0
 
 Java library for semantic version calculation from Git metadata. Three modules:
 
+<<<<<<< before updating
 - **git-metadata** — reads tags, commits, branches, remotes, and status.
 - **semver-calculator** — turns that metadata into a version.
 - **semver-cli** — command-line entry point. `main.java` is a JBang wrapper.
+=======
+- `npm run contribute` — bootstrap tooling (run once after clone)
+- `pnpm lint` — the pre-push set: prettier, shellcheck, reuse, plus
+  eslint (TypeScript) or checkstyle + spotbugs via Maven (java)
+- `pnpm check` — lint
+- `pnpm lint:reuse` — REUSE check alone; the first commit's pre-commit
+  hook seeds `LICENSES`
+- `./mvnw -q verify` — Maven build + checkstyle + spotbugs + jacoco + tests
+>>>>>>> after updating
 
 ## Source of Truth
 
