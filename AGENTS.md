@@ -8,19 +8,9 @@ SPDX-License-Identifier: CC-BY-NC-SA-4.0
 
 Java library for semantic version calculation from Git metadata. Three modules:
 
-<<<<<<< before updating
 - **git-metadata** — reads tags, commits, branches, remotes, and status.
 - **semver-calculator** — turns that metadata into a version.
 - **semver-cli** — command-line entry point. `main.java` is a JBang wrapper.
-=======
-- `npm run contribute` — bootstrap tooling (run once after clone)
-- `pnpm lint` — the pre-push set: prettier, shellcheck, reuse, plus
-  eslint (TypeScript) or checkstyle + spotbugs via Maven (java)
-- `pnpm check` — lint
-- `pnpm lint:reuse` — REUSE check alone; the first commit's pre-commit
-  hook seeds `LICENSES`
-- `./mvnw -q verify` — Maven build + checkstyle + spotbugs + jacoco + tests
->>>>>>> after updating
 
 ## Source of Truth
 
@@ -41,12 +31,12 @@ Read these files instead of trusting a copy of their contents here.
 
 ## Build and Test
 
-```bash
-npm run contribute # bootstrap once after clone: tools, deps, hooks
-pnpm lint # prettier + REUSE
-./mvnw -q verify # compile, test, checkstyle, spotbugs, jacoco
-./mvnw -q test # unit tests only
-```
+- `npm run contribute` — bootstrap tools, dependencies, and hooks.
+- `pnpm lint` — prettier, shellcheck, Maven lint, and REUSE. `git push` runs it.
+- `pnpm check` — lint.
+- `pnpm lint:reuse` — REUSE check alone.
+- `./mvnw -q verify` — compile, test, checkstyle, spotbugs, jacoco.
+- `./mvnw -q test` — unit tests only.
 
 `npm run contribute` heals the toolchain through
 `.config/git/hooks/heal.sh`. A failed heal never breaks a checkout.
@@ -119,6 +109,7 @@ Hooks live in `.config/git/hooks`:
 - `commit-msg` — validates the conventional commit format.
 - `post-checkout` and `post-merge` — heal the toolchain when lockfiles
   change.
+- `pre-push` — runs `pnpm lint` before pushing.
 
 ## Template Updates
 
@@ -127,7 +118,7 @@ Shared tooling comes from
 through copier. Refresh it with:
 
 ```bash
-uv run --group dev copier update --trust
+uvx copier update --trust
 ```
 
 Conflicts land as `.rej` files. Resolve them by hand. Renovate opens an
