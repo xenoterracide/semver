@@ -299,7 +299,8 @@ class GitMetadataImplTest {
 
   @Test
   void isShallowCloneTrueForLinkedWorktree(@TempDir(cleanup = CleanupMode.ON_SUCCESS) File worktreeDir)
-    throws GitAPIException, IOException, InterruptedException {
+    throws GitAPIException, IOException, InterruptedException
+  {
     try (var git = Git.init().setDirectory(projectDir).call()) {
       var initial = git.commit().setMessage("initial commit").call();
       var sha = initial.getId().getName();
@@ -325,7 +326,8 @@ class GitMetadataImplTest {
   }
 
   private static Git cloneWithOriginHead(File bareRemote, File devDir, File workDir)
-    throws GitAPIException, IOException, InterruptedException, URISyntaxException {
+    throws GitAPIException, IOException, InterruptedException, URISyntaxException
+  {
     var uri = bareRemote.toURI().toASCIIString();
     Git.init().setDirectory(bareRemote).setBare(true).call().close();
     try (var dev = Git.init().setDirectory(devDir).call()) {
