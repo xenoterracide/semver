@@ -31,7 +31,7 @@ jobs:
       - run: git remote set-head --auto origin
       - uses: actions/setup-java@v6
         with:
-          java-version: "25.0.5+8.0.LTS"
+          java-version: "25.0.5+100000002.0.LTS"
           distribution: "temurin"
           cache: maven
       - uses: jbangdev/setup-jbang@v0.1.1

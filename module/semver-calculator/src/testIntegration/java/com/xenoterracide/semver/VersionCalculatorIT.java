@@ -121,7 +121,8 @@ class VersionCalculatorIT {
 
   @Test
   void tagPushCheckoutReturnsCleanVersion()
-    throws GitAPIException, IOException, InterruptedException, URISyntaxException {
+    throws GitAPIException, IOException, InterruptedException, URISyntaxException
+  {
     try (var git = setupRepository()) {
       git.tag().setName("v1.0.0").call();
       git.push().setPushTags().call();
@@ -144,7 +145,8 @@ class VersionCalculatorIT {
 
   @Test
   void lightweightTagFromGitCliIsDetected()
-    throws GitAPIException, IOException, InterruptedException, URISyntaxException {
+    throws GitAPIException, IOException, InterruptedException, URISyntaxException
+  {
     try (var ignored = setupRepository()) {
       var tag = new ProcessBuilder("git", "tag", "v1.0.0")
         .directory(workDir)
