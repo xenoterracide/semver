@@ -63,7 +63,8 @@ class VersionOrderingIT {
 
   @Test
   void topicBranchSortsHigherThanHeadBranch()
-    throws GitAPIException, IOException, InterruptedException, URISyntaxException {
+    throws GitAPIException, IOException, InterruptedException, URISyntaxException
+  {
     try (var git = setupRepository()) {
       git.tag().setName("v1.0.0").call();
       git.commit().setMessage("first").call();
