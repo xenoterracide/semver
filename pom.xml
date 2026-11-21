@@ -46,9 +46,15 @@ SPDX-License-Identifier: CC0-1.0
     <maven-jar-plugin.version>3.5.1</maven-jar-plugin.version>
     <maven-resources-plugin.version>3.5.0</maven-resources-plugin.version>
     <maven-compiler-plugin.version>3.16.0</maven-compiler-plugin.version>
+<<<<<<< before updating
     <maven-source-plugin.version>3.4.0</maven-source-plugin.version>
     <maven-surefire-plugin.version>3.6.1</maven-surefire-plugin.version>
     <maven-failsafe-plugin.version>3.6.1</maven-failsafe-plugin.version>
+=======
+    <maven-surefire-plugin.version>3.6.0</maven-surefire-plugin.version>
+    <maven-failsafe-plugin.version>3.6.0</maven-failsafe-plugin.version>
+    <build-helper-maven-plugin.version>3.8.0</build-helper-maven-plugin.version>
+>>>>>>> after updating
     <maven-checkstyle-plugin.version>3.6.0</maven-checkstyle-plugin.version>
     <checkstyle.version>14.4.0</checkstyle.version>
     <spotbugs-maven-plugin.version>4.10.5.0</spotbugs-maven-plugin.version>
@@ -281,6 +287,11 @@ SPDX-License-Identifier: CC0-1.0
         </plugin>
 
         <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>build-helper-maven-plugin</artifactId>
+          <version>${build-helper-maven-plugin.version}</version>
+        </plugin>
+        <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-checkstyle-plugin</artifactId>
           <version>${maven-checkstyle-plugin.version}</version>
@@ -371,6 +382,36 @@ SPDX-License-Identifier: CC0-1.0
     </pluginManagement>
 
     <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>add-test-fixtures</id>
+            <phase>generate-test-sources</phase>
+            <goals>
+              <goal>add-test-source</goal>
+            </goals>
+            <configuration>
+              <sources>
+                <source>src/testFixtures/java</source>
+              </sources>
+            </configuration>
+          </execution>
+          <execution>
+            <id>add-integration-test-sources</id>
+            <phase>generate-test-sources</phase>
+            <goals>
+              <goal>add-test-source</goal>
+            </goals>
+            <configuration>
+              <sources>
+                <source>src/testIntegration/java</source>
+              </sources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
@@ -466,9 +507,13 @@ SPDX-License-Identifier: CC0-1.0
               <goal>check</goal>
             </goals>
             <configuration>
+<<<<<<< before updating
               <configLocation>
                 ${maven.multiModuleProjectDirectory}/.config/checkstyle/testIntegration.xml
               </configLocation>
+=======
+              <configLocation>${maven.multiModuleProjectDirectory}/.config/checkstyle/testIntegration.xml</configLocation>
+>>>>>>> after updating
               <sourceDirectories>
                 <sourceDirectory>${project.basedir}/src/testIntegration/java</sourceDirectory>
               </sourceDirectories>

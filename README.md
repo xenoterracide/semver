@@ -99,7 +99,7 @@ shared tooling lives in
 [xenoterracide/base-template](https://github.com/xenoterracide/base-template).
 Refresh it with:
 
-    uv run --group dev copier update --trust
+    uvx copier update --trust
 
 Renovate opens an update PR whenever the template tags a release. Merge it
 like any other dependency update.
