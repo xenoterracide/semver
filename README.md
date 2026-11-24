@@ -92,18 +92,6 @@ GitHub Actions tag-push checkouts can miss the tag entirely. See
 explicit `ref: ${{ github.ref_name }}` and `fetch-tags: true`, or the tag may not
 resolve.
 
-## Source of truth
-
-This project is managed with [copier](https://copier.readthedocs.io). The
-shared tooling lives in
-[xenoterracide/base-template](https://github.com/xenoterracide/base-template).
-Refresh it with:
-
-Gradle (Kotlin or Groovy DSL):
-
-Renovate opens an update PR whenever the template tags a release. Merge it
-like any other dependency update.
-
 ## AI Agent Skills
 
 This repository uses skills from
