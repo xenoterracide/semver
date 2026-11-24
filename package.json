@@ -21,7 +21,8 @@
     "precontribute": "npm run setup:corepack",
     "reuse": "uv run --frozen --group dev reuse",
     "setup:corepack": "npm install --global corepack && mkdir -p ~/.local/bin && corepack enable --install-directory ~/.local/bin",
-    "lint:maven": "./mvnw -B -q --no-transfer-progress test-compile checkstyle:check@checkstyle-main checkstyle:check@checkstyle-test spotbugs:check@spotbugs-check",
-    "lint": "pnpm lint:prettier && pnpm lint:shellcheck && pnpm lint:maven && pnpm lint:reuse"
+    "lint:maven": "./mvnw -B -q --no-transfer-progress package -DskipTests checkstyle:check@checkstyle-main checkstyle:check@checkstyle-test checkstyle:check@checkstyle-testFixtures checkstyle:check@checkstyle-testIntegration spotbugs:check@spotbugs-check",
+    "lint": "pnpm lint:prettier && pnpm lint:shellcheck && pnpm lint:maven && pnpm lint:reuse",
+    "verify": "pnpm lint && ./mvnw -q verify"
   }
 }

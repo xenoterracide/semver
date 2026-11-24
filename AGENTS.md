@@ -14,6 +14,7 @@ Java library for semantic version calculation from Git metadata. Three modules:
 
 ## Source of Truth
 
+<<<<<<< before updating
 Read these files instead of trusting a copy of their contents here.
 
 | For                       | See                                |
@@ -70,6 +71,14 @@ Exports `com.xenoterracide.semver`:
 Strategies in the `internal` package are selected by tag relationship
 (`ON_EXACT_TAG`, `AFTER_TAG`, `NO_TAG`) and branch type (`HEAD_BRANCH`,
 `TOPIC_BRANCH`):
+=======
+- Template: `copier.yml` in [xenoterracide/base-template](https://github.com/xenoterracide/base-template)
+- Answers: `.copier-answers.yml` in this repo
+- Agent project config: `.config/agent/project.yaml` — tracker facts for agent workflows.
+- Updates: `uvx copier update --trust` refreshes from template
+- Hooks heal the toolchain: `.envrc`, `contribute`, and the post hooks call
+  `.config/git/hooks/heal.sh`. A failed heal never breaks a checkout.
+>>>>>>> after updating
 
 - `OnExactTagHeadStrategy`, `OnExactTagTopicStrategy`
 - `AfterTagHeadStrategy`, `AfterTagTopicStrategy`
