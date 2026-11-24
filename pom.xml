@@ -264,6 +264,8 @@ SPDX-License-Identifier: CC0-1.0
                 <release>25</release>
                 <compilerArgs>
                   <arg>-parameters</arg>
+                  <arg>-Aimmutables.annotations.pick=jakarta</arg>
+                  <arg>-Aimmutables.guava.suppress</arg>
                   <arg>--should-stop=ifError=FLOW</arg>
                   <arg>-XDcompilePolicy=simple</arg>
                   <!-- Test config: NullAway and JavaTimeDefaultTimeZone disabled -->
@@ -278,6 +280,9 @@ SPDX-License-Identifier: CC0-1.0
               <goals>
                 <goal>testCompile</goal>
               </goals>
+              <configuration>
+                <release>25</release>
+              </configuration>
             </execution>
           </executions>
         </plugin>
@@ -438,6 +443,7 @@ SPDX-License-Identifier: CC0-1.0
               <goal>testCompile</goal>
             </goals>
             <configuration>
+              <release>25</release>
               <outputDirectory>${project.build.directory}/test-fixtures-classes</outputDirectory>
               <generatedTestSourcesDirectory>
                 ${project.build.directory}/generated-test-sources/test-fixtures-annotations
@@ -454,6 +460,7 @@ SPDX-License-Identifier: CC0-1.0
               <goal>testCompile</goal>
             </goals>
             <configuration>
+              <release>25</release>
               <outputDirectory>${project.build.directory}/integration-test-classes</outputDirectory>
               <generatedTestSourcesDirectory>
                 ${project.build.directory}/generated-test-sources/test-integration-annotations
