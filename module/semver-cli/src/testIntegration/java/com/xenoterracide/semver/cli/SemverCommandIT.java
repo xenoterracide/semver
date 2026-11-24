@@ -43,6 +43,7 @@ class SemverCommandIT {
         .filter(p -> p.getFileName().toString().endsWith(".jar"))
         .filter(p -> !p.getFileName().toString().endsWith("-sources.jar"))
         .filter(p -> !p.getFileName().toString().endsWith("-javadoc.jar"))
+        .filter(p -> !p.getFileName().toString().endsWith("-test-fixtures.jar"))
         .sorted(Comparator.comparing(p -> p.getFileName().toString()))
         .toList();
 
