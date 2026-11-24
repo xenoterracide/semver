@@ -6,7 +6,6 @@ SPDX-License-Identifier: CC-BY-NC-SA-4.0
 
 # semver
 
-<<<<<<< before updating
 Semantic version calculation from Git metadata.
 
 ## Modules
@@ -99,31 +98,9 @@ This project is managed with [copier](https://copier.readthedocs.io). The
 shared tooling lives in
 [xenoterracide/base-template](https://github.com/xenoterracide/base-template).
 Refresh it with:
-=======
-semver is a Java project.
-
-## Use
-
-Add the library to your build, then call its public API.
-
-## Install
-
-Add the library to your build.
-
-Maven:
-
-```xml
-<dependency>
-  <groupId>com.xenoterracide</groupId>
-  <artifactId>semver</artifactId>
-  <version>0.0.0</version>
-</dependency>
-```
->>>>>>> after updating
 
 Gradle (Kotlin or Groovy DSL):
 
-<<<<<<< before updating
 Renovate opens an update PR whenever the template tags a release. Merge it
 like any other dependency update.
 
@@ -137,22 +114,3 @@ Gradle, GitHub, and development workflows.
 ## License
 
 [GPL-3.0-or-later](LICENSES/GPL-3.0-or-later.txt).
-=======
-```kotlin
-dependencies {
-    implementation("com.xenoterracide:semver:0.0.0")
-}
-```
-
-## Development
-
-- [CONTRIBUTING.md](CONTRIBUTING.md) — human contributor guide
-- [AGENTS.md](AGENTS.md) — guide for AI agents
-
-## License
-
-Project code: [GPL-3.0-or-later](https://www.gnu.org/licenses/gpl-3.0.txt).
-Documentation: [CC-BY-NC-SA-4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).
-Copyright © 2015-2026 Caleb Cushing. Full texts live in [LICENSES](LICENSES).
-Each file carries its own SPDX header. A file may use a different license.
->>>>>>> after updating
