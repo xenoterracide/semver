@@ -27,7 +27,7 @@ import org.semver4j.Semver;
  * relative to the HEAD branch's {@code +git.N}. This is the ordering that decides dependency
  * resolution when the version is used in Maven coordinates.</p>
  */
-class VersionOrderingIT {
+class VersionOrderingTest {
 
   static final String MAIN = "main";
   static final String ORIGIN = "origin";

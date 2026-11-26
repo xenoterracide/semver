@@ -19,14 +19,14 @@ import org.junit.jupiter.api.io.TempDir;
 import org.semver4j.Semver;
 
 /**
- * Blackbox integration test of the version calculation algorithm against a real repository.
+ * Blackbox test of the version calculation algorithm against a real repository.
  *
  * <p>Recreates the {@code SpecIntegrationTest.headBranch()} scenario from the archived
  * {@code xenoterracide/gradle-semver} project: a single run walks commit, tag, and branch in sequence,
  * asserting the calculated version and its monotonic ordering at each step through
  * {@link GitMetadataFactory} and {@link VersionCalculator} only.</p>
  */
-class VersionCalculatorIT {
+class VersionCalculatorRealRepositoryTest {
 
   static final String MAIN = "main";
   static final String ORIGIN = "origin";

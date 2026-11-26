@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Integration test verifying the packaged CLI jar reports its implementation version.
  */
-class SemverCommandIT {
+class PackagedSemverCommandTest {
 
   @Test
   void packagedJarReportsImplementationVersion() throws IOException, InterruptedException {

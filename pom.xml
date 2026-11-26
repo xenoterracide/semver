@@ -607,18 +607,6 @@ SPDX-License-Identifier: CC0-1.0
             <version>3.8.0</version>
             <executions>
               <execution>
-                <id>add-integration-test-sources</id>
-                <phase>generate-test-sources</phase>
-                <goals>
-                  <goal>add-test-source</goal>
-                </goals>
-                <configuration>
-                  <sources>
-                    <source>src/testIntegration/java</source>
-                  </sources>
-                </configuration>
-              </execution>
-              <execution>
                 <id>add-integration-test-resources</id>
                 <phase>generate-test-resources</phase>
                 <goals>
