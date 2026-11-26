@@ -136,7 +136,7 @@ cp -r staged/.github/workflows .github/workflows
 
 All files carry SPDX headers. REUSE enforces them.
 
-- **GPL-3.0-or-later** — source code.
+- **PolyForm-Small-Business-1.0.0 OR PolyForm-Noncommercial-1.0.0** — source code.
 - **MIT** — scripts, configuration, workflows.
 - **CC0-1.0** — configuration and generated files.
 - **CC-BY-NC-SA-4.0** — documentation.
