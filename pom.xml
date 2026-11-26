@@ -669,7 +669,9 @@ SPDX-License-Identifier: CC0-1.0
     <profile>
       <id>staging</id>
       <properties>
-        <altDeploymentRepository>staging::default::file:${project.build.directory}/repo</altDeploymentRepository>
+        <altDeploymentRepository>
+          staging::default::file:${maven.multiModuleProjectDirectory}/target/repo
+        </altDeploymentRepository>
       </properties>
     </profile>
   </profiles>
