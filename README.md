@@ -101,4 +101,4 @@ Gradle, GitHub, and development workflows.
 
 ## License
 
-[GPL-3.0-or-later](LICENSES/GPL-3.0-or-later.txt).
+[PolyForm-Small-Business-1.0.0](LICENSES/PolyForm-Small-Business-1.0.0.txt) OR [PolyForm-Noncommercial-1.0.0](LICENSES/PolyForm-Noncommercial-1.0.0.txt).

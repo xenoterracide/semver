@@ -18,6 +18,13 @@ SPDX-License-Identifier: CC0-1.0
 
   <name>Semantic Versioning Parent</name>
   <description>Parent POM for semantic versioning tools and libraries</description>
+  <url>https://github.com/xenoterracide/semver</url>
+  <inceptionYear>2024</inceptionYear>
+  <scm>
+    <connection>scm:git:https://github.com/xenoterracide/semver.git</connection>
+    <developerConnection>scm:git:https://github.com/xenoterracide/semver.git</developerConnection>
+    <url>https://github.com/xenoterracide/semver</url>
+  </scm>
 
   <modules>
     <module>module/git-metadata</module>
@@ -385,6 +392,8 @@ SPDX-License-Identifier: CC0-1.0
           <version>${maven-javadoc-plugin.version}</version>
           <configuration>
             <doclint>all,-missing</doclint>
+            <bottom
+            ><![CDATA[Documentation licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.]]></bottom>
           </configuration>
         </plugin>
 
@@ -656,12 +665,25 @@ SPDX-License-Identifier: CC0-1.0
         </plugins>
       </build>
     </profile>
+
+    <profile>
+      <id>staging</id>
+      <properties>
+        <altDeploymentRepository>
+          staging::default::file:${maven.multiModuleProjectDirectory}/target/repo
+        </altDeploymentRepository>
+      </properties>
+    </profile>
   </profiles>
 
   <licenses>
     <license>
-      <name>GPL-3.0-or-later</name>
-      <url>https://www.gnu.org/licenses/gpl-3.0.txt</url>
+      <name>PolyForm-Small-Business-1.0.0</name>
+      <url>https://spdx.org/licenses/PolyForm-Small-Business-1.0.0.html</url>
+    </license>
+    <license>
+      <name>PolyForm-Noncommercial-1.0.0</name>
+      <url>https://spdx.org/licenses/PolyForm-Noncommercial-1.0.0.html</url>
     </license>
   </licenses>
 
