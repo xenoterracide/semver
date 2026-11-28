@@ -51,6 +51,7 @@ SPDX-License-Identifier: CC0-1.0
 
     <!-- Plugin versions -->
     <maven-jar-plugin.version>3.5.1</maven-jar-plugin.version>
+    <maven-source-plugin.version>3.4.0</maven-source-plugin.version>
     <maven-resources-plugin.version>3.5.0</maven-resources-plugin.version>
     <maven-compiler-plugin.version>3.16.0</maven-compiler-plugin.version>
     <maven-source-plugin.version>3.4.0</maven-source-plugin.version>
@@ -408,11 +409,18 @@ SPDX-License-Identifier: CC0-1.0
             </gpgArguments>
           </configuration>
         </plugin>
+<<<<<<< before updating
 
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>versions-maven-plugin</artifactId>
           <version>${versions-maven-plugin.version}</version>
+=======
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-source-plugin</artifactId>
+          <version>${maven-source-plugin.version}</version>
+>>>>>>> after updating
         </plugin>
       </plugins>
     </pluginManagement>
@@ -490,6 +498,19 @@ SPDX-License-Identifier: CC0-1.0
             <goals>
               <goal>integration-test</goal>
               <goal>verify</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <phase>package</phase>
+            <goals>
+              <goal>jar-no-fork</goal>
             </goals>
           </execution>
         </executions>
